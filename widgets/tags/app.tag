@@ -17,7 +17,7 @@
   </script>
 
   <style type="text/scss">
-    $blue: #1eaedb;
+    @import "widgets/vars.scss";
 
     body {
       padding-bottom: 10rem;
@@ -65,11 +65,10 @@
       white-space: nowrap;
 
       i {
-        padding: 0.5rem;
         color: white;
         background-color: $blue;
-        font-size: 2rem;
-        border-radius: 0.5rem;
+        padding: 0.2rem;
+        border-radius: 0.3rem;
       }
     }
   </style>
