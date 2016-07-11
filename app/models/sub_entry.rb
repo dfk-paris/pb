@@ -5,4 +5,6 @@ class SubEntry < ApplicationRecord
 
   acts_as_taggable_on :inventory_ids
 
+  validates :title, presence: true
+
 end

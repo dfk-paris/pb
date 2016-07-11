@@ -26,7 +26,7 @@ class SubEntriesController < ApplicationController
   def update
     @sub_entry = SubEntry.find(params[:id])
 
-    if @sub_entry.update(sub_entry_params)
+    if @sub_entry.update_attributes(sub_entry_params)
       render json: {'message' => 'sub entry has been updated'}
     else
       render status: 406, json: {
@@ -47,6 +47,8 @@ class SubEntriesController < ApplicationController
 
     def sub_entry_params
       params.fetch(:sub_entry, {}).permit(
+        :title,
+        :description,
         :sequence
       )
     end

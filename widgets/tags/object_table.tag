@@ -80,12 +80,18 @@
       <div class="sub-entries">
         <div each={se in me.sub_entries}>
           <div class="buttons u-pull-right">
-            <i class="fa fa-edit"></i>
-            <i class="fa fa-remove"></i>
+            <a href="#/editor?id={se.id}"><i class="fa fa-edit"></i></a>
+            <a><i class="fa fa-remove"></i></a>
           </div>
-          <i class="fa fa-arrow-circle-right"></i>
-          <strong>{se.sequence} {se.title}</strong>
-          <pb-badge-list values={se.inventory_ids} />
+          <div class="media u-pull-left">
+            <img src={se.media[0].urls.thumb} show={se.media.length > 0} />
+          </div>
+          <div class="metadata">
+            <i class="fa fa-arrow-circle-right"></i>
+            <strong>{se.sequence} {se.title}</strong>
+            <pb-badge-list values={se.inventory_ids} />
+          </div>
+          <div class="u-cf"></div>
         </div>
       </div>
 
@@ -96,7 +102,7 @@
   <style type="text/scss">
     @import "widgets/vars.scss";
   
-    pb-object-table {
+    pb-object-table, [data-is=pb-object-table] {
       & > form {
         margin-bottom: 0rem;
       }
@@ -135,6 +141,22 @@
 
         & > div:hover {
           background-color: $yellow;
+        }
+
+        .media {
+          width: 80px;
+          min-height: 10px;
+          margin-right: 1rem;
+          line-height: 0px;
+          font-size: 0px;
+
+          img {
+            border-radius: 0.5rem;
+          }
+        }
+
+        .metadata {
+          margin-left: 80px;
         }
       }
     }

@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::API
 
+  include ActionController::HttpAuthentication::Basic::ControllerMethods
+
   helper_method :current_user
 
   before_action :auth

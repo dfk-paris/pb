@@ -1,0 +1,1 @@
+json.partial! 'item', sub_entry: @sub_entry

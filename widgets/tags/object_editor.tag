@@ -1,44 +1,37 @@
 <pb-object-editor>
 
-  <h1>Objekt 'Kerzenständer' bearbeiten</h1>
+  <h1 show={item.title}>Objekt '{item.title}' bearbeiten</h1>
+  <h1 show={!item}>Objekt erstellen</h1>
 
   <hr />
 
-  <form>
+  <form onsubmit={submit}>
     <div class="row">
       <div class="six columns">
-        <label for="pb_form_object_name_de">Objektbezeichnung</label>
+        <pb-input
+          type="text"
+          name="title"
+          label="Objektbezeichnung"
+          value={item.title}
+        />
+        <!-- <label for="pb_form_object_title">Objektbezeichnung</label>
         <input
           class="u-full-width"
           type="text"
-          name="name"
-          id="pb_form_object_name_de"
-        />
+          name="title"
+          id="pb_form_object_title"
+          value={item.title}
+        /> -->
       </div>
       <div class="six columns">
-        <label for="pb_form_object_name_fr">französische Übersetzung</label>
-        <input
-          class="u-full-width"
-          type="text"
-          name="name"
-          id="pb_form_object_name_fr"
-        />
-      </div>
-    </div>
-
-    <label for="pb_form_object_location">Aufstellungsort</label>
-    <div class="row">
-      <div class="six columns">
+        <label for="pb_form_object_location">Aufstellungsort</label>
         <pb-locations-select />
       </div>
-      <div class="six columns">
-        {tags['pb-locations-select'].french_value()}
-      </div>
     </div>
 
-    <label for="pb_form_object_people">Hersteller / Künstler</label>
     <div class="row">
       <div class="six columns">
+        <label for="pb_form_object_people">Hersteller / Künstler</label>
         <pb-people-autocomplete />
       </div>
     </div>
@@ -290,24 +283,12 @@
 
     <div class="row">
       <div class="twelve columns">
-        <label for="pb_form_object_description_de">Beschreibung</label>
+        <label for="pb_form_object_description">Beschreibung</label>
         <textarea
           class="u-full-width"
-          name="description_de"
-          id="pb_form_object_description_de"
-        />
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="twelve columns">
-        <label for="pb_form_object_description_fr">
-          Beschreibung (französisch)
-        </label>
-        <textarea
-          class="u-full-width"
-          name="description_fr"
-          id="pb_form_object_description_fr"
+          name="description"
+          id="pb_form_object_description"
+          value={item.description}
         />
       </div>
     </div>
@@ -316,9 +297,7 @@
 
     <div class="row">
       <div class="twelwe columns">
-        <div id="pb-dropzone" class="dropzone">
-          <div class="dz-message">hier klicken oder Bilder hineinziehen</div>
-        </div>
+        <pb-media-dropzone media={item.media} sub-entry-id={opts.id} />
       </div>
     </div>
 
@@ -333,27 +312,33 @@
 
   <script type="text/coffee">
     self = this
-    window.x = self
-
-    self.selection_changed = -> self.update()
 
     self.on 'mount', ->
-      self.dropzone = new Dropzone($(self.root).find('.dropzone')[0],
-        url: "/file/post"
+      if self.opts.id
+        $.ajax(
+          type: 'get'
+          url: "/api/ses/#{self.opts.id}"
+          success: (data) ->
+            console.log data
+            self.item = data
+            self.update()
+        )
+
+    self.selection_changed = -> self.update()
+    self.submit = (event) ->
+      event.preventDefault()
+      self.item.title = $(self['pb_form_object_title']).val()
+      console.log 'submitting', self.item
+      $.ajax(
+        type: 'put'
+        url: "/api/ses/#{self.opts.id}"
+        data: JSON.stringify(sub_entry: self.item)
+        success: (data) ->
+          console.log data
+        error: (request) ->
+          console.log JSON.parse(request.response)
       )
 
-      files = [
-        {size: 224758, name: '005.jpg'},
-        {size: 1051924, name: '006.jpg'},
-        {size: 503655, name: '007.jpg'}
-      ]
-
-      for file in files
-        self.dropzone.emit "addedfile", file
-        self.dropzone.createThumbnailFromUrl(
-          file, "/sample-data/images/#{file.name}"
-        )
-        self.dropzone.emit "complete", file
   </script>
 
 </pb-object-editor>

@@ -27,6 +27,7 @@ class Init < ActiveRecord::Migration[5.0]
       t.belongs_to :sub_entry
       t.string :caption
       t.has_attached_file :image
+      t.boolean :is_default
       t.timestamps
     end
   end
