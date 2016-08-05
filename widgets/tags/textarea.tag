@@ -1,14 +1,13 @@
-<pb-input>
+<pb-textarea>
 
   <label>
     {opts.label}
-    <input
-      type={opts.type || 'text'}
+    <textarea
       name={opts.name}
-      class="u-full-width"
       placeholder={opts.label}
+      class="u-full-width"
       value={opts.value}
-    />
+    ></textarea>
   </label>
 
-</pb-input>
+</pb-textarea>

@@ -1,4 +1,4 @@
-<pb-object-table>
+<pb-mes-table>
 
   <h1>Objekte</h1>
 
@@ -70,17 +70,19 @@
     <li each={me in main_entries}>
       <div class="main-entry">
         <div class="buttons u-pull-right">
-          <i class="fa fa-edit"></i>
+          <a href="#/mes/edit?id={me.id}"><i class="fa fa-edit"></i></a>
           <i class="fa fa-remove"></i>
         </div>
         <h4>{me.sequence} {me.title}</h4>
-        <span show={me.group}><strong>Gruppe</strong>: {me.group}</span>
-        <span show={me.location}><strong>Gruppe</strong>: {me.location}</span>
+        <span show={me.location}>
+          <strong>Raum / Ort der Aufbewahrung:</strong>
+          <pb-location id={me.location} />
+        </span>
       </div>
       <div class="sub-entries">
         <div each={se in me.sub_entries}>
           <div class="buttons u-pull-right">
-            <a href="#/editor?id={se.id}"><i class="fa fa-edit"></i></a>
+            <a href="#/ses/edit?id={se.id}"><i class="fa fa-edit"></i></a>
             <a><i class="fa fa-remove"></i></a>
           </div>
           <div class="media u-pull-left">
@@ -140,7 +142,7 @@
         }
 
         & > div:hover {
-          background-color: $yellow;
+          background-color: $highlight;
         }
 
         .media {
@@ -192,4 +194,4 @@
       )
   </script>
 
-</pb-object-table>
+</pb-mes-table>

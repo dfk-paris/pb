@@ -49,8 +49,12 @@ class MainEntriesController < ApplicationController
       params.fetch(:main_entry, {}).permit(
         :title,
         :location,
-        :group,
-        :sequence
+        :sequence,
+        :provenience,
+        :historical_evidence,
+        :literature,
+        :description,
+        :appreciation
       )
     end
 

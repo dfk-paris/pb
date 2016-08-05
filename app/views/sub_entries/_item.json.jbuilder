@@ -1,16 +1,17 @@
 json.main_entry do
-  json.id sub_entry.main_entry.id
-  json.title sub_entry.main_entry.title
-  json.group sub_entry.main_entry.group
-  json.location sub_entry.main_entry.location
-  json.sequence sub_entry.main_entry.sequence
+  json.partial! 'main_entries/item', main_entry: sub_entry.main_entry
 end
 
-json.id sub_entry.id
-json.title sub_entry.title
-json.sequence sub_entry.sequence
-json.description sub_entry.description
-json.inventory_ids sub_entry.inventory_ids.map{|t| t.name}
+json.extract!(sub_entry, 
+  :id, :main_entry_id,
+  :sequence, :title, :description, 
+  :creator, :location, :dating, 
+  :height, :width, :depth, :diameter, :weight, 
+  :height_with_socket, :width_with_socket, :depth_with_socket, 
+  :markings, :material, :framing, :restaurations,
+  :created_at, :updated_at
+)
+json.inventory_ids sub_entry.inventory_id_list
 
 json.media sub_entry.media do |medium|
   json.partial! 'media/item', medium: medium

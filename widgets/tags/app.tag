@@ -2,8 +2,8 @@
 
   <div class="container navigation">
     <div class="u-text-right">
-      <a href="#/list">Liste</a> |
-      <a href="#/editor">Eingabe</a>
+      <a href="#/mes">Liste</a> |
+      <a href="#/mes/new">Neu</a>
     </div>
 
     <div class="pb-content" />
@@ -26,9 +26,13 @@
       }
 
       textarea {
-        min-height: 15rem;
+        min-height: 12rem;
         resize: none;
       }
+    }
+
+    li {
+      list-style-type: none;
     }
 
     .u-text-right {
@@ -103,18 +107,32 @@
               result.query[kv[0]] = kv[1]
           if result.hash
             result.hash_path = result.hash.split('?')[0]
-          if hash_query_string = result.hash.split('?')[1]
-            for pair in hash_query_string.split('&')
-              kv = pair.split('=')
-              result.hash_query[kv[0]] = kv[1]
+            
+            if hash_query_string = result.hash.split('?')[1]
+              for pair in hash_query_string.split('&')
+                kv = pair.split('=')
+                result.hash_query[kv[0]] = kv[1]
           self.routing.parts_cache = result
         self.routing.parts_cache
     }
     self.bus = riot.observable()
+    self.data = {}
     window.pb = self
     
 
     self.on 'mount', ->
+      $.ajax(
+        type: 'get'
+        url: 'data/locations.json'
+        dataType: 'json'
+        success: (data) ->
+          self.data.locations = {}
+          for group in data
+            for room in group.rooms
+              self.data.locations[room.id] = room.name
+          riot.update()
+      )
+
       self.routing.route = riot.route.create()
       self.routing.route '..', ->
         if document.location.href != self.routing.href
@@ -127,13 +145,18 @@
       console.log parts
       opts = {}
       tag = switch parts['hash_path']
-        when '/list' then 'pb-object-table'
-        when '/editor'
+        when '/mes/edit', '/mes/new'
           opts['id'] = parts['hash_query'].id
-          'pb-object-editor'
+          opts.bla = "asdf"
+          'pb-me-editor'
+        when '/ses/edit', '/ses/new'
+          opts['id'] = parts['hash_query'].id
+          opts['main_entry_id'] = parts['hash_query'].main_entry_id
+          'pb-se-editor'
+        when '/mes' then 'pb-mes-table'
         else
           'pb-welcome'
-
+      
       riot.mount $('.pb-content')[0], tag, opts
   </script>
 

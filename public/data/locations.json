@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Erdgeschoss",
+    "rooms": [
+      {"id": 1, "name": "VESTIBÜL"},
+      {"id": 2, "name": "VORZIMMER ZUM GRÜNEN SALON"},
+      {"id": 3, "name": "GRÜNER SALON"},
+      {"id": 4, "name": "ROTER SALON "},
+      {"id": 5, "name": "KLEINER SALON "},
+      {"id": 6, "name": "BIBLIOTHEK"},
+      {"id": 7, "name": "GROSSER SPEISESAAL"},
+      {"id": 8, "name": "TREPPENHAUS UND TREPPE"}
+    ]
+  },{
+    "name": "Obergeschoss",
+    "rooms": [
+      {"id": 9, "name": "VORZIMMER"},
+      {"id": 10, "name": "THRONSAAL"},
+      {"id": 11, "name": "BOTSCHAFTERBÜRO"},
+      {"id": 12, "name": "SALON DER VIER JAHRESZEITEN"},
+      {"id": 13, "name": "KLEINE GALERIE"},
+      {"id": 14, "name": "MUSIKZIMMER"},
+      {"id": 15, "name": "KIRSCHSALON"},
+      {"id": 16, "name": "SCHLAFZIMMER"},
+      {"id": 17, "name": "BADEZIMMER"},
+      {"id": 18, "name": "TÜRKISCHES BOUDOIR"}
+    ]
+  },{
+    "name": "Andere",
+    "rooms": [
+      {"id": 19, "name": "KANZLERWOHNUNG"},
+      {"id": 20, "name": "EINGANGSPAVILLON"},
+      {"id": 21, "name": "LAGER"},
+      {"id": 22, "name": "ANDERE"}
+    ]
+  }
+]

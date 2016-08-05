@@ -10,15 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160707142933) do
+ActiveRecord::Schema.define(version: 20160805163931) do
 
   create_table "main_entries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "title"
-    t.string   "location"
-    t.string   "group"
+    t.integer  "location"
     t.string   "sequence"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.text     "provenience",         limit: 65535
+    t.text     "historical_evidence", limit: 65535
+    t.text     "literature",          limit: 65535
+    t.text     "description",         limit: 65535
+    t.text     "appreciation",        limit: 65535
   end
 
   create_table "media", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -37,9 +41,24 @@ ActiveRecord::Schema.define(version: 20160707142933) do
     t.integer  "main_entry_id"
     t.string   "title"
     t.string   "sequence"
-    t.text     "description",   limit: 65535
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.text     "description",        limit: 65535
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.string   "material"
+    t.string   "creator"
+    t.string   "location"
+    t.string   "dating"
+    t.string   "markings"
+    t.string   "height"
+    t.string   "width"
+    t.string   "depth"
+    t.string   "diameter"
+    t.string   "weight"
+    t.string   "height_with_socket"
+    t.string   "width_with_socket"
+    t.string   "depth_with_socket"
+    t.text     "framing",            limit: 65535
+    t.text     "restaurations",      limit: 65535
     t.index ["main_entry_id"], name: "index_sub_entries_on_main_entry_id", using: :btree
   end
 
