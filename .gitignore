@@ -17,7 +17,8 @@
 .byebug_history
 
 # Custom ignores
-/data
+data
+config/secrets.yml
 
 node_modules
 public/*.css
