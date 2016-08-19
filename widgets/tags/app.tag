@@ -69,6 +69,17 @@
     .pb-nowrap {
       white-space: nowrap;
     }
+
+    .pb-errors {
+      margin-top: -1.6rem;
+      font-size: 1rem;
+      color: red;
+
+      li {
+        list-style-type: disc;
+        margin: 0px;
+      }
+    }
   </style>
 
   <script type="text/coffee">
@@ -78,6 +89,16 @@
       dataType: 'json'
       contentType: 'application/json'
     }
+
+    $(document).on 'ajaxComplete', (event, request, options) ->
+      try
+        data = JSON.parse(request.response)
+        console.log data
+        if data.message
+          type = if request.status >= 200 && request.status < 300 then 'notice' else 'error'
+          self.bus.trigger 'message', type, data.message
+      catch e
+        console.log e
 
     self = this
     self.routing = {
@@ -128,6 +149,7 @@
           riot.update()
       )
 
+      riot.route.base "#/"
       self.routing.route = riot.route.create()
       self.routing.route '..', ->
         if document.location.href != self.routing.href
@@ -151,8 +173,10 @@
         when '/mes' then 'pb-mes-table'
         else
           'pb-welcome'
-      
       riot.mount $('.pb-content')[0], tag, opts
+
+    self.bus.on 'message', (type, message) ->
+      console.log type.toUpperCase(), message
   </script>
 
 </pb-app>

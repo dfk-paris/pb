@@ -13,11 +13,13 @@
           label="Objektbezeichnung"
           name="title"
           value={item.title}
+          errors={errors.title}
         />
         <pb-input
           label="Fortlaufende Nummer"
           name="sequence"
           value={item.sequence}
+          errors={errors.sequence}
         />
       </div>
       <div class="six columns">
@@ -25,6 +27,7 @@
           label="Inventarnummern"
           name="inventory_id_list"
           value={item.inventory_ids.join(', ')}
+          errors={errors.inventory_ids}
         />
       </div>
     </div>
@@ -177,8 +180,14 @@
           data: JSON.stringify(sub_entry: form_data())
           success: (data) ->
             console.log data
+            self.errors = undefined
+            riot.route '/mes'
           error: (request) ->
-            console.log JSON.parse(request.response)
+            data = JSON.parse(request.response)
+            console.log data
+            self.errors = data.errors
+          complete: ->
+            self.update()
         )
 
 

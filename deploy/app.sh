@@ -16,7 +16,7 @@ function deploy {
   remote "ln -sfn $SHARED_PATH/database.yml $CURRENT_PATH/config/database.yml"
   remote "ln -sfn $SHARED_PATH/secrets.yml $CURRENT_PATH/config/secrets.yml"
   
-  within_do $CURRENT_PATH "bundle install --without test developement --path $BUNDLE_PATH"
+  within_do $CURRENT_PATH "bundle install --without development test --path $BUNDLE_PATH"
   remote "touch $CURRENT_PATH/tmp/restart.txt"
 
   finalize

@@ -1,6 +1,6 @@
-json.main_entry do
-  json.partial! 'main_entries/item', main_entry: sub_entry.main_entry
-end
+# json.main_entry do
+#   json.partial! 'main_entries/item', main_entry: sub_entry.main_entry
+# end
 
 json.extract!(sub_entry, 
   :id, :main_entry_id,

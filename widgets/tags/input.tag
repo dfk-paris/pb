@@ -10,5 +10,8 @@
       value={opts.value}
     />
   </label>
+  <ul class="pb-errors">
+    <li each={e in opts.errors}>{e}</li>
+  </ul>
 
 </pb-input>

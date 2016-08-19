@@ -67,7 +67,7 @@
   </div>
 
   <ul class="u-full-width">
-    <li each={me in main_entries}>
+    <li each={me in data}>
       <div class="main-entry">
         <div class="u-pull-right">
           <pb-button
@@ -76,12 +76,13 @@
             label="bearbeiten"
           />
           <pb-button
-            href="#/mes/remove?id={me.id}"
+            href="#/mes/{me.id}"
             icon="remove"
             label="löschen"
+            onclick={remove_main_entry(me)}
           />
         </div>
-        <h4>{me.sequence} {me.title}</h4>
+        <h4>{me.sequence} {me.title || me.id}</h4>
         <span show={me.location} class="pb-location">
           <strong>Raum / Ort der Aufbewahrung:</strong>
           <pb-location id={me.location} />
@@ -96,9 +97,10 @@
               label="bearbeiten"
             />
             <pb-button
-              href="#/ses/remove?id={se.id}"
+              href="#/ses/{se.id}"
               icon="remove"
               label="löschen"
+              onclick={remove_sub_entry(se)}
             />
           </div>
           <div class="metadata">
@@ -181,27 +183,43 @@
       event.preventDefault()
       self.criteria_visible = !self.criteria_visible
 
-    group = (data) ->
-      mes = {}
-      for se in data
-        me_id = se.main_entry.id
-        mes[me_id] ||= se.main_entry
-        mes[me_id]['sub_entries'] ||= []
-        mes[me_id]['sub_entries'].push se
-      results = []
-      for id, me of mes
-        results.push me
-      results
-
-    self.on 'mount', ->
+    self.fetch = ->
       $.ajax(
         type: 'get'
-        url: 'api/ses'
+        url: 'api/mes'
         success: (data) ->
           console.log data
-          self.main_entries = group(data)
+          self.data = data
           self.update()
       )
+
+    self.on 'mount', -> self.fetch()
+
+    self.remove_main_entry = (me) ->
+      (event) ->
+        event.preventDefault()
+        if confirm("Sicher?")
+          $.ajax(
+            type: 'delete'
+            url: "api/mes/#{me.id}"
+            success: (data) ->
+              console.log data
+              self.fetch()
+          )
+
+    self.remove_sub_entry = (se) ->
+      (event) ->
+        event.preventDefault()
+        if confirm("Sicher?")
+          $.ajax(
+            type: 'delete'
+            url: "api/ses/#{se.id}"
+            success: (data) ->
+              console.log data
+              self.fetch()
+          )
+
+
   </script>
 
 </pb-mes-table>
