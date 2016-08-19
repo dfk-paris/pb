@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+BUNDLE_PATH=${BUNDLE_PATH:-$SHARED_PATH/bundle}
+
 function deploy {
   setup
   deploy_code
@@ -8,12 +10,14 @@ function deploy {
   upload public/app.css $CURRENT_PATH/public/app.css
   upload public/app.js $CURRENT_PATH/public/app.js
   upload public/tags.js $CURRENT_PATH/public/tags.js
-  upload public/fonts/ $CURRENT_PATH/public/fronts/
+  upload public/fonts/ $CURRENT_PATH/public/fonts/
 
   remote "ln -sfn $SHARED_PATH/data $CURRENT_PATH/data"
   remote "ln -sfn $SHARED_PATH/database.yml $CURRENT_PATH/config/database.yml"
   remote "ln -sfn $SHARED_PATH/secrets.yml $CURRENT_PATH/config/secrets.yml"
-  # Your deployment specifics go here
+  
+  within_do $CURRENT_PATH "bundle install --without test developement --path $BUNDLE_PATH"
+  remote "touch $CURRENT_PATH/tmp/restart.txt"
 
   finalize
 }
