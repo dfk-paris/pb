@@ -18,7 +18,6 @@
 
 # Custom ignores
 data
-config/secrets.yml
 
 node_modules
 public/*.css
