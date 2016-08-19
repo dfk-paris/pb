@@ -5,7 +5,9 @@
       <a href="#/mes">Liste</a> |
       <a href="#/mes/new">Neu</a>
     </div>
+  </div>
 
+  <div class="container">
     <div class="pb-content" />
   </div>
   
@@ -64,15 +66,8 @@
       margin-top: 2rem;
     }
 
-    .buttons {
+    .pb-nowrap {
       white-space: nowrap;
-
-      i {
-        color: white;
-        background-color: $blue;
-        padding: 0.2rem;
-        border-radius: 0.3rem;
-      }
     }
   </style>
 

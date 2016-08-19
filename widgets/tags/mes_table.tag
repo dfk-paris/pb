@@ -69,29 +69,47 @@
   <ul class="u-full-width">
     <li each={me in main_entries}>
       <div class="main-entry">
-        <div class="buttons u-pull-right">
-          <a href="#/mes/edit?id={me.id}"><i class="fa fa-edit"></i></a>
-          <i class="fa fa-remove"></i>
+        <div class="u-pull-right">
+          <pb-button
+            href="#/mes/edit?id={me.id}"
+            icon="edit"
+            label="bearbeiten"
+          />
+          <pb-button
+            href="#/mes/remove?id={me.id}"
+            icon="remove"
+            label="löschen"
+          />
         </div>
         <h4>{me.sequence} {me.title}</h4>
-        <span show={me.location}>
+        <span show={me.location} class="pb-location">
           <strong>Raum / Ort der Aufbewahrung:</strong>
           <pb-location id={me.location} />
         </span>
       </div>
       <div class="sub-entries">
         <div each={se in me.sub_entries}>
-          <div class="buttons u-pull-right">
-            <a href="#/ses/edit?id={se.id}"><i class="fa fa-edit"></i></a>
-            <a><i class="fa fa-remove"></i></a>
-          </div>
-          <div class="media u-pull-left">
-            <img src={se.media[0].urls.thumb} show={se.media.length > 0} />
+          <div class="u-pull-right">
+            <pb-button
+              href="#/ses/edit?id={se.id}"
+              icon="edit"
+              label="bearbeiten"
+            />
+            <pb-button
+              href="#/ses/remove?id={se.id}"
+              icon="remove"
+              label="löschen"
+            />
           </div>
           <div class="metadata">
             <i class="fa fa-arrow-circle-right"></i>
+            <div class="media u-pull-left" show={se.media.length > 0}>
+              <img src={se.media[0].urls.thumb} />
+            </div>
             <strong>{se.sequence} {se.title}</strong>
-            <pb-badge-list values={se.inventory_ids} />
+            <div show={se.inventory_ids.length > 0}>
+              <pb-badge-list values={se.inventory_ids} />
+            </div>
           </div>
           <div class="u-cf"></div>
         </div>
@@ -104,13 +122,12 @@
   <style type="text/scss">
     @import "widgets/vars.scss";
   
-    pb-object-table, [data-is=pb-object-table] {
+    pb-mes-table, [data-is=pb-mes-table] {
       & > form {
         margin-bottom: 0rem;
       }
 
       & > ul {
-        margin-top: 1rem;
         list-style-type: none;
 
         & > li {
@@ -125,24 +142,21 @@
       }
 
       .main-entry {
-        .buttons {
-          i {
-            padding: 0.5rem;
-            font-size: 2rem;
-            border-radius: 0.5rem;
-          }
+        .pb-location {
+          position: relative;
+          top: -10px;
+          font-size: 1.2rem;
         }
       }
 
       .sub-entries {
-        margin-top: 2rem;
-
         & > div {
-          padding: 0.5rem;
+          padding: 0.8rem;
         }
 
         & > div:hover {
           background-color: $highlight;
+          border-radius: 0.5rem;
         }
 
         .media {
@@ -155,10 +169,6 @@
           img {
             border-radius: 0.5rem;
           }
-        }
-
-        .metadata {
-          margin-left: 80px;
         }
       }
     }

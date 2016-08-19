@@ -24,3 +24,5 @@ public/*.css
 public/*.js
 public/fonts
 public/sample-data
+
+deploy/config.sh

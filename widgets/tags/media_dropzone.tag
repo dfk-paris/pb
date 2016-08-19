@@ -8,6 +8,12 @@
         <!-- <div class="dz-size"><span data-dz-size></span></div> -->
         <!-- <div class="dz-filename"><span data-dz-name></span></div> -->
         <div class="dz-caption" data-dz-caption></div>
+        <pb-button href="#" icon="edit" label="bearbeiten" class="edit" />
+        <div class="pb-modal">
+          <form>
+            <input type="asdf" name="" placeholder="asdfasdf">
+          </form>
+        </div>
       </div>
       <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
       <div class="dz-error-message"><span data-dz-errormessage></span></div>
@@ -44,7 +50,6 @@
   <script type="text/coffee">
     self = this
     self.media_added = false
-    window.x = self
 
     self.on 'mount', ->
       self.dropzone = new Dropzone($(self.root).find('.dropzone')[0],
@@ -67,10 +72,17 @@
       self.dropzone.on 'addedfile', (file) ->
         $(file.previewTemplate).attr('data-id', file.id)
         $(file.previewTemplate).find('[data-dz-caption]').html(file.caption)
+        riot.mount $(file.previewTemplate).find('.pb-modal')[0], 'pb-modal'
 
       self.dropzone.on 'success', (file, response) ->
         $(file.previewTemplate).attr('data-id', response.medium.id)
         $(file.previewTemplate).find('[data-dz-caption]').html(response.medium.caption)
+
+      self.edit = (event) ->
+        console.log self
+        event.preventDefault()
+        console.log arguments
+        # self.tags['pb-modal']
 
     self.on 'updated', ->
       if self.opts.media && !self.media_added
@@ -85,6 +97,7 @@
           self.dropzone.emit "addedfile", file
           self.dropzone.createThumbnailFromUrl(file, medium.urls.normal)
           self.dropzone.emit "complete", file
+
   </script>
 
 </pb-media-dropzone>

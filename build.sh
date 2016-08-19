@@ -17,17 +17,14 @@ function static {
     widgets/vendor/dropzone/dropzone.css \
     > public/app.css
 
-  cat \
-    widgets/vendor/auto-complete/auto-complete.min.js \
-    > public/app.js
-
   rsync -a widgets/vendor/font-awesome/fonts/ public/fonts/
 
   uglifyjs \
-    node_modules/zepto/zepto.min.js \
+    node_modules/zepto/dist/zepto.min.js \
     node_modules/riot/riot.min.js \
     widgets/vendor/auto-complete/auto-complete.min.js \
     widgets/vendor/dropzone/dropzone.js \
+    widgets/vendor/jquery.easyModal.js \
     -o public/app.js
 }
 
