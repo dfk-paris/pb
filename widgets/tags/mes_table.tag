@@ -122,7 +122,7 @@
   </ul>
 
   <style type="text/scss">
-    @import "widgets/vars.scss";
+    @import "widgets/styles/vars.scss";
   
     pb-mes-table, [data-is=pb-mes-table] {
       & > form {

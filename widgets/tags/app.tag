@@ -12,7 +12,7 @@
   </div>
   
   <style type="text/scss">
-    @import "widgets/vars.scss";
+    @import "widgets/styles/vars.scss";
 
     body {
       padding-bottom: 10rem;

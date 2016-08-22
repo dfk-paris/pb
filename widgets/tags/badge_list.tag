@@ -4,7 +4,7 @@
   </span>
 
   <style type="text/scss">
-    @import "widgets/vars.scss";
+    @import "widgets/styles/vars.scss";
 
     pb-badge-list {
       & > .outer {

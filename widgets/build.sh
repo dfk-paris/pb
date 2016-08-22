@@ -1,11 +1,22 @@
 #!/bin/bash -e
 
+COMMAND=${1:-all}
+
 function all {
   static
+  index
 }
 
 function watch {
+  all && watch_all
+}
+
+function watch_all {
   watch_tags
+}
+
+function server {
+  ruby -run -ehttpd ./public -p3000
 }
 
 function static {
@@ -32,8 +43,13 @@ function static {
 #   node_modules/.bin/riot --colors widgets/tags public/tags.js
 # }
 
+function index {
+  node ./widgets/build.js > public/index.html
+}
+
+
 function watch_tags {
   node_modules/.bin/riot --colors --watch widgets/tags public/tags.js
 }
 
-$1
+$COMMAND

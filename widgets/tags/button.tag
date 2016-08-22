@@ -6,7 +6,7 @@
   </a>
 
   <style type="text/scss">
-    @import "widgets/vars.scss";
+    @import "widgets/styles/vars.scss";
 
     pb-button, [data-is=pb-button] {
       font-size: 1rem;
