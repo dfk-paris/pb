@@ -29,6 +29,10 @@ NOCOLOR="\e[0m"
 
 # Generic functions
 
+function task {
+  within_do $CURRENT_PATH "$1"
+}
+
 function within_do {
   remote "cd $1 ; $2"
 }
@@ -63,11 +67,11 @@ function setup {
 function deploy_code {
   TMPDIR=$TMPROOT/`pwgen 20 1`
   local "mkdir -p $TMPROOT"
-  local "git clone $REPO $TMPDIR"
-  local "cd $TMPDIR && git checkout $COMMIT"
+  local "git clone -q $REPO $TMPDIR"
+  local "cd $TMPDIR && git checkout -q $COMMIT"
   local "tar czf deploy.tar.gz -C $TMPDIR ."
   local "rm -rf $TMPDIR"
-  local "scp -P $PORT deploy.tar.gz $HOST:$DEPLOY_TO/deploy.tar.gz"
+  local "scp -q -P $PORT deploy.tar.gz $HOST:$DEPLOY_TO/deploy.tar.gz"
   local "rm deploy.tar.gz"
 
   remote "mkdir $CURRENT_PATH"
@@ -92,7 +96,7 @@ function finalize {
 function upload {
   FROM=$1
   TO=$2
-  OPTS="-rv --times --rsh=ssh --compress --human-readable -e 'ssh -p $PORT'"
+  OPTS="-rvqtzh --rsh=ssh -e 'ssh -p $PORT'"
 
   local "rsync $OPTS $FROM $HOST:$TO"
 }

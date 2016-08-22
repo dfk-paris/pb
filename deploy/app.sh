@@ -7,7 +7,7 @@ function deploy {
   deploy_code
   cleanup
 
-  npm run build
+  local "npm run build > /dev/null"
 
   upload public/app.css $CURRENT_PATH/public/app.css
   upload public/app.js $CURRENT_PATH/public/app.js
@@ -19,7 +19,7 @@ function deploy {
   remote "ln -sfn $SHARED_PATH/database.yml $CURRENT_PATH/config/database.yml"
   remote "ln -sfn $SHARED_PATH/secrets.yml $CURRENT_PATH/config/secrets.yml"
   
-  within_do $CURRENT_PATH "bundle install --without development test --path $BUNDLE_PATH"
+  task "bundle install --without development test --path $BUNDLE_PATH --clean --quiet"
   remote "touch $CURRENT_PATH/tmp/restart.txt"
 
   finalize
