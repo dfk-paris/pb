@@ -30,18 +30,18 @@ function server {
 
 function vendor {
   log "concatenating vendor css"
-  cat widgets/vendor/css/* > public/vendor.css
+  cat widgets/vendor/css/*.css > public/vendor.css
 
   log "copying other vendor assets"
   rsync -aL widgets/vendor/other/ public/
 
   log "combining vendor javascript"
-  uglifyjs widgets/vendor/js/* -o public/vendor.js
+  uglifyjs widgets/vendor/js/*.js -o public/vendor.js
 }
 
 function tags {
   log "compiling tags"
-  node_modules/.bin/riot -s widgets/tags public/tags.js
+  node_modules/.bin/riot -s widgets/tags public/app.js
 }
 
 function index {
