@@ -1,11 +1,11 @@
-<pb-modal>
+<w-modal>
 
   <div name="receiver">
     <yield />
   </div>
 
   <style type="text/scss">
-    pb-modal, [data-is=pb-modal] {
+    w-modal, [data-is=w-modal] {
       [name=receiver] {
         background-color: white;
       }
@@ -29,4 +29,4 @@
 
   </script>
 
-</pb-modal>
+</w-modal>

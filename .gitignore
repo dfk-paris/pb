@@ -20,10 +20,10 @@
 data
 
 node_modules
-public/*.css
-public/*.js
-public/*.html
+public/index.html
+public/vendor.css
+public/vendor.js
+public/app.js
 public/fonts
-public/sample-data
 
 deploy/config.sh

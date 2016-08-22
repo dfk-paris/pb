@@ -8,14 +8,14 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="<%= stylesheet_path('app.css') %>"
+      href="<%= stylesheet_path('vendor.css') %>"
     />
   </head>
   <body>
-    <pb-app></pb-app>
+    <w-app></w-app>
 
+    <script type="text/javascript" src="<%= script_path('vendor.js') %>"></script>
     <script type="text/javascript" src="<%= script_path('app.js') %>"></script>
-    <script type="text/javascript" src="<%= script_path('tags.js') %>"></script>
     <script type="text/javascript">
       riot.mount('*')
     </script>

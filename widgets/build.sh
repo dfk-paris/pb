@@ -30,30 +30,18 @@ function server {
 
 function vendor {
   log "concatenating vendor css"
-  cat \
-    widgets/vendor/skeleton/normalize.css \
-    widgets/vendor/skeleton/skeleton.css \
-    widgets/vendor/font-awesome/font-awesome.min.css \
-    widgets/vendor/auto-complete/auto-complete.css \
-    widgets/vendor/dropzone/dropzone.css \
-    > public/app.css
+  cat widgets/vendor/css/* > public/vendor.css
 
-  log "copying vendor assets"
-  rsync -a widgets/vendor/font-awesome/fonts/ public/fonts/
+  log "copying other vendor assets"
+  rsync -aL widgets/vendor/other/ public/
 
   log "combining vendor javascript"
-  uglifyjs \
-    node_modules/zepto/dist/zepto.min.js \
-    node_modules/riot/riot.min.js \
-    widgets/vendor/auto-complete/auto-complete.min.js \
-    widgets/vendor/dropzone/dropzone.js \
-    widgets/vendor/jquery.easyModal.js \
-    -o public/app.js
+  uglifyjs widgets/vendor/js/* -o public/vendor.js
 }
 
 function tags {
   log "compiling tags"
-  node_modules/.bin/riot -s widgets/tags public/tags.js
+  node_modules/.bin/riot -s widgets/tags public/app.js
 }
 
 function index {

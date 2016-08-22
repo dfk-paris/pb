@@ -1,4 +1,4 @@
-<pb-app>
+<w-app>
 
   <div class="container navigation">
     <div class="u-text-right">
@@ -13,73 +13,6 @@
   
   <style type="text/scss">
     @import "widgets/styles/vars.scss";
-
-    body {
-      padding-bottom: 10rem;
-    }
-
-    a {
-      cursor: pointer;
-    }
-
-    label {
-      input, textarea, select {
-        font-weight: normal;
-      }
-
-      textarea {
-        min-height: 12rem;
-        resize: none;
-      }
-    }
-
-    li {
-      list-style-type: none;
-    }
-
-    .u-text-right {
-      text-align: right;
-    }
-
-    .u-text-left {
-      text-align: left; 
-    }
-
-    .u-text-center {
-      text-align: center;
-    }
-
-    .pb-thumbnail {
-      max-width: 8rem;
-      max-height: 8rem;
-    }
-
-    .dropzone {
-      text-align: center;
-      vertical-align: middle;
-      border: 3px dashed gray;
-      color: gray;
-      font-size: 3rem;
-    }
-
-    .navigation {
-      margin-top: 2rem;
-    }
-
-    .pb-nowrap {
-      white-space: nowrap;
-    }
-
-    .pb-errors {
-      margin-top: -1.6rem;
-      font-size: 1rem;
-      color: red;
-
-      li {
-        list-style-type: disc;
-        margin: 0px;
-      }
-    }
   </style>
 
   <script type="text/coffee">
@@ -179,4 +112,4 @@
       console.log type.toUpperCase(), message
   </script>
 
-</pb-app>
+</w-app>

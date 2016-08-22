@@ -3,3 +3,70 @@ $gray: #e1e1e1;
 $yellow: #dbaa1e;
 $pink: #db1e4f;
 $highlight: #DB1E50;
+
+body {
+  padding-bottom: 10rem;
+}
+
+a {
+  cursor: pointer;
+}
+
+label {
+  input, textarea, select {
+    font-weight: normal;
+  }
+
+  textarea {
+    min-height: 12rem;
+    resize: none;
+  }
+}
+
+li {
+  list-style-type: none;
+}
+
+.u-text-right {
+  text-align: right;
+}
+
+.u-text-left {
+  text-align: left; 
+}
+
+.u-text-center {
+  text-align: center;
+}
+
+.pb-thumbnail {
+  max-width: 8rem;
+  max-height: 8rem;
+}
+
+.dropzone {
+  text-align: center;
+  vertical-align: middle;
+  border: 3px dashed gray;
+  color: gray;
+  font-size: 3rem;
+}
+
+.navigation {
+  margin-top: 2rem;
+}
+
+.pb-nowrap {
+  white-space: nowrap;
+}
+
+.pb-errors {
+  margin-top: -1.6rem;
+  font-size: 1rem;
+  color: red;
+
+  li {
+    list-style-type: disc;
+    margin: 0px;
+  }
+}
