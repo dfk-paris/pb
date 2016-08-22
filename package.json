@@ -1,0 +1,36 @@
+{
+  "name": "widgets",
+  "version": "1.0.0",
+  "description": "a collection of widgets including an app context",
+  "scripts": {
+    "build": "./widgets/build.sh",
+    "watch": "./widgets/build.sh watch",
+    "server": "./widgets/build.sh server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/<your>/<repository>.git"
+  },
+  "keywords": [
+    "palais",
+    "beauharnais",
+    "art",
+    "history"
+  ],
+  "author": "Moritz Schepp <moritz.schepp@gmail.com>",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "git://github.com/<your>/<repository>/issues"
+  },
+  "homepage": "https://github.com/<your>/<repository>.git",
+  "devDependencies": {
+    "coffee-script": "^1.10.0",
+    "node-sass": "^3.8.0",
+    "node-static": "^0.7.8",
+    "onchange": "^2.5.0",
+    "parallelshell": "^2.0.0",
+    "riot": "^2.5.0",
+    "uglifyjs": "^2.4.10",
+    "zepto": "^1.0.1"
+  }
+}
