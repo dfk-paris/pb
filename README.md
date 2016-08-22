@@ -1,24 +1,10 @@
-# README
+# Palais Beauharnais Catalogue
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+a DFK project to inventorize the items within the Palais Beauharnais
 
-Things you may want to cover:
+TODO (docs):
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* setup
+* widget character and usage
+* data copyright and availability
+* link to DFK instance and website
