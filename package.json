@@ -1,8 +1,7 @@
 {
-  "name": "palais-beauharnais-catalogue",
+  "name": "pb",
   "version": "1.0.0",
   "description": "a DFK project to inventorize the items within the Palais Beauharnais",
-  "main": "index.js",
   "scripts": {
     "build": "./widgets/build.sh",
     "watch": "./widgets/build.sh watch",
@@ -10,20 +9,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/moritzschepp/palais-beauharnais.git"
+    "url": "git://github.com/dfk-paris/pb.git"
   },
   "keywords": [
-    "palais",
-    "beauharnais",
-    "art",
-    "history"
+    "palais", "beauharnais", "art", "history", "furniture", "catalogue"
   ],
   "author": "Moritz Schepp <moritz.schepp@gmail.com>",
   "license": "AGPL-3.0",
   "bugs": {
-    "url": "https://github.com/moritzschepp/palais-beauharnais/issues"
+    "url": "https://github.com/dfk-paris/pb/issues"
   },
-  "homepage": "https://github.com/moritzschepp/palais-beauharnais#readme",
+  "homepage": "https://github.com/dfk-paris/pb",
   "devDependencies": {
     "coffee-script": "^1.10.0",
     "node-sass": "^3.8.0",
