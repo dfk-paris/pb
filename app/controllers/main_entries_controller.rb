@@ -3,7 +3,10 @@ class MainEntriesController < ApplicationController
   skip_before_action :auth, only: [:index, :show]
 
   def index
-    @main_entries = MainEntry.includes(sub_entries: :inventory_ids).all
+    @main_entries = MainEntry.
+      includes(sub_entries: :inventory_ids).
+      pageit(params[:page]).
+      all
   end
 
   def show

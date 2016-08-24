@@ -10,7 +10,9 @@
   <div class="container">
     <div class="pb-content" />
   </div>
-  
+
+  <w-modal />
+
   <style type="text/scss">
     @import "widgets/styles/vars.scss";
   </style>
@@ -66,9 +68,29 @@
     }
     self.bus = riot.observable()
     self.data = {}
-    window.pb = self
+    self.utils = {
+      shorten: (str, n = 15) ->
+        if str && str.length > n
+          str.substr(0, n - 1) + '&hellip;'
+        else
+          str
+      in_groups_of: (per_row, array, dummy = null) ->
+        result = []
+        current = []
+        for i in array
+          if current.length == per_row
+            result.push(current)
+            current = []
+          current.push(i)
+        if current.length > 0
+          if dummy
+            while current.length < per_row
+              current.push(dummy)
+          result.push(current)
+        result
+    }
+    window.wApp = self
     
-
     self.on 'mount', ->
       $.ajax(
         type: 'get'
@@ -88,7 +110,7 @@
         if document.location.href != self.routing.href
           self.routing.parts_cache = null
           self.routing.href = document.location.href
-          pb.bus.trigger 'routing', self.routing.parts()
+          wApp.bus.trigger 'routing', self.routing.parts()
       riot.route.start(true)
 
     self.bus.on 'routing', (parts) ->
@@ -110,6 +132,7 @@
 
     self.bus.on 'message', (type, message) ->
       console.log type.toUpperCase(), message
+      
   </script>
 
 </w-app>

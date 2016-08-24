@@ -1,31 +1,5 @@
 <pb-media-dropzone>
 
-  <div data-id="dropzone-tpl" style="display: none">
-
-    <div class="dz-preview dz-file-preview">
-      <div class="dz-image"><img data-dz-thumbnail /></div>
-      <div class="dz-details">
-        <!-- <div class="dz-size"><span data-dz-size></span></div> -->
-        <!-- <div class="dz-filename"><span data-dz-name></span></div> -->
-        <div class="dz-caption" data-dz-caption></div>
-        <pb-button href="#" icon="edit" label="bearbeiten" class="edit" />
-        <div class="pb-modal">
-          <form>
-            <input type="asdf" name="" placeholder="asdfasdf">
-          </form>
-        </div>
-      </div>
-      <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
-      <div class="dz-error-message"><span data-dz-errormessage></span></div>
-      <div class="dz-success-mark"><i class="fa fa-check"></i></div>
-      <div class="dz-error-mark"><i class="fa fa-remove"></i></div>
-      <!-- <div class="dz-remove" data-dz-remove>
-        <i class="fa fa-remove"></i>
-      </div> -->
-    </div>
-
-  </div>
-
   <div class="dropzone">
     <div class="dz-message">hier klicken oder Bilder hineinziehen</div>
   </div>
@@ -49,54 +23,59 @@
 
   <script type="text/coffee">
     self = this
-    self.media_added = false
 
     self.on 'mount', ->
       self.dropzone = new Dropzone($(self.root).find('.dropzone')[0],
         url: "/api/ses/#{self.opts.subEntryId}/media"
         method: 'post'
         paramName: 'medium[image]'
-        previewTemplate: $('[data-id=dropzone-tpl]')[0].innerHTML
-        addRemoveLinks: true
-        removedfile: (file) ->
-          $.ajax(
-            type: 'delete'
-            url: "/api/ses/#{self.opts.subEntryId}/media/#{file.id}"
-            success: (data) ->
-              $(file.previewElement).remove()
-              if self.opts.media.length > 0
-                $(self.root).find('.dz-message').hide()
-          )
+        # previewTemplate: $("script[data-id=dropzone-tpl]")[0].innerHTML
+        # addRemoveLinks: true
+        # removedfile: (file) ->
+        #   $.ajax(
+        #     type: 'delete'
+        #     url: "/api/ses/#{self.opts.subEntryId}/media/#{file.id}"
+        #     success: (data) ->
+        #       $(file.previewElement).remove()
+        #       if self.opts.media.length > 0
+        #         $(self.root).find('.dz-message').hide()
+        #   )
       )
 
-      self.dropzone.on 'addedfile', (file) ->
-        $(file.previewTemplate).attr('data-id', file.id)
-        $(file.previewTemplate).find('[data-dz-caption]').html(file.caption)
-        riot.mount $(file.previewTemplate).find('.pb-modal')[0], 'pb-modal'
+      # self.dropzone.on 'addedfile', (file) ->
+      #   $(file.previewTemplate).attr('data-id', file.id)
+      #   $(file.previewTemplate).find('[data-dz-caption]').html(
+      #     wApp.utils.shorten(file.caption)
+      #   )
+      #   # console.log file
+      #   riot.mount $(file.previewElement).find('pb-button')[0], 'pb-button'
+      #   $(file.previewElement).on 'click', 'pb-button', (event) ->
+      #     event.preventDefault()
+      #     wApp.trigger 'modal', 'pb-file-editor', {
+      #       'subEntryId': self.opts.subEntryId
+      #       'item': file
+      #     }
 
       self.dropzone.on 'success', (file, response) ->
-        $(file.previewTemplate).attr('data-id', response.medium.id)
-        $(file.previewTemplate).find('[data-dz-caption]').html(response.medium.caption)
+        wApp.bus.trigger 'pb-load-data'
+        self.dropzone.removeFile(file)
+        # $(file.previewTemplate).attr('data-id', response.medium.id)
+        # $(file.previewTemplate).find('[data-dz-caption]').html(response.medium.caption)
 
-      self.edit = (event) ->
-        console.log self
-        event.preventDefault()
-        console.log arguments
-        # self.tags['pb-modal']
-
-    self.on 'updated', ->
-      if self.opts.media && !self.media_added
-        self.media_added = true
-        for medium in self.opts.media
-          file = {
-            id: medium.id
-            name: medium.file_name
-            size: medium.size
-            caption: medium.caption
-          }
-          self.dropzone.emit "addedfile", file
-          self.dropzone.createThumbnailFromUrl(file, medium.urls.normal)
-          self.dropzone.emit "complete", file
+    # self.on 'updated', ->
+    #   console.log 'again!'
+    #   if self.opts.media
+    #     self.dropzone.emit 'reset'
+    #     for medium in self.opts.media
+    #       file = {
+    #         id: medium.id
+    #         name: medium.file_name
+    #         size: medium.size
+    #         caption: medium.caption
+    #       }
+    #       self.dropzone.emit "addedfile", file
+    #       self.dropzone.createThumbnailFromUrl(file, medium.urls.normal)
+    #       self.dropzone.emit "complete", file
 
   </script>
 

@@ -64,13 +64,13 @@ jQuery = Zepto;
                 zIndex: function () {
                     return (function (value) {
                         return value === -Infinity ? 0 : value + 1;
-                    }(Math.max.apply(Math, $.makeArray($('*').map(function () {
+                    }(Math.max.apply(Math, $('*').map(function () {
                         return $(this).css('z-index');
                     }).filter(function () {
                         return $.isNumeric(this);
                     }).map(function () {
                         return parseInt(this, 10);
-                    })))));
+                    }))));
                 },
                 updateZIndexOnOpen: true,
                 hasVariableWidth: false

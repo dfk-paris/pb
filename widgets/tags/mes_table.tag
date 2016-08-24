@@ -61,13 +61,15 @@
     </div>
   </form>
 
-  <div class="pagination u-text-right">
-    <i class="fa fa-chevron-circle-left"></i> |
-    <i class="fa fa-chevron-circle-right"></i>
-  </div>
+  <pb-pagination
+    total={data.total}
+    page={page()}
+    per_page={10}
+    onchange={page_to}
+  />
 
   <ul class="u-full-width">
-    <li each={me in data}>
+    <li each={me in data.items}>
       <div class="main-entry">
         <div class="u-pull-right">
           <pb-button
@@ -183,10 +185,15 @@
       event.preventDefault()
       self.criteria_visible = !self.criteria_visible
 
+    self.page = ->
+      hq = wApp.routing.parts()['hash_query'] || {}
+      hq['page']
+
     self.fetch = ->
       $.ajax(
         type: 'get'
         url: 'api/mes'
+        data: {page: self.page}
         success: (data) ->
           console.log data
           self.data = data

@@ -127,27 +127,86 @@
 
     <hr />
 
-    <pb-media-dropzone media={item.media} sub-entry-id={opts.id} />
-
-    <hr />
-
     <div class="u-text-right">
       <input type="submit" class="button-primary" value="Speichern" />
       <input type="reset" class="button" value="Abbrechen" />
     </div>
 
+    <hr />
+
+    <h3>Abbildungen</h3>
+
+    <div class="pb-media-grid row" each={row in wApp.utils.in_groups_of(4, item.media)}>
+      <div class="three columns" each={medium in row}>
+        <div class="pb-frame">
+          <img src={medium.urls.normal} />
+          <small show={medium.caption}>{medium.caption}</small>
+          <hr show={medium.caption} />
+          <div class="u-text-right buttons">
+            <pb-button
+              href="#"
+              icon="edit"
+              label="bearbeiten"
+              class="edit"
+              onclick={edit_medium(medium)}
+            />
+            <pb-button
+              href="#"
+              icon="remove"
+              label="löschen"
+              class="remove"
+              onclick={remove_medium(medium)}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <pb-media-dropzone media={item.media} sub-entry-id={opts.id} />
+
   </form>
+
+  <style type="text/scss">
+    pb-se-editor, [data-is=pb-se-editor] {
+      .pb-media-grid {
+        .pb-frame {
+          padding: 0.5rem;
+          border: 1px solid gray;
+          margin-bottom: 3rem;
+
+          img {
+            display: block;
+            width: 100%;
+          }
+
+          hr {
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+          }
+
+          .buttons {
+            margin-top: 0.3rem;
+          }
+        }
+      }
+    }
+  </style>
 
   <script type="text/coffee">
     self = this
 
     self.on 'mount', ->
+      x = wApp.bus.on 'pb-load-data', -> self.load_data()
+      # console.log x
+      self.load_data()
+
+    self.load_data = ->
       if self.opts.id
         $.ajax(
           type: 'get'
           url: "/api/ses/#{self.opts.id}"
           success: (data) ->
-            console.log data
+            # console.log data
             self.item = data
             self.update()
         )
@@ -169,9 +228,9 @@
           url: "/api/ses/#{self.opts.id}"
           data: JSON.stringify(sub_entry: form_data())
           success: (data) ->
-            console.log data
+            # console.log data
           error: (request) ->
-            console.log JSON.parse(request.response)
+            # console.log JSON.parse(request.response)
         )
       else
         $.ajax(
@@ -179,15 +238,32 @@
           url: "/api/ses"
           data: JSON.stringify(sub_entry: form_data())
           success: (data) ->
-            console.log data
+            # console.log data
             self.errors = undefined
             riot.route '/mes'
           error: (request) ->
             data = JSON.parse(request.response)
-            console.log data
+            # console.log data
             self.errors = data.errors
           complete: ->
             self.update()
+        )
+
+    self.edit_medium =(medium) ->
+      (event) ->
+        wApp.trigger 'modal', 'pb-file-editor', {
+          'subEntryId': self.opts.id
+          'item': medium
+        }
+
+    self.remove_medium = (medium) ->
+      (event) ->
+        event.preventDefault()
+        $.ajax(
+          type: 'delete'
+          url: "/api/ses/#{medium.sub_entry_id}/media/#{medium.id}"
+          success: ->
+            wApp.bus.trigger 'pb-load-data'
         )
 
 

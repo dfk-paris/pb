@@ -15,7 +15,7 @@ function all {
 }
 
 function watch {
-  all
+  all || true
 
   parallelshell \
     "widgets/build.sh watch_vendor" \
@@ -41,7 +41,7 @@ function vendor {
 
 function tags {
   log "compiling tags"
-  node_modules/.bin/riot -s widgets/tags public/app.js
+  node_modules/.bin/riot widgets/tags public/app.js 2> /dev/null
 }
 
 function index {
@@ -58,7 +58,7 @@ function watch_tags {
 }
 
 function watch_index {
-  onchange public/ -- widgets/build.sh index
+  onchange public/app.js public/vendor.* widgets/index.html.ejs -- widgets/build.sh index
 }
 
 function log {

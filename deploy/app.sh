@@ -9,9 +9,9 @@ function deploy {
 
   local "npm run build > /dev/null"
 
-  upload public/app.css $CURRENT_PATH/public/app.css
+  upload public/vendor.css $CURRENT_PATH/public/vendor.css
+  upload public/vendor.js $CURRENT_PATH/public/vendor.js
   upload public/app.js $CURRENT_PATH/public/app.js
-  upload public/tags.js $CURRENT_PATH/public/tags.js
   upload public/fonts/ $CURRENT_PATH/public/fonts/
   upload public/index.html $CURRENT_PATH/public/index.html
 
