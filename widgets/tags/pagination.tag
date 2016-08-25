@@ -14,12 +14,8 @@
       (event) ->
         if new_page >= 1 && new_page <= self.total_pages()
           riot.route("mes?page=#{new_page}")
-          # if handler = self.opts.onchange
-          #   handler(new_page)
 
-    self.total_pages = -> 
-      # console.log self.opts
-      Math.ceil(self.opts.total / self.opts.per_page)
+    self.total_pages = -> Math.ceil(self.opts.total / self.opts.per_page)
   </script>
 
 </pb-pagination>

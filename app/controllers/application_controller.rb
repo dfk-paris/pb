@@ -4,7 +4,7 @@ class ApplicationController < ActionController::API
 
   helper_method :current_user
 
-  before_action :auth
+  before_action :auth, if: -> {Rails.env.production?}
 
   def auth
     unless current_user
