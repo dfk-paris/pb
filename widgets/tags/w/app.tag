@@ -12,6 +12,7 @@
   </div>
 
   <w-modal />
+  <w-messaging />
 
   <style type="text/scss">
     @import "widgets/styles/vars.scss";
@@ -28,7 +29,7 @@
     $(document).on 'ajaxComplete', (event, request, options) ->
       try
         data = JSON.parse(request.response)
-        console.log data
+        # console.log data
         if data.message
           type = if request.status >= 200 && request.status < 300 then 'notice' else 'error'
           self.bus.trigger 'message', type, data.message
@@ -37,13 +38,28 @@
 
     self = this
     self.routing = {
-      query: -> self.routing.parts()['hash_query']
-      path: -> self.routing.parts()['hash_path']
+      query: (params) ->
+        if params
+          result = {}
+          $.extend(result, self.routing.query(), params)
+          qs = []
+          for k, v of result
+            if result[k] != null
+              qs.push "#{k}=#{v}"
+          riot.route "#{self.routing.path()}?#{qs.join '&'}"
+        else
+          self.routing.parts()['hash_query'] || {}
+      path: (new_path) ->
+        if new_path
+          riot.route new_path
+        else
+          self.routing.parts()['hash_path']
       parts: ->
         unless self.routing.parts_cache
           h = document.location.href
           cs = h.match(/^(https?):\/\/([^\/]+)([^?#]+)?(?:\?([^#]+))?(?:#(.*))?$/)
           result = {
+            href: h
             scheme: cs[1]
             host: cs[2]
             path: cs[3]
@@ -107,14 +123,20 @@
       riot.route.base "#/"
       self.routing.route = riot.route.create()
       self.routing.route '..', ->
-        if document.location.href != self.routing.href
+        old_parts = self.routing.parts()
+        if document.location.href != old_parts['href']
           self.routing.parts_cache = null
-          self.routing.href = document.location.href
-          wApp.bus.trigger 'routing', self.routing.parts()
-      riot.route.start(true)
+          console.log self.routing.parts()
+          wApp.bus.trigger 'routing:href', self.routing.parts()
 
-    self.bus.on 'routing', (parts) ->
-      console.log parts
+          if old_parts['hash_path'] != self.routing.path()
+            wApp.bus.trigger 'routing:path', self.routing.parts()
+          else
+            wApp.bus.trigger 'routing:query', self.routing.parts()
+      riot.route.start(true)
+      wApp.bus.trigger 'routing:path', self.routing.parts()
+
+    self.bus.on 'routing:path', (parts) ->
       opts = {}
       tag = switch parts['hash_path']
         when '/mes/edit', '/mes/new'
@@ -130,9 +152,6 @@
           'pb-welcome'
       riot.mount $('.pb-content')[0], tag, opts
 
-    self.bus.on 'message', (type, message) ->
-      console.log type.toUpperCase(), message
-      
   </script>
 
 </w-app>

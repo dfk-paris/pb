@@ -15,7 +15,7 @@
     </div>
 
     <div class="u-text-right">
-      <input type="submit" class="button-primary" value="Speichern" />
+      <input type="submit" class="button" value="Speichern" />
       <input type="reset" class="button" value="Abbrechen" />
     </div>
   </form>

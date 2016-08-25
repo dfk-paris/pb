@@ -18,7 +18,7 @@
           #   handler(new_page)
 
     self.total_pages = -> 
-      console.log self.opts
+      # console.log self.opts
       Math.ceil(self.opts.total / self.opts.per_page)
   </script>
 

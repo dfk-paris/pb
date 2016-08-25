@@ -186,8 +186,8 @@
       self.criteria_visible = !self.criteria_visible
 
     self.page = ->
-      hq = wApp.routing.parts()['hash_query'] || {}
-      hq['page']
+      hq = wApp.routing.query() || {}
+      hq['page'] || 1
 
     self.fetch = ->
       $.ajax(
@@ -201,6 +201,8 @@
       )
 
     self.on 'mount', -> self.fetch()
+    wApp.bus.on 'routing:query', ->
+      self.fetch()
 
     self.remove_main_entry = (me) ->
       (event) ->

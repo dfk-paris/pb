@@ -1,8 +1,10 @@
+@import 'palette';
+
 $blue: #1eaedb;
 $gray: #e1e1e1;
 $yellow: #dbaa1e;
 $pink: #db1e4f;
-$highlight: #DB1E50;
+$highlight: #f4f4f4;
 
 body {
   padding-bottom: 10rem;
@@ -10,6 +12,7 @@ body {
 
 a {
   cursor: pointer;
+  color: $color-secondary-1-0;
 }
 
 label {
@@ -20,6 +23,18 @@ label {
   textarea {
     min-height: 12rem;
     resize: none;
+  }
+}
+
+input[type=submit], input[type=reset] {
+  background-color: $color-secondary-1-0;
+  border-color: $color-secondary-1-0;
+  color: white;
+
+  &:hover {
+    background-color: $color-secondary-1-1;
+    border-color: $color-secondary-1-1;
+    color: white;
   }
 }
 

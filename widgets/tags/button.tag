@@ -14,7 +14,7 @@
 
       a {
         color: white;
-        background-color: $blue;
+        background-color: $color-secondary-1-0;
         border-radius: 0.3rem;
         padding: 0.5rem;
         text-decoration: none;
@@ -22,7 +22,7 @@
 
       a:hover {
         color: white;
-        background-color: lighten($blue, 20)
+        background-color: $color-secondary-1-1
       }
     }
   </style>
