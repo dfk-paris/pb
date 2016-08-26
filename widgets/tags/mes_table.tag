@@ -2,68 +2,48 @@
 
   <h1>Objekte</h1>
 
-  <form>
+  <form onsubmit={search}>
     <div class="row">
       <div class="one-third column">
-        <input
-          class="u-full-width"
-          type="text"
-          name="terms"
-          placeholder="Search everywhere"
+        <pb-input
+          placeholder="Objektbezeichnung"
+          name="title"
+          value={params('title')}
         />
       </div>
       <div class="one-third column">
-        <a onclick={toggle_criteria}>more …</a>
+        <pb-location-select
+          name="location"
+          value={params('location')}
+          prompt={true}
+        />
+      </div>
+      <div class="one-third column">
+        <pb-autocomplete
+          placeholder="Personen"
+          name="creator"
+          value={params('creator')}
+        />
       </div>
     </div>
 
-    <div class="criteria" if={criteria_visible}>
-      <div class="row">
-        <div class="one-third column">
-          <input
-            class="u-full-width"
-            type="text"
-            name="account_number"
-            placeholder="Konto-Nr"
-          />
-        </div>
-        <div class="one-third column">
-          <input
-            class="u-full-width"
-            type="text"
-            name="inventory"
-            placeholder="Inventarbezeichnung"
-          />
-        </div>
+    <div class="row">
+      <div class="one-third column">
+        <pb-input
+          placeholder="Inventar"
+          name="inventory"
+          value={params('inventory')}
+        />
       </div>
-
-      <div class="row">
-        <div class="one-third column">
-          <input
-            class="u-full-width"
-            type="text"
-            name="name"
-            placeholder="Objektbezeichnung"
-          />
-        </div>
-        <div class="one-third column">
-          <input
-            class="u-full-width"
-            type="text"
-            name="location"
-            placeholder="Aufstellungsort"
-          />
-        </div>
-        <div class="one-third column">
-          <pb-people-autocomplete />
-        </div>
+      <div class="two-thirds column u-text-right">
+        <input type="submit" class="button" value="Suchen"></input>
       </div>
     </div>
   </form>
 
   <pb-pagination
     total={data.total}
-    page={page()}
+    page={params('page')}
     per_page={10}
     onchange={page_to}
   />
@@ -117,7 +97,10 @@
             </div>
             <strong>{se.sequence} {se.title}</strong>
             <div show={se.inventory_ids.length > 0}>
-              <pb-badge-list values={se.inventory_ids} />
+              <pb-badge-list
+                values={se.inventory_ids}
+                highlight={params('inventory')}
+              />
             </div>
           </div>
           <div class="u-cf"></div>
@@ -183,22 +166,33 @@
 
   <script type="text/coffee">
     self = this
+    window.s = self
 
-    self.toggle_criteria = (event) ->
+    self.params = (key = undefined) ->
+      result = {
+        page: (wApp.routing.query() || {})['page'] || 1
+        title: wApp.routing.query()['title']
+        location: parseInt(wApp.routing.query()['location'])
+        creator: wApp.routing.query()['creator']
+        inventory: wApp.routing.query()['inventory']
+      }
+      if key then result[key] else result
+
+    self.search = (event) -> 
       event.preventDefault()
-      self.criteria_visible = !self.criteria_visible
-
-    self.page = ->
-      hq = wApp.routing.query() || {}
-      hq['page'] || 1
+      wApp.routing.query(
+        title: self.tags.title.value()
+        location: self.tags.location.value()
+        creator: self.tags.creator.value()
+        inventory: self.tags.inventory.value()
+      )
 
     self.fetch = ->
       $.ajax(
         type: 'get'
         url: 'api/mes'
-        data: {page: self.page}
+        data: self.params()
         success: (data) ->
-          console.log data
           self.data = data
           self.update()
       )
@@ -215,7 +209,6 @@
             type: 'delete'
             url: "api/mes/#{me.id}"
             success: (data) ->
-              console.log data
               self.fetch()
           )
 
@@ -227,7 +220,6 @@
             type: 'delete'
             url: "api/ses/#{se.id}"
             success: (data) ->
-              console.log data
               self.fetch()
           )
 

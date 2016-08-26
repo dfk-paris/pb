@@ -6,7 +6,7 @@
     self = this
 
     self.label = ->
-      (pb.data.locations || {})[self.opts.id]
+      (wApp.data.locations || {})[self.opts.id]
 
   </script>
 

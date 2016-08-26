@@ -15,13 +15,18 @@
           value={item.title}
           errors={errors.title}
         />
-      </div>
-      <div class="six columns">
         <pb-input
           label="Fortlaufende Nummer"
           name="sequence"
           value={item.sequence}
           errors={errors.sequence}
+        />
+      </div>
+      <div class="six columns">
+        <pb-location-select
+          label="Raum / Ort der Aufbewahrung"
+          name="location"
+          value={item.location}
         />
       </div>
     </div>
@@ -62,7 +67,6 @@
 
     <div class="u-text-right">
       <input type="submit" class="button-primary" value="Speichern" />
-      <input type="reset" class="button" value="Abbrechen" />
     </div>
 
   </form>

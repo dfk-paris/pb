@@ -5,8 +5,8 @@
       {"id": 1, "name": "VESTIBÜL"},
       {"id": 2, "name": "VORZIMMER ZUM GRÜNEN SALON"},
       {"id": 3, "name": "GRÜNER SALON"},
-      {"id": 4, "name": "ROTER SALON "},
-      {"id": 5, "name": "KLEINER SALON "},
+      {"id": 4, "name": "ROTER SALON"},
+      {"id": 5, "name": "KLEINER SALON"},
       {"id": 6, "name": "BIBLIOTHEK"},
       {"id": 7, "name": "GROSSER SPEISESAAL"},
       {"id": 8, "name": "TREPPENHAUS UND TREPPE"}

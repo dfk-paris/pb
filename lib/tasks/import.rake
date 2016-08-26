@@ -8,10 +8,8 @@ namespace :pb do
     "#{(rand * 2).to_i + 1} C #{(rand * 2).to_i + 1} #{(rand * 300).to_i}"
   end
 
-  def locations
-    json = File.read("#{Rails.root}/public/sample-data/data/locations.json")
-    data = JSON.parse(json)
-    data.map{|e| e['options']}.flatten
+  def location
+    random(1, 22)
   end
 
   def seq
@@ -61,14 +59,13 @@ namespace :pb do
       when :main_entry
         entry = {
           title: combine(titles, connectors, add),
-          location: combine(locations),
+          location: location,
           sequence: seq,
           provenience: sentence(3, 10),
           historical_evidence: sentence(10, 50),
           literature: sentence(5, 15),
           description: text(4, 20),
-          appreciation: text(2, 10),
-          location: random(1, 22)
+          appreciation: text(2, 10)
         }
       when :sub_entry
         entry = {

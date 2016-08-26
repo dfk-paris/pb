@@ -4,8 +4,12 @@ class MainEntriesController < ApplicationController
 
   def index
     @main_entries = MainEntry.
-      includes(sub_entries: :inventory_ids).
       pageit(params[:page]).
+      with_order.
+      by_title(params[:title]).
+      by_location(params[:location]).
+      by_creator(params[:creator]).
+      by_inventory(params[:inventory]).
       all
   end
 

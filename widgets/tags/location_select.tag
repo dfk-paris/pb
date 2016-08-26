@@ -1,4 +1,4 @@
-<pb-locations-select>
+<pb-location-select>
 
   <label>
     {opts.label}
@@ -6,11 +6,12 @@
       name={opts.name}
       class="u-full-width"
     >
-      <optgroup each={group in location_groups} label={group.name}>
+      <option value="0" if={opts.prompt}>.. bitte auswählen</option>
+      <optgroup each={group in data} label={group.name}>
         <option
           each={location in group.rooms}
           value={location.id}
-          selected={location.id == opts.value}
+          selected={is_selected(location)}
         >
           {location.name}
         </option>
@@ -28,11 +29,13 @@
         type: 'get'
         url: '/data/locations.json'
         success: (data) ->
-          self.location_groups = data
-          self.parent.selection_changed()
+          self.data = data
           self.update()
       )
 
-    self.french_value = -> $(self.root).find('select').val().split('/')[1]
+    self.is_selected = (location) ->
+      location.id == opts.value
+
+    self.value = -> $(self.root).find('select').val()
   </script>
-</pb-locations-select>
+</pb-location-select>

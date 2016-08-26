@@ -44,7 +44,7 @@
           $.extend(result, self.routing.query(), params)
           qs = []
           for k, v of result
-            if result[k] != null
+            if result[k] != null && result[k] != ''
               qs.push "#{k}=#{v}"
           riot.route "#{self.routing.path()}?#{qs.join '&'}"
         else
@@ -111,7 +111,6 @@
       $.ajax(
         type: 'get'
         url: 'data/locations.json'
-        dataType: 'json'
         success: (data) ->
           self.data.locations = {}
           for group in data
@@ -151,6 +150,7 @@
         else
           'pb-welcome'
       riot.mount $('.pb-content')[0], tag, opts
+      window.scrollTo(0, 0)
 
   </script>
 

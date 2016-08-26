@@ -4,8 +4,6 @@
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
 
-system 'npm run build'
-
 require 'cucumber/rails'
 
 # Capybara defaults to CSS3 selectors rather than XPath.
@@ -59,19 +57,3 @@ end
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
-
-# Capybara.register_driver :selenium do |app|
-#   Capybara::Selenium::Driver.new(app, browser: :firefox, marionette: true)
-# end
-
-Selenium::WebDriver::Chrome.driver_path = '/opt/chromedriver'
-
-Capybara.register_driver :chromium do |app|
-  Capybara::Selenium::Driver.new(app, :browser => :chrome)
-end
-
-Capybara.default_driver = :chromium
-Capybara.javascript_driver = :chromium
-
-# Capybara.default_driver = :selenium
-# Capybara.javascript_driver = :selenium

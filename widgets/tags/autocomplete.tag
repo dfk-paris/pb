@@ -3,7 +3,7 @@
   <pb-input
     label={opts.label}
     name={opts.name}
-    placeholder={opts.label}
+    placeholder={opts.placeholder || opts.label}
     value={opts.value}
   />
 
@@ -24,9 +24,10 @@
             }
             dataType: 'json'
             success: (data) -> 
-              console.log data
               suggest(data)
           )
       )
+
+    self.value = -> self.tags['pb-input'].value()
   </script>
 </pb-autocomplete>
