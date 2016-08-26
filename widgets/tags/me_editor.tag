@@ -96,9 +96,12 @@
           url: "/api/mes/#{self.opts.id}"
           data: JSON.stringify(main_entry: form_data())
           success: (data) ->
-            console.log data
+            riot.route '/mes'
           error: (request) ->
-            console.log JSON.parse(request.response)
+            data = JSON.parse(request.response)
+            self.errors = data.errors
+          complete: ->
+            self.update()
         )
       else
         $.ajax(

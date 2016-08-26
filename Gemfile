@@ -30,6 +30,7 @@ group :test do
   gem 'cucumber-rails'
   gem 'database_cleaner'
   gem 'selenium-webdriver'
+  gem 'factory_girl_rails'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

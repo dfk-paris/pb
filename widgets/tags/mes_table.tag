@@ -73,6 +73,11 @@
       <div class="main-entry">
         <div class="u-pull-right">
           <pb-button
+            href="#/ses/new?main_entry_id={me.id}"
+            icon="plus"
+            label="Unterobjekt hinzufügen"
+          />
+          <pb-button
             href="#/mes/edit?id={me.id}"
             icon="edit"
             label="bearbeiten"

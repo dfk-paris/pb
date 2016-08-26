@@ -1,7 +1,7 @@
 <pb-se-editor>
 
-  <h1 show={item.title}>Objekt '{item.title}' bearbeiten</h1>
-  <h1 show={!item}>Objekt erstellen</h1>
+  <h1 show={item.title}>Unterobjekt '{item.title}' bearbeiten</h1>
+  <h1 show={!item}>Unterobjekt hinzufügen</h1>
 
   <hr />
 
@@ -216,7 +216,7 @@
       for element in $(self.root).find("[name]")
         e = $(element)
         result[e.attr('name')] = e.val()
-      result.main_entry_id = self.opts.main_entry_id
+      result.main_entry_id = wApp.routing.query()['main_entry_id']
       result
 
     self.submit = (event) ->
@@ -228,9 +228,11 @@
           url: "/api/ses/#{self.opts.id}"
           data: JSON.stringify(sub_entry: form_data())
           success: (data) ->
-            # console.log data
+            riot.route '/mes'
           error: (request) ->
-            # console.log JSON.parse(request.response)
+            self.errors = data.errors
+          complete: ->
+            self.update()
         )
       else
         $.ajax(
@@ -238,12 +240,10 @@
           url: "/api/ses"
           data: JSON.stringify(sub_entry: form_data())
           success: (data) ->
-            # console.log data
-            self.errors = undefined
+            # self.errors = undefined
             riot.route '/mes'
           error: (request) ->
             data = JSON.parse(request.response)
-            # console.log data
             self.errors = data.errors
           complete: ->
             self.update()
