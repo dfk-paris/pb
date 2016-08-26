@@ -96,7 +96,7 @@
         </span>
       </div>
       <div class="sub-entries">
-        <div each={se in me.sub_entries}>
+        <div each={se in me.sub_entries} class="sub-entry">
           <div class="u-pull-right">
             <pb-button
               href="#/ses/edit?id={se.id}"
@@ -158,12 +158,10 @@
         }
       }
 
-      .sub-entries {
-        & > div {
-          padding: 0.8rem;
-        }
+      .sub-entry {
+        padding: 0.8rem;
 
-        & > div:hover {
+        &:hover {
           background-color: $highlight;
           border-radius: 0.5rem;
         }

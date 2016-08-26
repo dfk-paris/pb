@@ -66,12 +66,8 @@ When(/^I fill in the following values$/) do |table|
   end
 end
 
-Given(/^a record of type "([^"]*)"$/) do |factory|
-  x = FactoryGirl.create factory.to_sym
-end
-
-When(/^I follow( and confirm)? "([^"]*)" within main entry "([^"]*)"$/) do |confirm, link, scope|
-  within page.find('div.main-entry', text: 'Kaiserliche Sitzgruppe') do
+When(/^I follow( and confirm)? "([^"]*)" within (main|sub) entry "([^"]*)"$/) do |confirm, link, type, scope|
+  within page.find("div.#{type}-entry", text: scope) do
     step "I follow#{confirm} \"#{link}\""
   end
 end

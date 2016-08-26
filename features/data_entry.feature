@@ -20,7 +20,7 @@ Feature: data entry
     And I should see "Kaiserliche Sitzgruppe"
 
   Scenario: Update a main entry
-    Given a record of type "main_entry"
+    Given a main entry
     When I go to "the main entries list"
     And I follow "bearbeiten" within main entry "Kaiserliche Sitzgruppe"
     Then I should see "bearbeiten"
@@ -33,14 +33,14 @@ Feature: data entry
     Then I should see "Kayserliche Sitzgruppe"
 
   Scenario: Remove a main entry
-    Given a record of type "main_entry"
+    Given a main entry
     When I go to "the main entries list"
     And I follow and confirm "löschen" within main entry "Kaiserliche Sitzgruppe"
     Then I should be on "the main entries list"
     And I should not see "Kaiserliche Sitzgruppe"
 
   Scenario: add sub entries to a main entry
-    Given a record of type "main_entry"
+    Given a main entry
     When I go to "the main entries list"
     And I follow "Unterobjekt hinzufügen" within main entry "Kaiserliche Sitzgruppe"
     Then I should see "Unterobjekt hinzufügen"
@@ -48,5 +48,28 @@ Feature: data entry
       | field             | value     |
       | Objektbezeichnung | 3 Spiegel |
     And I press "Speichern"
+    Then I should see "Unterobjekt wurde angelegt"
     Then I should be on "the main entries list"
     And I should see "3 Spiegel"
+
+  Scenario: update a sub entry
+    Given a main entry
+    And a sub entry
+    When I go to "the main entries list" 
+    And I follow "bearbeiten" within sub entry "3 Spiegel"
+    When I fill in the following values
+      | field             | value            |
+      | Objektbezeichnung | 3 kleine Spiegel |
+    And I press "Speichern"
+    Then I should see "Unterobjekt wurde geändert"
+    Then I should be on "the main entries list"
+    And I should see "3 kleine Spiegel"
+    And I should not see "3 Spiegel"
+
+  Scenario: remove a sub entry
+   Given a main entry
+   And a sub entry
+   When I go to "the main entries list"
+   And I follow and confirm "löschen" within sub entry "3 Spiegel"
+   Then I should be on "the main entries list"
+   And I should not see "3 Spiegel"
