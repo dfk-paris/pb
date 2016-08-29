@@ -104,6 +104,11 @@
               current.push(dummy)
           result.push(current)
         result
+      to_integer: (value) ->
+        if $.isNumeric(value)
+          parseInt(value)
+        else
+          value
     }
     window.wApp = self
     
@@ -133,6 +138,7 @@
           else
             wApp.bus.trigger 'routing:query', self.routing.parts()
       riot.route.start(true)
+      riot.route('mes')
       wApp.bus.trigger 'routing:path', self.routing.parts()
 
     self.bus.on 'routing:path', (parts) ->

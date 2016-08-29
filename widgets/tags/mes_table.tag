@@ -172,7 +172,7 @@
       result = {
         page: (wApp.routing.query() || {})['page'] || 1
         title: wApp.routing.query()['title']
-        location: parseInt(wApp.routing.query()['location'])
+        location: wApp.utils.to_integer(wApp.routing.query()['location'])
         creator: wApp.routing.query()['creator']
         inventory: wApp.routing.query()['inventory']
       }

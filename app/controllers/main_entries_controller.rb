@@ -4,6 +4,7 @@ class MainEntriesController < ApplicationController
 
   def index
     @main_entries = MainEntry.
+      with_sub_entries.
       pageit(params[:page]).
       with_order.
       by_title(params[:title]).

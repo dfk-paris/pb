@@ -5,8 +5,8 @@ class MainEntry < ApplicationRecord
   validates :title, presence: true
 
   scope :with_sub_entries, lambda {
-    includes(sub_entries: :inventory_ids).
-    joins('LEFT JOIN sub_entries ON sub_entries.main_entry_id = main_entries.id')
+    includes(sub_entries: [:inventory_ids, :media]).
+    references(:main_entries, :sub_entries, :tags)
   }
 
   scope :with_order, lambda {
@@ -22,7 +22,7 @@ class MainEntry < ApplicationRecord
   }
 
   scope :by_location, lambda {|location|
-    return all if location.blank? || location == '0'
+    return all if location.blank? || location == '0' || location == 0
     where(location: location)
   }
 
@@ -36,11 +36,7 @@ class MainEntry < ApplicationRecord
 
   scope :by_inventory, lambda {|inventory|
     return all if inventory.blank?
-    tags = ActsAsTaggableOn::Tag.
-      where('LOWER(name) LIKE :name', name: "%#{inventory.downcase}%").
-      map{|t| t.name}
-    sub_entry_ids = SubEntry.tagged_with(tags, any: true).pluck(:id)
-    where('sub_entries.id IN (:ids)', ids: sub_entry_ids)
+    where('LOWER(tags.name) LIKE :name', name: "%#{inventory.downcase}%")
   }
 
 end
