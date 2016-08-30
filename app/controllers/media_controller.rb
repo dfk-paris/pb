@@ -40,7 +40,7 @@ class MediaController < ApplicationController
 
     def medium_params
       params.fetch(:medium, {}).permit(
-        :image, :caption, :publish
+        :image, :caption, :publish, :sequence
       )
     end
 

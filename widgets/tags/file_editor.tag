@@ -12,6 +12,11 @@
           errors={errors.caption}
         />
         <pb-input
+          label="Fortlaufende Nummer"
+          name="sequence"
+          value={opts.item.sequence}
+        />
+        <pb-input
           type="checkbox"
           label="Öffentlich"
           name="publish"

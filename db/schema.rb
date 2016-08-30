@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160830135733) do
+ActiveRecord::Schema.define(version: 20160830160546) do
 
   create_table "main_entries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "title"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20160830135733) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.boolean  "publish"
+    t.string   "sequence"
     t.index ["sub_entry_id"], name: "index_media_on_sub_entry_id", using: :btree
   end
 

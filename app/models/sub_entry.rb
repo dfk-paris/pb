@@ -1,7 +1,7 @@
 class SubEntry < ApplicationRecord
 
   belongs_to :main_entry
-  has_many :media, dependent: :destroy
+  has_many :media, lambda {order("ISNULL(sequence), sequence ASC")}, dependent: :destroy
 
   acts_as_taggable_on :inventory_ids
 
