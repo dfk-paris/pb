@@ -11,7 +11,7 @@
       <div class="six columns">
         <fieldset>
           <pb-input
-            if={!no_title}
+            if={!hide_title_field}
             label="Objektbezeichnung"
             name="title"
             value={item.title}
@@ -214,7 +214,7 @@
       self.load_data()
 
       $("input[name='no_title']").on 'change', (event) ->
-        self.no_title = !self.no_title
+        self.hide_title_field = $(event.target).prop('checked')
         self.update()
 
     self.load_data = ->
@@ -225,7 +225,7 @@
           success: (data) ->
             # console.log data
             self.item = data
-            self.no_title = data.no_title
+            self.hide_title_field = data.no_title
             self.update()
         )
 

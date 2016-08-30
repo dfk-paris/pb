@@ -9,6 +9,8 @@ json.extract!(sub_entry,
 )
 json.inventory_ids sub_entry.inventory_ids.map{|t| t.name}
 
-json.media sub_entry.media do |medium|
+media = (local_assigns[:only_published] ? sub_entry.media.published : sub_entry.media)
+
+json.media media do |medium|
   json.partial! 'media/item', medium: medium
 end

@@ -2,6 +2,8 @@ class Medium < ApplicationRecord
 
   belongs_to :sub_entry
 
+  scope :published, lambda {where(publish: true)}
+
   has_attached_file :image, {
     url: '/media/:style/:id.:extension',
     storage: :filesystem,
