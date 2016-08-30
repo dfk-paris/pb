@@ -3,7 +3,7 @@ class Medium < ApplicationRecord
   belongs_to :sub_entry
 
   has_attached_file :image, {
-    url: '/media/:style/:id.:extension/',
+    url: '/media/:style/:id.:extension',
     storage: :filesystem,
     path: "#{Rails.root}/data/media/:style/:id.:extension",
     styles: {
