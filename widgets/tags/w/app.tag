@@ -2,8 +2,7 @@
 
   <div class="container navigation">
     <div class="u-text-right">
-      <a href="#/mes">Liste</a> |
-      <a href="#/mes/new">Neu</a>
+      <a href="#/mes/new" class="button">Neuer Eintrag</a>
     </div>
   </div>
 

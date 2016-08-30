@@ -26,7 +26,7 @@ label {
   }
 }
 
-input[type=submit], input[type=reset] {
+input[type=submit], input[type=reset], .button {
   background-color: $color-secondary-1-0;
   border-color: $color-secondary-1-0;
   color: white;
