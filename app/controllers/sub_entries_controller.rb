@@ -58,7 +58,7 @@ class SubEntriesController < ApplicationController
     def sub_entry_params
       params.fetch(:sub_entry, {}).permit(
         :main_entry_id,
-        :sequence, :inventory_ids,
+        :sequence, :inventory_ids, :inventory_id_list,
         :title, :description, 
         :creator, :location, :dating, 
         :height, :width, :depth, :diameter, :weight, 

@@ -60,11 +60,13 @@ Feature: data entry
     When I fill in the following values
       | field             | value            |
       | Objektbezeichnung | 3 kleine Spiegel |
+      | Inventarnummern   | ab 01 01         |
     And I press "Speichern"
     Then I should see "Unterobjekt wurde geändert"
     Then I should be on "the main entries list"
     And I should see "3 kleine Spiegel"
     And I should not see "3 Spiegel"
+    And I should see "ab 01 01"
 
   Scenario: remove a sub entry
    Given a main entry
