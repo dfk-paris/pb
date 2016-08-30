@@ -7,4 +7,8 @@ class SubEntry < ApplicationRecord
 
   validates :title, presence: true
 
+  def title
+    no_title ? main_entry.title : super
+  end
+
 end

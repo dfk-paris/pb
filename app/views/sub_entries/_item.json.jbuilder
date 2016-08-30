@@ -1,6 +1,6 @@
 json.extract!(sub_entry, 
   :id, :main_entry_id,
-  :sequence, :title, :description, 
+  :sequence, :title, :no_title, :description, 
   :creator, :location, :dating, 
   :height, :width, :depth, :diameter, :weight, 
   :height_with_socket, :width_with_socket, :depth_with_socket, 

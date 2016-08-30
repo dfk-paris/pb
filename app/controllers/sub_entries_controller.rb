@@ -59,7 +59,7 @@ class SubEntriesController < ApplicationController
       params.fetch(:sub_entry, {}).permit(
         :main_entry_id,
         :sequence, :inventory_ids, :inventory_id_list,
-        :title, :description, 
+        :title, :no_title, :description, 
         :creator, :location, :dating, 
         :height, :width, :depth, :diameter, :weight, 
         :height_with_socket, :width_with_socket, :depth_with_socket, 

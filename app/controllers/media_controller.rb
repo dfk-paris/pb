@@ -8,9 +8,9 @@ class MediaController < ApplicationController
     @medium = @sub_entry.media.build(medium_params)
     
     if @medium.save
-      @message = 'medium has been created'
+      @message = 'medium wurde erstellt'
     else
-      @message = 'medium was not created'
+      @message = 'medium konnte nicht erstellt werden'
       @errors = @medium.errors
       render status: 406
     end
@@ -20,10 +20,10 @@ class MediaController < ApplicationController
     @medium = @sub_entry.media.find(params[:id])
 
     if @medium.update(medium_params)
-      render json: {'message' => 'medium has been updated'}
+      render json: {'message' => 'medium wurde geändert'}
     else
       render status: 406, json: {
-        'message' => 'medium was not updated',
+        'message' => 'medium konnte nicht geändert werden',
         'errors' => @medium.errors
       }
     end
@@ -32,7 +32,7 @@ class MediaController < ApplicationController
   def destroy
     @medium = @sub_entry.media.find(params[:id])
     @medium.destroy
-    @message = 'medium has been removed'
+    @message = 'medium wurde gelöscht'
   end
 
 
@@ -40,7 +40,7 @@ class MediaController < ApplicationController
 
     def medium_params
       params.fetch(:medium, {}).permit(
-        :image, :caption
+        :image, :caption, :publish
       )
     end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160805163931) do
+ActiveRecord::Schema.define(version: 20160830135733) do
 
   create_table "main_entries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "title"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20160805163931) do
     t.datetime "image_updated_at"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.boolean  "publish"
     t.index ["sub_entry_id"], name: "index_media_on_sub_entry_id", using: :btree
   end
 
@@ -59,6 +60,7 @@ ActiveRecord::Schema.define(version: 20160805163931) do
     t.string   "depth_with_socket"
     t.text     "framing",            limit: 65535
     t.text     "restaurations",      limit: 65535
+    t.boolean  "no_title"
     t.index ["main_entry_id"], name: "index_sub_entries_on_main_entry_id", using: :btree
   end
 

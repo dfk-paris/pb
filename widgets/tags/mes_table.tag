@@ -2,6 +2,12 @@
 
   <h1>Objekte</h1>
 
+  <div class="u-text-right">
+    <a href="#/mes/new" class="button">Neuer Eintrag</a>
+  </div>
+
+  <hr />
+
   <form onsubmit={search}>
     <div class="row">
       <div class="one-third column">

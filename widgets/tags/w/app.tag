@@ -1,11 +1,5 @@
 <w-app>
 
-  <div class="container navigation">
-    <div class="u-text-right">
-      <a href="#/mes/new" class="button">Neuer Eintrag</a>
-    </div>
-  </div>
-
   <div class="container">
     <div class="pb-content" />
   </div>
@@ -137,7 +131,6 @@
           else
             wApp.bus.trigger 'routing:query', self.routing.parts()
       riot.route.start(true)
-      riot.route('mes')
       wApp.bus.trigger 'routing:path', self.routing.parts()
 
     self.bus.on 'routing:path', (parts) ->
@@ -151,9 +144,8 @@
           opts['id'] = parts['hash_query'].id
           opts['main_entry_id'] = parts['hash_query'].main_entry_id
           'pb-se-editor'
-        when '/mes' then 'pb-mes-table'
         else
-          'pb-welcome'
+          'pb-mes-table'
       riot.mount $('.pb-content')[0], tag, opts
       window.scrollTo(0, 0)
 

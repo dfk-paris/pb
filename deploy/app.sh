@@ -20,6 +20,7 @@ function deploy {
   remote "ln -sfn $SHARED_PATH/secrets.yml $CURRENT_PATH/config/secrets.yml"
   
   task "bundle install --without development test --path $BUNDLE_PATH --clean --quiet"
+  task "RAILS_ENV=production bundle exec rake db:migrate"
   remote "touch $CURRENT_PATH/tmp/restart.txt"
 
   finalize

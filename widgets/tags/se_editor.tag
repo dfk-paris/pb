@@ -9,12 +9,21 @@
 
     <div class="row">
       <div class="six columns">
-        <pb-input
-          label="Objektbezeichnung"
-          name="title"
-          value={item.title}
-          errors={errors.title}
-        />
+        <fieldset>
+          <pb-input
+            if={!no_title}
+            label="Objektbezeichnung"
+            name="title"
+            value={item.title}
+            errors={errors.title}
+          />
+          <pb-input
+            type="checkbox"
+            label="{no_title ? 'Objektbezeichnung ' : ''}aus Überobjekt übernehmen"
+            name="no_title"
+            value={item.no_title}
+          />
+        </fieldset>
         <pb-input
           label="Fortlaufende Nummer"
           name="sequence"
@@ -137,7 +146,7 @@
 
     <div class="pb-media-grid row" each={row in wApp.utils.in_groups_of(4, item.media)}>
       <div class="three columns" each={medium in row}>
-        <div class="pb-frame">
+        <div class="pb-frame {'publish': medium.publish}">
           <img src={medium.urls.normal} />
           <small show={medium.caption}>{medium.caption}</small>
           <hr show={medium.caption} />
@@ -166,6 +175,8 @@
   </form>
 
   <style type="text/scss">
+    @import "widgets/styles/vars.scss";
+
     pb-se-editor, [data-is=pb-se-editor] {
       .pb-media-grid {
         .pb-frame {
@@ -186,6 +197,10 @@
           .buttons {
             margin-top: 0.3rem;
           }
+
+          &.publish {
+            background-color: $color-secondary-2-4;
+          }
         }
       }
     }
@@ -195,9 +210,12 @@
     self = this
 
     self.on 'mount', ->
-      x = wApp.bus.on 'pb-load-data', -> self.load_data()
-      # console.log x
+      wApp.bus.on 'pb-load-data', -> self.load_data()
       self.load_data()
+
+      $("input[name='no_title']").on 'change', (event) ->
+        self.no_title = !self.no_title
+        self.update()
 
     self.load_data = ->
       if self.opts.id
@@ -207,15 +225,20 @@
           success: (data) ->
             # console.log data
             self.item = data
+            self.no_title = data.no_title
             self.update()
         )
 
     form_data = ->
       result = {}
-      for element in $(self.root).find("[name]")
+      for element in $(self.root).find("input[name], textarea[name]")
         e = $(element)
         result[e.attr('name')] = e.val()
+      for element in $(self.root).find("input[type=checkbox][name]")
+        e = $(element)
+        result[e.attr('name')] = e.prop('checked')
       result.main_entry_id = wApp.routing.query()['main_entry_id']
+      result.no_title = $("input[name=no_title]").prop('checked')
       result
 
     self.submit = (event) ->

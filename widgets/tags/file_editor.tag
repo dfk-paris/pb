@@ -11,6 +11,12 @@
           value={opts.item.caption}
           errors={errors.caption}
         />
+        <pb-input
+          type="checkbox"
+          label="Öffentlich"
+          name="publish"
+          value={opts.item.publish}
+        />
       </div>
     </div>
 
@@ -34,14 +40,14 @@
   <script type="text/coffee">
     self = this
 
-    self.on 'mount', ->
-      # console.log self.opts
-
     form_data = ->
       result = {}
       for element in $(self.root).find("[name]")
         e = $(element)
         result[e.attr('name')] = e.val()
+      for element in $(self.root).find("input[type=checkbox][name]")
+        e = $(element)
+        result[e.attr('name')] = e.prop('checked')
       result
 
     self.submit = (event) ->
