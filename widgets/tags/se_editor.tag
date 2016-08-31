@@ -137,14 +137,29 @@
     <hr />
 
     <div class="u-text-right">
-      <input type="submit" class="button" value="Speichern" />
+      <input
+        type="submit"
+        class="button"
+        value="Speichern"
+        onclick={pre_submit('stay')}
+      />
+      <input
+        type="submit"
+        class="button"
+        value="Speichern und zurück zur Liste"
+        onclick={pre_submit('back')}
+      />
     </div>
 
-    <hr />
+    <hr if={opts.id} />
 
-    <h3>Abbildungen</h3>
+    <h3 if={opts.id}>Abbildungen</h3>
 
-    <div class="pb-media-grid row" each={row in wApp.utils.in_groups_of(4, item.media)}>
+    <div
+      if={opts.id}
+      class="pb-media-grid row"
+      each={row in wApp.utils.in_groups_of(4, item.media)}
+    >
       <div class="three columns" each={medium in row}>
         <div class="pb-frame {'publish': medium.publish}">
           <img src={medium.urls.normal} />
@@ -170,7 +185,7 @@
       </div>
     </div>
 
-    <pb-media-dropzone media={item.media} sub-entry-id={opts.id} />
+    <pb-media-dropzone if={opts.id} media={item.media} sub-entry-id={opts.id} />
 
   </form>
 
@@ -241,6 +256,11 @@
       result.no_title = $("input[name=no_title]").prop('checked')
       result
 
+    self.pre_submit = (where) ->
+      (event) ->
+        self.where = where
+        true
+
     self.submit = (event) ->
       event.preventDefault()
 
@@ -250,7 +270,10 @@
           url: "/api/ses/#{self.opts.id}"
           data: JSON.stringify(sub_entry: form_data())
           success: (data) ->
-            riot.route '/mes'
+            if self.where == 'back'
+              riot.route '/mes'
+            else
+              self.update()
           error: (request) ->
             self.errors = data.errors
           complete: ->
@@ -262,8 +285,10 @@
           url: "/api/ses"
           data: JSON.stringify(sub_entry: form_data())
           success: (data) ->
-            # self.errors = undefined
-            riot.route '/mes'
+            if self.where == 'back'
+              riot.route '/mes'
+            else
+              self.update()
           error: (request) ->
             data = JSON.parse(request.response)
             self.errors = data.errors

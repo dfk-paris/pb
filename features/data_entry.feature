@@ -47,7 +47,7 @@ Feature: data entry
     When I fill in the following values
       | field             | value     |
       | Objektbezeichnung | 3 Spiegel |
-    And I press "Speichern"
+    And I press "Speichern und zurück zur Liste"
     Then I should see "Unterobjekt wurde angelegt"
     Then I should be on "the main entries list"
     And I should see "3 Spiegel"
@@ -61,7 +61,7 @@ Feature: data entry
       | field             | value            |
       | Objektbezeichnung | 3 kleine Spiegel |
       | Inventarnummern   | ab 01 01         |
-    And I press "Speichern"
+    And I press "Speichern und zurück zur Liste"
     Then I should see "Unterobjekt wurde geändert"
     Then I should be on "the main entries list"
     And I should see "3 kleine Spiegel"
