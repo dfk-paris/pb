@@ -14,3 +14,9 @@ media = (local_assigns[:only_published] ? sub_entry.media.published : sub_entry.
 json.media media do |medium|
   json.partial! 'media/item', medium: medium
 end
+
+if local_assigns[:include_main_entry]
+  json.main_entry do
+    json.partial! 'main_entries/item', main_entry: sub_entry.main_entry
+  end
+end

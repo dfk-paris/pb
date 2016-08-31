@@ -66,6 +66,16 @@ When(/^I fill in the following values$/) do |table|
   end
 end
 
+When(/^I check "([^"]*)"$/) do |field|
+  check field
+end
+
+Then(/^I should see "([^"]*)" within (main|sub) entry "([^"]*)"$/) do |pattern, type, scope|
+  within page.find("div.#{type}-entry", text: scope) do
+    step "I should see \"#{pattern}\""
+  end
+end
+
 When(/^I follow( and confirm)? "([^"]*)" within (main|sub) entry "([^"]*)"$/) do |confirm, link, type, scope|
   within page.find("div.#{type}-entry", text: scope) do
     step "I follow#{confirm} \"#{link}\""

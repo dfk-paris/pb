@@ -18,18 +18,19 @@
             errors={errors.title}
           />
           <pb-input
+            if={!hide_title_field}
+            label="Fortlaufende Nummer"
+            name="sequence"
+            value={item.sequence}
+            errors={errors.sequence}
+          />
+          <pb-input
             type="checkbox"
-            label="{no_title ? 'Objektbezeichnung ' : ''}aus Überobjekt übernehmen"
+            label="aus Überobjekt übernehmen"
             name="no_title"
             value={item.no_title}
           />
         </fieldset>
-        <pb-input
-          label="Fortlaufende Nummer"
-          name="sequence"
-          value={item.sequence}
-          errors={errors.sequence}
-        />
       </div>
       <div class="six columns">
         <pb-textarea

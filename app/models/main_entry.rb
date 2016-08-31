@@ -4,6 +4,14 @@ class MainEntry < ApplicationRecord
 
   validates :title, presence: true
 
+  after_save do |me|
+    if me.title_changed? || me.sequence_changed?
+      me.sub_entries.each do |se|
+        se.save
+      end
+    end
+  end
+
   scope :with_sub_entries, lambda {
     includes(sub_entries: [:inventory_ids, :media]).
     references(:main_entries, :sub_entries, :tags)

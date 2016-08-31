@@ -75,3 +75,20 @@ Feature: data entry
    And I follow and confirm "löschen" within sub entry "3 Spiegel"
    Then I should be on "the main entries list"
    And I should not see "3 Spiegel"
+
+  Scenario: pull title and sequence from main entry
+    Given a main entry
+    When I go to "the main entries list"
+    And I follow "Unterobjekt hinzufügen"
+    And I check "aus Überobjekt übernehmen"
+    And I press "Speichern und zurück zur Liste"
+    Then I should see "001 Kaiserliche Sitzgruppe" within main entry "Kaiserliche Sitzgruppe"
+    And I should see "001 Kaiserliche Sitzgruppe" within sub entry "Kaiserliche Sitzgruppe"
+    When I follow "bearbeiten" within main entry "Kaiserliche Sitzgruppe"
+    And I fill in the following values
+      | field               | value |
+      | Objektbezeichnung   | KS    |
+      | Fortlaufende Nummer | 002   |
+    And I press "Speichern"
+    Then I should see "002 KS" within main entry "KS"
+    And I should see "002 KS" within sub entry "KS"

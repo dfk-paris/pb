@@ -7,6 +7,13 @@ class SubEntry < ApplicationRecord
 
   validates :title, presence: true
 
+  before_validation do |se|
+    if se.no_title
+      se.title = se.main_entry.title
+      se.sequence = se.main_entry.sequence
+    end
+  end
+
   def title
     no_title ? main_entry.title : super
   end
