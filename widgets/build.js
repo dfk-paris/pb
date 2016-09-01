@@ -1,13 +1,14 @@
+#!/usr/bin/env node
 'use strict';
 
 var ejs = require('ejs');
 var fs = require('fs');
 var crypto = require('crypto');
-var async = require('async');
 
 class IndexRenderer {
-  constructor() {
+  constructor(filename) {
     this.file_opts = {encoding: 'utf8'};
+    this.filename = filename
   }
 
   read(filename) {
@@ -15,7 +16,7 @@ class IndexRenderer {
   }
 
   tpl() {
-    return this.read('widgets/index.html.ejs');
+    return this.read(this.filename);
   }
 
   digest(filename) {
@@ -36,5 +37,7 @@ class IndexRenderer {
   }
 }
 
-var ir = new IndexRenderer();
-console.log(ir.render());
+process.argv.slice(2).forEach(function (val) {
+  var ir = new IndexRenderer(val);
+  console.log(ir.render());
+});

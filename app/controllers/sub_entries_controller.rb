@@ -14,12 +14,11 @@ class SubEntriesController < ApplicationController
     @sub_entry = SubEntry.new(sub_entry_params)
     
     if @sub_entry.save
-      render json: {'message' => 'Unterobjekt wurde angelegt'}
+      @message = 'Unterobjekt wurde angelegt'
+      render action: 'processing'
     else
-      render status: 406, json: {
-        'message' => 'Unterobjekt konnte nicht angelegt werden',
-        'errors' => @sub_entry.errors
-      }
+      @message = 'Unterobjekt konnte nicht angelegt werden'
+      render status: 406, action: 'processing'
     end
   end
 
@@ -27,19 +26,19 @@ class SubEntriesController < ApplicationController
     @sub_entry = SubEntry.find(params[:id])
 
     if @sub_entry.update_attributes(sub_entry_params)
-      render json: {'message' => 'Unterobjekt wurde geändert'}
+      @message = 'Unterobjekt wurde geändert'
+      render action: 'processing'
     else
-      render status: 406, json: {
-        'message' => 'Unterobjekt konnte nicht geändert werden',
-        'errors' => @sub_entry.errors
-      }
+      @message = 'Unterobjekt konnte nicht geändert werden'
+      render status: 406, action: 'processing'
     end
   end
 
   def destroy
     @sub_entry = SubEntry.find(params[:id])
     @sub_entry.destroy
-    render status: 200, json: {'message' => 'Unterobjekt wurde gelöscht'}
+    @message = 'Unterobjekt wurde gelöscht'
+    render action: 'processing'
   end
 
   def autocomplete

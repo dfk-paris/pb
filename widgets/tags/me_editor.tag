@@ -75,10 +75,10 @@
     self = this
 
     self.on 'mount', ->
-      if self.opts.id
+      if self.id()
         $.ajax(
           type: 'get'
-          url: "/api/mes/#{self.opts.id}"
+          url: "/api/mes/#{self.id()}"
           success: (data) ->
             self.item = data
             self.update()
@@ -91,13 +91,15 @@
         result[e.attr('name')] = e.val()
       result
 
+    self.id = -> wApp.routing.query()['id']
+
     self.submit = (event) ->
       event.preventDefault()
 
-      if self.opts.id
+      if self.id()
         $.ajax(
           type: 'put'
-          url: "/api/mes/#{self.opts.id}"
+          url: "/api/mes/#{self.item.id}"
           data: JSON.stringify(main_entry: form_data())
           success: (data) ->
             riot.route '/mes'
@@ -113,12 +115,9 @@
           url: "/api/mes"
           data: JSON.stringify(main_entry: form_data())
           success: (data) ->
-            console.log data
-            self.errors = undefined
             riot.route '/mes'
           error: (request) ->
             data = JSON.parse(request.response)
-            console.log data
             self.errors = data.errors
           complete: ->
             self.update()

@@ -27,8 +27,8 @@
     self = this
     self.active = false
 
-    window.wApp.on 'modal', (tag, opts = {}) ->
-      console.log arguments
+    wApp.bus.on 'modal', (tag, opts = {}) ->
+      # console.log arguments
       opts.modal = self
       riot.mount self.receiver, tag, opts
       $(self.root).show()

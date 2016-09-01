@@ -3,7 +3,7 @@
   <h1>Objekte</h1>
 
   <div class="u-text-right">
-    <a href="#/mes/new" class="button">Neuer Eintrag</a>
+    <a href="#/mes/form" class="button">Neuer Eintrag</a>
   </div>
 
   <hr />
@@ -59,12 +59,12 @@
       <div class="main-entry">
         <div class="u-pull-right">
           <pb-button
-            href="#/ses/new?main_entry_id={me.id}"
+            href="#/ses/form?main_entry_id={me.id}"
             icon="plus"
             label="Unterobjekt hinzufügen"
           />
           <pb-button
-            href="#/mes/edit?id={me.id}"
+            href="#/mes/form?id={me.id}"
             icon="edit"
             label="bearbeiten"
           />
@@ -85,7 +85,7 @@
         <div each={se in me.sub_entries} class="sub-entry">
           <div class="u-pull-right">
             <pb-button
-              href="#/ses/edit?id={se.id}"
+              href="#/ses/form?main_entry_id={me.id}&id={se.id}"
               icon="edit"
               label="bearbeiten"
             />

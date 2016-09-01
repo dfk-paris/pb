@@ -152,12 +152,12 @@
       />
     </div>
 
-    <hr if={opts.id} />
+    <hr if={id()} />
 
-    <h3 if={opts.id}>Abbildungen</h3>
+    <h3 if={id()}>Abbildungen</h3>
 
     <div
-      if={opts.id}
+      if={id()}
       class="pb-media-grid row"
       each={row in wApp.utils.in_groups_of(4, item.media)}
     >
@@ -186,7 +186,11 @@
       </div>
     </div>
 
-    <pb-media-dropzone if={opts.id} media={item.media} sub-entry-id={opts.id} />
+    <pb-media-dropzone
+      if={id()}
+      media={item.media}
+      sub-entry-id={id()}
+    />
 
   </form>
 
@@ -233,6 +237,9 @@
         self.hide_title_field = $(event.target).prop('checked')
         self.update()
 
+    self.id = -> wApp.routing.query()['id']
+    self.main_entry_id = -> wApp.routing.query()['main_entry_id']
+
     self.load_data = ->
       if self.opts.id
         $.ajax(
@@ -265,15 +272,16 @@
     self.submit = (event) ->
       event.preventDefault()
 
-      if self.opts.id
+      if self.id()
         $.ajax(
           type: 'put'
-          url: "/api/ses/#{self.opts.id}"
+          url: "/api/ses/#{self.id()}"
           data: JSON.stringify(sub_entry: form_data())
           success: (data) ->
             if self.where == 'back'
               riot.route '/mes'
             else
+              self.item = data.sub_entry
               self.update()
           error: (request) ->
             self.errors = data.errors
@@ -289,6 +297,8 @@
             if self.where == 'back'
               riot.route '/mes'
             else
+              riot.route "/ses/form?main_entry_id=#{self.main_entry_id()}&id=#{data.sub_entry.id}"
+              self.item = data.sub_entry
               self.update()
           error: (request) ->
             data = JSON.parse(request.response)
@@ -299,7 +309,7 @@
 
     self.edit_medium =(medium) ->
       (event) ->
-        wApp.trigger 'modal', 'pb-file-editor', {
+        wApp.bus.trigger 'modal', 'pb-file-editor', {
           'subEntryId': self.opts.id
           'item': medium
         }
