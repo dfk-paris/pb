@@ -62,7 +62,7 @@
       .pb-media-grid {
         .medium {
           float: left;
-          width: 25%;
+          width: 33%;
           padding: 1rem;
           text-align: center;
 

@@ -14,6 +14,7 @@ function deploy {
   upload public/app.js $CURRENT_PATH/public/app.js
   upload public/fonts/ $CURRENT_PATH/public/fonts/
   upload public/index.html $CURRENT_PATH/public/index.html
+  upload public/listing.html $CURRENT_PATH/public/listing.html
 
   remote "ln -sfn $SHARED_PATH/data $CURRENT_PATH/data"
   remote "ln -sfn $SHARED_PATH/database.yml $CURRENT_PATH/config/database.yml"
