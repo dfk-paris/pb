@@ -10,6 +10,10 @@
     <div class="row">
       <div class="six columns">
         <fieldset>
+          <strong>Haupteintrag:</strong><br/ >
+          <em>{item.main_entry.title} ({item.main_entry.sequence})</em>
+          <hr />
+
           <pb-input
             if={!hide_title_field}
             label="Objektbezeichnung"
@@ -26,7 +30,7 @@
           />
           <pb-input
             type="checkbox"
-            label="aus Überobjekt übernehmen"
+            label="aus Haupteintrag übernehmen"
             name="no_title"
             value={item.no_title}
           />
