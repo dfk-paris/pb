@@ -81,14 +81,14 @@
     <div class="row">
       <div class="four columns">
         <pb-input
-          label="Höhe ohne Sockel (in cm)"
-          name="height"
-          value={item.height}
-        />
-        <pb-input
-          label="Höhe mit Sockel (in cm)"
+          label="Höhe mit ..."
           name="height_with_socket"
           value={item.height_with_socket}
+        />
+        <pb-input
+          label="Höhe ohne ..."
+          name="height"
+          value={item.height}
         />
         <pb-input
           label="Gewicht (in kg)"
@@ -98,14 +98,14 @@
       </div>
       <div class="four columns">
         <pb-input
-          label="Breite ohne Sockel (in cm)"
-          name="width"
-          value={item.width}
-        />
-        <pb-input
-          label="Breite mit Sockel (in cm)"
+          label="Breite mit ..."
           name="width_with_socket"
           value={item.width_with_socket}
+        />
+        <pb-input
+          label="Breite ohne ..."
+          name="width"
+          value={item.width}
         />
         <pb-input
           label="Durchmesser (in cm)"
@@ -115,14 +115,14 @@
       </div>
       <div class="four columns">
         <pb-input
-          label="Tiefe ohne Sockel (in cm)"
-          name="depth"
-          value={item.depth}
-        />
-        <pb-input
-          label="Tiefe mit Sockel (in cm)"
+          label="Tiefe mit ..."
           name="depth_with_socket"
           value={item.depth_with_socket}
+        />
+        <pb-input
+          label="Tiefe ohne ..."
+          name="depth"
+          value={item.depth}
         />
       </div>
     </div>
