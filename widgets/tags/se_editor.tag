@@ -1,7 +1,7 @@
 <pb-se-editor>
 
   <h1 show={item.title}>Unterobjekt '{item.title}' bearbeiten</h1>
-  <h1 show={!item}>Unterobjekt hinzufügen</h1>
+  <h1 show={!item.id}>Unterobjekt hinzufügen</h1>
 
   <hr />
 
@@ -10,10 +10,6 @@
     <div class="row">
       <div class="six columns">
         <fieldset>
-          <strong>Haupteintrag:</strong><br/ >
-          <em>{item.main_entry.title} ({item.main_entry.sequence})</em>
-          <hr />
-
           <pb-input
             if={!hide_title_field}
             label="Objektbezeichnung"
@@ -28,9 +24,12 @@
             value={item.sequence}
             errors={errors.sequence}
           />
+          <hr if={!hide_title_field} />
+          <strong>Haupteintrag:</strong><br/ >
+          <em>{item.main_entry.title} ({item.main_entry.sequence})</em>
           <pb-input
             type="checkbox"
-            label="aus Haupteintrag übernehmen"
+            label="Werte aus Haupteintrag übernehmen"
             name="no_title"
             value={item.no_title}
           />
@@ -253,6 +252,15 @@
             # console.log data
             self.item = data
             self.hide_title_field = data.no_title
+            self.update()
+        )
+      else
+        $.ajax(
+          type: 'get'
+          url: "/api/mes/#{self.opts.main_entry_id}"
+          success: (data) ->
+            console.log data
+            self.item = {main_entry: data}
             self.update()
         )
 

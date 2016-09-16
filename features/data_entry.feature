@@ -80,7 +80,7 @@ Feature: data entry
     Given a main entry
     When I go to "the main entries list"
     And I follow "Unterobjekt hinzufügen"
-    And I check "aus Überobjekt übernehmen"
+    And I check "Werte aus Haupteintrag übernehmen"
     And I press "Speichern und zurück zur Liste"
     Then I should see "001 Kaiserliche Sitzgruppe" within main entry "Kaiserliche Sitzgruppe"
     And I should see "001 Kaiserliche Sitzgruppe" within sub entry "Kaiserliche Sitzgruppe"

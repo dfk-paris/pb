@@ -99,7 +99,7 @@
           <div class="metadata">
             <i class="fa fa-arrow-circle-right"></i>
             <div class="media u-pull-left" show={se.media.length > 0}>
-              <img src={se.media[0].urls.thumb} />
+              <img each={medium in se.media} src={medium.urls.thumb} />
             </div>
             <strong>{se.sequence} {se.title}</strong>
             <div show={se.inventory_ids.length > 0}>
@@ -157,14 +157,25 @@
 
         .media {
           width: 80px;
-          min-height: 10px;
           margin-right: 1rem;
           line-height: 0px;
           font-size: 0px;
 
           img {
-            border-radius: 0.5rem;
+            display: block;
+            float: left;
+            max-width: 20px;
+            max-height: 20px;
+            min-width: 20px;
+            min-height: 20px;
           }
+
+          img:first-child {
+            clear: both;
+            max-width: 80px;
+            max-height: 80px;
+          }
+
         }
       }
     }
