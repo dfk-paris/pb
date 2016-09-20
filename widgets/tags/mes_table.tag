@@ -3,7 +3,7 @@
   <h1>Objekte</h1>
 
   <div class="u-text-right">
-    <a href="#/mes/form" class="button">Neuer Eintrag</a>
+    <a href="#" onclick={new_me} class="button">Neuer Eintrag</a>
   </div>
 
   <hr />
@@ -183,7 +183,8 @@
 
   <script type="text/coffee">
     self = this
-    window.s = self
+
+    self.on 'mount', -> self.fetch()
 
     self.params = (key = undefined) ->
       result = {
@@ -214,7 +215,6 @@
           self.update()
       )
 
-    self.on 'mount', -> self.fetch()
     wApp.bus.on 'routing:query', ->
       self.fetch()
 
@@ -239,6 +239,10 @@
             success: (data) ->
               self.fetch()
           )
+
+    self.new_me = (event) ->
+      event.preventDefault()
+      riot.route 'mes/form'
 
 
   </script>
