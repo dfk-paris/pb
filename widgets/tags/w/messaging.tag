@@ -1,5 +1,4 @@
 <w-messaging>
-
   <div
     each={message in messages}
     class="message {'error': error(message), 'notice': notice(message)}"
@@ -15,7 +14,6 @@
     $(document).on 'ajaxComplete', (event, request, options) ->
       try
         data = JSON.parse(request.response)
-        # console.log data
         if data.message
           type = if request.status >= 200 && request.status < 300 then 'notice' else 'error'
           wApp.bus.trigger 'message', type, data.message
@@ -24,6 +22,7 @@
 
     self.on 'mount', -> self.messages = []
     wApp.bus.on 'message', (type, message) -> 
+      # console.log 'messaging', type, message
       self.messages.push {
         type: type,
         content: message

@@ -1,1 +1,1 @@
-json.partial! 'item', sub_entry: @sub_entry, include_main_entry: true
+json.partial! 'item', sub_entry: @sub_entry

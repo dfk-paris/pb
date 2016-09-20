@@ -26,7 +26,7 @@
           />
           <hr if={!hide_title_field} />
           <strong>Haupteintrag:</strong><br/ >
-          <em>{item.main_entry.title} ({item.main_entry.sequence})</em>
+          <em>{main_entry.title} ({main_entry.sequence})</em>
           <pb-input
             type="checkbox"
             label="Werte aus Haupteintrag übernehmen"
@@ -231,6 +231,8 @@
 
   <script type="text/coffee">
     self = this
+    self.id = -> wApp.routing.query()['id']
+    self.main_entry_id = -> wApp.routing.query()['main_entry_id']
 
     self.on 'mount', ->
       wApp.bus.on 'pb-load-data', -> self.load_data()
@@ -240,10 +242,15 @@
         self.hide_title_field = $(event.target).prop('checked')
         self.update()
 
-    self.id = -> wApp.routing.query()['id']
-    self.main_entry_id = -> wApp.routing.query()['main_entry_id']
-
     self.load_data = ->
+      $.ajax(
+        type: 'get'
+        url: "/api/mes/#{self.main_entry_id()}"
+        success: (data) ->
+          self.main_entry = data
+          self.update()
+      )
+
       if self.opts.id
         $.ajax(
           type: 'get'
@@ -265,15 +272,16 @@
         )
 
     form_data = ->
-      result = {}
+      result = {
+        main_entry_id: self.main_entry_id()
+        no_title: $("input[name=no_title]").prop('checked')
+      }
       for element in $(self.root).find("input[name], textarea[name]")
         e = $(element)
         result[e.attr('name')] = e.val()
       for element in $(self.root).find("input[type=checkbox][name]")
         e = $(element)
         result[e.attr('name')] = e.prop('checked')
-      result.main_entry_id = wApp.routing.query()['main_entry_id']
-      result.no_title = $("input[name=no_title]").prop('checked')
       result
 
     self.pre_submit = (where) ->
