@@ -1,21 +1,44 @@
 <pb-pagination>
 
   <div class="u-text-right" show={total_pages() > 1}>
-    <a onclick={page_to(opts.page, -1)}><i class="fa fa-chevron-circle-left"></i></a>
+    <a
+      show={!is_first()}
+      onclick={page_to_first}
+    ><i class="fa fa-angle-double-left"></i></a>
+    <a
+      show={!is_first()}
+      onclick={page_down}
+    ><i class="fa fa-angle-left"></i></a>
     {opts.page}/{total_pages()}
-    <a onclick={page_to(opts.page, +1)}><i class="fa fa-chevron-circle-right"></i></a>
+    <a
+      show={!is_last()}
+      onclick={page_up}
+    ><i class="fa fa-angle-right"></i></a>
+    <a
+      show={!is_last()}
+      onclick={page_to_last}
+    ><i class="fa fa-angle-double-right"></i></a>
   </div>
 
   <script type="text/coffee">
-    self = this
+    tag = this
 
-    self.page_to = (old_page, change) ->
-      new_page = parseInt(old_page) + change
-      (event) ->
-        if new_page >= 1 && new_page <= self.total_pages()
-          riot.route("mes?page=#{new_page}")
+    tag.current_page = -> parseInt(wApp.routing.query()['page'] || 1)
+    tag.page_to_first = -> tag.page_to(1)
+    tag.page_down = -> tag.page_to(tag.current_page() - 1)
+    tag.page_up = -> tag.page_to(tag.current_page() + 1)
+    tag.page_to_last = -> tag.page_to(tag.total_pages())
 
-    self.total_pages = -> Math.ceil(self.opts.total / self.opts.per_page)
+    tag.is_first = -> tag.current_page() == 1
+    tag.is_last = -> tag.current_page() == tag.total_pages()
+
+    tag.page_to = (new_page) ->
+      if new_page != tag.current_page() && new_page >= 1 && new_page <= tag.total_pages()
+        wApp.routing.query page: new_page
+
+    tag.total_pages = ->
+      console.log tag.opts.total, tag.opts.per_page
+      Math.ceil(tag.opts.total / tag.opts.per_page)
   </script>
 
 </pb-pagination>

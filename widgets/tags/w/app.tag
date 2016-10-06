@@ -14,7 +14,12 @@
   <script type="text/coffee">
     self = this
 
-    self.on 'mount', -> wApp.routing.setup()
+    self.on 'mount', ->
+      $(document).on 'click', 'img[src-large]', (event) ->
+        console.log event.target
+        url = $(event.target).attr('src-large')
+        wApp.bus.trigger 'modal', 'pb-image-viewer', url: url
+      wApp.routing.setup()
     
     wApp.bus.on 'routing:path', (parts) ->
       opts = {}

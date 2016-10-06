@@ -59,11 +59,6 @@
           name="material"
           value={item.material}
         />
-        <pb-autocomplete
-          label="Markierungen"
-          name="markings"
-          value={item.markings}
-        />
       </div>
       <div class="six columns">
         <pb-autocomplete
@@ -75,6 +70,13 @@
           label="Datum"
           name="dating"
           value={item.dating}
+        />
+      </div>
+      <div class="twelve columns">
+        <pb-textarea
+          label="Markierungen"
+          name="markings"
+          value={item.markings}
         />
       </div>
     </div>
@@ -266,7 +268,7 @@
           type: 'get'
           url: "/api/mes/#{self.opts.main_entry_id}"
           success: (data) ->
-            console.log data
+            # console.log data
             self.item = {main_entry: data}
             self.update()
         )

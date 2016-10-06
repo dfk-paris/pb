@@ -3,7 +3,9 @@
   <h1>Objekte</h1>
 
   <div class="u-text-right">
-    <a href="#" onclick={new_me} class="button">Neuer Eintrag</a>
+    <!-- <a href="#" onclick={new_me} class="button">Neuer Eintrag</a> -->
+    
+    <a href="#/mes/form" class="button">Neuer Eintrag</a>
   </div>
 
   <hr />
@@ -99,7 +101,11 @@
           <div class="metadata">
             <i class="fa fa-arrow-circle-right"></i>
             <div class="media u-pull-left" show={se.media.length > 0}>
-              <img each={medium in se.media} src={medium.urls.thumb} />
+              <img
+                each={medium in se.media}
+                src={medium.urls.thumb}
+                src-large={medium.urls.big}
+              />
             </div>
             <strong>{se.sequence} {se.title}</strong>
             <div show={se.inventory_ids.length > 0}>
@@ -199,6 +205,7 @@
     self.search = (event) -> 
       event.preventDefault()
       wApp.routing.query(
+        page: 1
         title: self.tags.title.value()
         location: self.tags.location.value()
         creator: self.tags.creator.value()

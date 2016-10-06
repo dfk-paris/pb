@@ -12,19 +12,27 @@ class MainEntry < ApplicationRecord
     end
   end
 
+  scope :mega_join, lambda {
+    distinct.
+    from('main_entries').
+    joins('LEFT OUTER JOIN sub_entries ses ON ses.main_entry_id = main_entries.id').
+    joins('LEFT OUTER JOIN taggings ON taggings.taggable_id = ses.id').
+    joins('LEFT OUTER JOIN tags ON tags.id = taggings.tag_id')
+  }
+
   scope :with_sub_entries, lambda {
     includes(sub_entries: [:inventory_ids, :media]).
     references(:main_entries, :sub_entries, :tags)
   }
 
   scope :with_order, lambda {
-    with_sub_entries.order("main_entries.sequence ASC, sub_entries.sequence ASC")
+    mega_join.order("main_entries.sequence ASC")
   }
 
   scope :by_title, lambda {|title|
     return all if title.blank?
-    with_sub_entries.where(
-      'main_entries.title LIKE :title OR sub_entries.title LIKE :title',
+    mega_join.where(
+      'main_entries.title LIKE :title OR ses.title LIKE :title',
       title: "%#{title}%"
     )
   }
@@ -36,15 +44,15 @@ class MainEntry < ApplicationRecord
 
   scope :by_creator, lambda {|creator|
     return all if creator.blank?
-    with_sub_entries.where(
-      'sub_entries.creator LIKE :creator',
+    mega_join.where(
+      'ses.creator LIKE :creator',
       creator: "%#{creator}%"
     )
   }
 
   scope :by_inventory, lambda {|inventory|
     return all if inventory.blank?
-    where('LOWER(tags.name) LIKE :name', name: "%#{inventory.downcase}%")
+    mega_join.where('LOWER(tags.name) LIKE :name', name: "%#{inventory.downcase}%")
   }
 
 end
