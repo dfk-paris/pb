@@ -96,7 +96,7 @@
           value={item.height}
         />
         <pb-input
-          label="Gewicht (in kg)"
+          label="Gewicht"
           name="weight"
           value={item.weight}
         />
@@ -113,7 +113,7 @@
           value={item.width}
         />
         <pb-input
-          label="Durchmesser (in cm)"
+          label="Durchmesser"
           name="diameter"
           value={item.diameter}
         />

@@ -32,8 +32,8 @@
         width={se.width_with_socket}
         depth={se.depth_with_socket}
       /> -->
-      <pb-string-value label="Gewicht" value={se.weight} unit="kg" />
-      <pb-string-value label="Durchmesser" value={se.diameter} unit="cm" />
+      <pb-string-value label="Gewicht" value={se.weight} />
+      <pb-string-value label="Durchmesser" value={se.diameter} />
       <pb-text-value label="Restaurierungen" value={se.restaurations} />
 
       <div class="pb-media-grid" if={se.media.length > 0} >
