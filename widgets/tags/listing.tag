@@ -12,6 +12,7 @@
     <pb-text-value label="Würdigung" value={me.appreciation} />
 
     <div each={se in me.sub_entries} class="pb-sub-entry">
+      adfasdf
       <em>Nr. {se.sequence}</em>
       <div><strong>{se.title}</strong></div>
       <span>{creator_city_date(se)}</span>
@@ -19,19 +20,7 @@
       <pb-string-value label="Inv-Nr." value={se.inventory_ids.join('; ')} />
       <pb-string-value label="Merkierungen" value={se.markings} />
       <pb-string-value label="Material" value={se.material} />
-      <pb-text-value label="Maße" value={dimensions(se)}>
-      <!-- <pb-dimension-values
-        label="Maße ohne Sockel"
-        height={se.height}
-        width={se.width}
-        depth={se.depth}
-      />
-      <pb-dimension-values
-        label="Maße mit Sockel"
-        height={se.height_with_socket}
-        width={se.width_with_socket}
-        depth={se.depth_with_socket}
-      /> -->
+      <pb-text-value label="Maße" value={dimensions(se)} />
       <pb-string-value label="Gewicht" value={se.weight} />
       <pb-string-value label="Durchmesser" value={se.diameter} />
       <pb-text-value label="Restaurierungen" value={se.restaurations} />
@@ -95,6 +84,7 @@
       $.ajax(
         type: 'get'
         url: '/api/mes'
+        data: {per_page: 'all'}
         success: (data) ->
           self.data = data
           self.update()

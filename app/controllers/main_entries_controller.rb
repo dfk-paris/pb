@@ -9,7 +9,7 @@ class MainEntriesController < ApplicationController
       by_location(params[:location]).
       by_creator(params[:creator]).
       by_inventory(params[:inventory]).
-      pageit(params[:page]).
+      pageit(params[:page], params[:per_page]).
       all
   end
 
