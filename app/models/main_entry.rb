@@ -55,4 +55,8 @@ class MainEntry < ApplicationRecord
     mega_join.where('LOWER(tags.name) LIKE :name', name: "%#{inventory.downcase}%")
   }
 
+  scope :include_unpublished, lambda { |value|
+    value.present? ? all : where(publish: true)
+  }
+
 end

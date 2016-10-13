@@ -77,7 +77,11 @@
             onclick={remove_main_entry(me)}
           />
         </div>
-        <h4>{me.sequence} {me.title || me.id}</h4>
+        <h4>
+          {me.sequence} {me.title || me.id}
+          <i show={me.publish} class="fa fa-eye"></i>
+          <i show={!me.publish} class="fa fa-eye-slash"></i>
+        </h4>
         <span show={me.location} class="pb-location">
           <strong>Raum / Ort der Aufbewahrung:</strong>
           <pb-location id={me.location} />
@@ -199,6 +203,7 @@
         location: wApp.utils.to_integer(wApp.routing.query()['location'])
         creator: wApp.routing.query()['creator']
         inventory: wApp.routing.query()['inventory']
+        unpublished: true
       }
       if key then result[key] else result
 

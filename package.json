@@ -33,7 +33,7 @@
     "onchange": "^2.5.0",
     "parallelshell": "^2.0.0",
     "pgwmodal": "^2.0.2",
-    "riot": "^2.6.2",
+    "riot": "^2.6.3",
     "uglifyjs": "^2.4.10",
     "zepto": "^1.0.1"
   }

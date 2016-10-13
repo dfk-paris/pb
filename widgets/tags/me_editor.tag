@@ -31,6 +31,13 @@
       </div>
     </div>
 
+    <pb-input
+      label="Diesen Eintrag veröffentlichen"
+      name="publish"
+      type="checkbox"
+      value={item.publish}
+    />
+
     <hr />
 
     <pb-textarea
@@ -80,6 +87,7 @@
           type: 'get'
           url: "/api/mes/#{self.id()}"
           success: (data) ->
+            console.log data
             self.item = data
             self.update()
         )
@@ -88,7 +96,10 @@
       result = {}
       for element in $(self.root).find("[name]")
         e = $(element)
-        result[e.attr('name')] = e.val()
+        if e.attr('type') == 'checkbox'
+          result[e.attr('name')] = e.prop('checked')
+        else
+          result[e.attr('name')] = e.val()
       result
 
     self.id = -> wApp.routing.query()['id']

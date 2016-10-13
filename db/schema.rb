@@ -10,19 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160923082724) do
+ActiveRecord::Schema.define(version: 20161013143240) do
 
   create_table "main_entries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "title"
     t.integer  "location"
     t.string   "sequence"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
     t.text     "provenience",         limit: 65535
     t.text     "historical_evidence", limit: 65535
     t.text     "literature",          limit: 65535
     t.text     "description",         limit: 65535
     t.text     "appreciation",        limit: 65535
+    t.boolean  "publish",                           default: true
   end
 
   create_table "media", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

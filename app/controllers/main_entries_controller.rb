@@ -5,6 +5,7 @@ class MainEntriesController < ApplicationController
   def index
     @main_entries = MainEntry.
       with_order.
+      include_unpublished(params[:unpublished]).
       by_title(params[:title]).
       by_location(params[:location]).
       by_creator(params[:creator]).
@@ -61,7 +62,8 @@ class MainEntriesController < ApplicationController
         :historical_evidence,
         :literature,
         :description,
-        :appreciation
+        :appreciation,
+        :publish
       )
     end
 
