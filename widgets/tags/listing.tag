@@ -18,7 +18,7 @@
       <span>{creator_city_date(se)}</span>
 
       <pb-string-value label="Inv-Nr." value={se.inventory_ids.join('; ')} />
-      <pb-string-value label="Merkierungen" value={se.markings} />
+      <pb-string-value label="Markierungen" value={se.markings} />
       <pb-string-value label="Material" value={se.material} />
       <pb-text-value label="Maße" value={dimensions(se)} />
       <pb-string-value label="Gewicht" value={se.weight} />

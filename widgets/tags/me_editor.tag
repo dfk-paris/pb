@@ -87,7 +87,7 @@
           type: 'get'
           url: "/api/mes/#{self.id()}"
           success: (data) ->
-            console.log data
+            # console.log data
             self.item = data
             self.update()
         )
