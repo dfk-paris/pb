@@ -12,7 +12,6 @@
     <pb-text-value label="Würdigung" value={me.appreciation} />
 
     <div each={se in me.sub_entries} class="pb-sub-entry">
-      adfasdf
       <em>Nr. {se.sequence}</em>
       <div><strong>{se.title}</strong></div>
       <span>{creator_city_date(se)}</span>

@@ -37,7 +37,7 @@
         wApp.routing.query page: new_page
 
     tag.total_pages = ->
-      console.log tag.opts.total, tag.opts.per_page
+      # console.log tag.opts.total, tag.opts.per_page
       Math.ceil(tag.opts.total / tag.opts.per_page)
   </script>
 

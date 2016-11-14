@@ -26,7 +26,7 @@
     self.value_from_parent = ->
       if self.opts.type == 'checkbox' then 1 else self.opts.value
     self.checked = ->
-      console.log self.opts
+      # console.log self.opts
       self.opts.type == 'checkbox' && self.opts.value
   </script>
 

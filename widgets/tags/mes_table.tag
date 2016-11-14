@@ -47,6 +47,25 @@
         <input type="submit" class="button" value="Suchen"></input>
       </div>
     </div>
+
+    <div class="row">
+      <div class="one-third column">
+        <pb-input
+          label="Daten anzeigen"
+          name="show_data"
+          type="checkbox"
+          onchange={toggleDataVisibility}
+        />
+      </div>
+      <div class="one-third column">
+        <pb-input
+          label="leere Felder anzeigen"
+          name="show_empty_fields"
+          type="checkbox"
+          onchange={toggleEmptyFieldVisibility}
+        />
+      </div>
+    </div>
   </form>
 
   <pb-pagination
@@ -82,10 +101,42 @@
           <i show={me.publish} class="fa fa-eye"></i>
           <i show={!me.publish} class="fa fa-eye-slash"></i>
         </h4>
-        <span show={me.location} class="pb-location">
+        <div show={me.location} class="pb-location">
           <strong>Raum / Ort der Aufbewahrung:</strong>
           <pb-location id={me.location} />
-        </span>
+        </div>
+        <div class="pb-timestamp">
+          <strong>Letztes Update:</strong>
+          <w-timestamp value={me.updated_at} />
+        </div>
+
+        <div class="pb-data" show={showData}>
+          <pb-string-value
+            label="Herkunft / Provenienz"
+            value={me.provenience}
+            show-if-empty={showEmptyFields}
+          />
+          <pb-string-value
+            label="Historische Nachweise"
+            value={me.historical_evidence}
+            show-if-empty={showEmptyFields}
+          />
+          <pb-string-value
+            label="Literatur"
+            value={me.literature}
+            show-if-empty={showEmptyFields}
+          />
+          <pb-string-value
+            label="Beschreibung"
+            value={me.description}
+            show-if-empty={showEmptyFields}
+          />
+          <pb-string-value
+            label="Würdigung"
+            value={me.appreciation}
+            show-if-empty={showEmptyFields}
+          />
+        </div>
       </div>
       <div class="sub-entries">
         <div each={se in me.sub_entries} class="sub-entry">
@@ -112,10 +163,26 @@
               />
             </div>
             <strong>{se.sequence} {se.title}</strong>
+            <div class="pb-timestamp">
+              <strong>Letztes Update:</strong>
+              <w-timestamp value={se.updated_at} />
+            </div>
             <div show={se.inventory_ids.length > 0}>
               <pb-badge-list
                 values={se.inventory_ids}
                 highlight={params('inventory')}
+              />
+            </div>
+            <div class="pb-data" show={showData}>
+              <pb-string-value
+                label="Markierungen"
+                value={se.markings}
+                show-if-empty={showEmptyFields}
+              />
+              <pb-string-value
+                label="Restaurierungen"
+                value={se.restaurations}
+                show-if-empty={showEmptyFields}
               />
             </div>
           </div>
@@ -149,12 +216,22 @@
         }
       }
 
-      .main-entry {
-        .pb-location {
-          position: relative;
-          top: -10px;
-          font-size: 1.2rem;
+      .pb-data {
+        font-size: 10px;
+        color: gray;
+
+        pb-string-value, [data-is=pb-string-value] {
+          em {
+            font-weight: bold;
+          }
         }
+      }
+
+      .pb-location, .pb-timestamp {
+        position: relative;
+        top: -10px;
+        margin-bottom: -3px;
+        font-size: 1.2rem;
       }
 
       .sub-entry {
@@ -163,6 +240,10 @@
         &:hover {
           background-color: $highlight;
           border-radius: 0.5rem;
+        }
+
+        .pb-location, .pb-timestamp {
+          top: -5px;
         }
 
         .media {
@@ -193,6 +274,9 @@
 
   <script type="text/coffee">
     self = this
+    self.showData = false
+    self.showEmptyFields = false
+    window.t = self
 
     self.on 'mount', -> self.fetch()
 
@@ -255,6 +339,14 @@
     self.new_me = (event) ->
       event.preventDefault()
       riot.route 'mes/form'
+
+    self.toggleDataVisibility = (event) ->
+      self.showData = $(event.target).prop('checked')
+      self.update()
+
+    self.toggleEmptyFieldVisibility = (event) ->
+      self.showEmptyFields = $(event.target).prop('checked')
+      self.update()
 
 
   </script>

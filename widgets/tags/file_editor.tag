@@ -63,13 +63,13 @@
         url: "/api/ses/#{self.opts.subEntryId}/media/#{self.opts.item.id}"
         data: JSON.stringify(medium: form_data())
         success: (data) ->
-          console.log data
+          # console.log data
           self.errors = undefined
           self.opts.modal.trigger 'close'
           wApp.bus.trigger 'pb-load-data'
         error: (request) ->
           data = JSON.parse(request.response)
-          console.log data
+          # console.log data
           self.errors = data.errors
         complete: ->
           self.update()
