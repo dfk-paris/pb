@@ -304,7 +304,7 @@
     self.fetch = ->
       $.ajax(
         type: 'get'
-        url: 'api/mes'
+        url: '/api/mes'
         data: self.params()
         success: (data) ->
           self.data = data
@@ -320,7 +320,7 @@
         if confirm("Sicher?")
           $.ajax(
             type: 'delete'
-            url: "api/mes/#{me.id}"
+            url: "/api/mes/#{me.id}"
             success: (data) ->
               self.fetch()
           )
@@ -331,7 +331,7 @@
         if confirm("Sicher?")
           $.ajax(
             type: 'delete'
-            url: "api/ses/#{se.id}"
+            url: "/api/ses/#{se.id}"
             success: (data) ->
               self.fetch()
           )

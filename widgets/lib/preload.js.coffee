@@ -1,6 +1,6 @@
 $.ajax(
   type: 'get'
-  url: 'data/locations.json'
+  url: "/data/locations.json"
   success: (data) ->
     wApp.data.locations = {}
     for group in data

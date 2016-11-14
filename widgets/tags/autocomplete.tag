@@ -17,7 +17,7 @@
         source: (term, suggest) ->
           $.ajax(
             type: 'get'
-            url: "api/ses/autocomplete"
+            url: "/api/ses/autocomplete"
             data: {
               column: opts.name
               term: term
