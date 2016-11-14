@@ -1,13 +1,12 @@
 Dropzone.autoDiscover = false
 
-api_url = Zepto('script[pb-api-url]').attr('pb-api-url')
+wAppApiUrl = Zepto('script[pb-api-url]').attr('pb-api-url') || ''
 
 Zepto.extend Zepto.ajaxSettings, {
   dataType: 'json'
   contentType: 'application/json'
   beforeSend: (xhr, settings) ->
-    if api_url
-      settings.url = "#{wApp.api_url}#{settings.url}"
+    settings.url = "#{wAppApiUrl}#{settings.url}"
 }
 
 window.wApp = {

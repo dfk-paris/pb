@@ -46,9 +46,6 @@ wApp.routing = {
     wApp.routing.route = riot.route.create()
     riot.route.base "#/"
     
-    # Zepto(window).on 'hashchange', ->
-    #   console.log 'troute', arguments
-
     wApp.routing.route ->
       # console.log 'routing', arguments
       old_parts = wApp.routing.parts()

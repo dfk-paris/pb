@@ -27,7 +27,7 @@
 
       Zepto.ajax(
         type: 'get'
-        url: '/data/locations.json'
+        url: '/api/locations'
         success: (data) ->
           self.data = data
           self.update()

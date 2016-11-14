@@ -1,6 +1,6 @@
 Zepto.ajax(
   type: 'get'
-  url: "/data/locations.json"
+  url: "/api/locations"
   success: (data) ->
     wApp.data.locations = {}
     for group in data

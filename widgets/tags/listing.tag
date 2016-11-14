@@ -26,7 +26,7 @@
 
       <div class="pb-media-grid" if={se.media.length > 0} >
         <div class="medium" each={medium in se.media} if={medium.publish}>
-          <img src={medium.urls.normal}>
+          <img src="{apiUrl()}{medium.urls.normal}">
           <div class="caption">
             {parent.se.sequence}{medium.caption ? ': ' : ''}
             <em>{medium.caption}</em>
@@ -99,6 +99,8 @@
       ]
       fields = fields.filter (e) -> !!e
       fields.join(', ')
+
+    self.apiUrl = -> wAppApiUrl
 
   </script>
 

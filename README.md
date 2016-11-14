@@ -54,7 +54,32 @@ Then, on the serverinitialize the database within `/path/to/app/current`:
 
 The app is ready to login with username `admin` and password `admin`.
 
+## Widget Integration
+
+A page might integrate a widget that this software provides. The only widgets at
+the moment are the listing and the filtering form. To use any of them, add the
+following at the end of your html body:
+
+    <script
+      type="text/javascript"
+      src="https://pb.dfkg.org/app.js"
+      pb-api-url="https://pb.dfkg.org"
+    ></script>
+    <script type="text/javascript">riot.mount('pb-listing')</script>
+
+Where the `pb-api-url` should point to the url where this application is hosted.
+Also configure the CORS parameters within config/application.rb so that your
+integrating page is allowed to fetch data from this app. Then you may simply add
+the widgets within your html body like this:
+
+the filter form
+
+    <pb-filters></pb-filters>
+
+the listing
+
+    <pb-listing></pb-listing>
+
 ## TODO:
 
-* widgets
 * link to DFK instance and website
