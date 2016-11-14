@@ -67,8 +67,8 @@ following at the end of your html body:
     ></script>
     <script type="text/javascript">riot.mount('pb-listing')</script>
 
-Where the `pb-api-url` should point to the url where this application is hosted.
-Also configure the CORS parameters within config/application.rb so that your
+Where the  `src` and `pb-api-url` should point to the url where this application is hosted.
+Also configure the CORS parameters within `config/application.rb` so that your
 integrating page is allowed to fetch data from this app. Then you may simply add
 the widgets within your html body like this:
 

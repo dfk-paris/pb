@@ -17,7 +17,7 @@
 .byebug_history
 
 # Custom ignores
-data
+/data
 
 node_modules
 public/*.html
