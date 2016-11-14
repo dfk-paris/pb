@@ -20,9 +20,9 @@
 
     self.value = ->
       if self.opts.type == 'checkbox'
-        $(self.root).find('input').prop('checked')
+        Zepto(self.root).find('input').prop('checked')
       else
-        $(self.root).find('input').val()
+        Zepto(self.root).find('input').val()
     self.value_from_parent = ->
       if self.opts.type == 'checkbox' then 1 else self.opts.value
     self.checked = ->

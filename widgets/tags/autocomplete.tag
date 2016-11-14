@@ -12,10 +12,10 @@
 
     self.on 'mount', ->
       self.ac = new autoComplete(
-        selector: $(self.root).find('input')[0]
+        selector: Zepto(self.root).find('input')[0]
         minChars: 2
         source: (term, suggest) ->
-          $.ajax(
+          Zepto.ajax(
             type: 'get'
             url: "/api/ses/autocomplete"
             data: {

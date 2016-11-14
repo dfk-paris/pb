@@ -302,7 +302,7 @@
       )
 
     self.fetch = ->
-      $.ajax(
+      Zepto.ajax(
         type: 'get'
         url: '/api/mes'
         data: self.params()
@@ -318,7 +318,7 @@
       (event) ->
         event.preventDefault()
         if confirm("Sicher?")
-          $.ajax(
+          Zepto.ajax(
             type: 'delete'
             url: "/api/mes/#{me.id}"
             success: (data) ->
@@ -329,7 +329,7 @@
       (event) ->
         event.preventDefault()
         if confirm("Sicher?")
-          $.ajax(
+          Zepto.ajax(
             type: 'delete'
             url: "/api/ses/#{se.id}"
             success: (data) ->
@@ -341,11 +341,11 @@
       riot.route 'mes/form'
 
     self.toggleDataVisibility = (event) ->
-      self.showData = $(event.target).prop('checked')
+      self.showData = Zepto(event.target).prop('checked')
       self.update()
 
     self.toggleEmptyFieldVisibility = (event) ->
-      self.showEmptyFields = $(event.target).prop('checked')
+      self.showEmptyFields = Zepto(event.target).prop('checked')
       self.update()
 
 

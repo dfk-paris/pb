@@ -47,18 +47,18 @@
 
     form_data = ->
       result = {}
-      for element in $(self.root).find("[name]")
-        e = $(element)
+      for element in Zepto(self.root).find("[name]")
+        e = Zepto(element)
         result[e.attr('name')] = e.val()
-      for element in $(self.root).find("input[type=checkbox][name]")
-        e = $(element)
+      for element in Zepto(self.root).find("input[type=checkbox][name]")
+        e = Zepto(element)
         result[e.attr('name')] = e.prop('checked')
       result
 
     self.submit = (event) ->
       event.preventDefault()
 
-      $.ajax(
+      Zepto.ajax(
         type: 'put'
         url: "/api/ses/#{self.opts.subEntryId}/media/#{self.opts.item.id}"
         data: JSON.stringify(medium: form_data())

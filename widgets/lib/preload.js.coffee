@@ -1,4 +1,4 @@
-$.ajax(
+Zepto.ajax(
   type: 'get'
   url: "/data/locations.json"
   success: (data) ->

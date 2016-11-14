@@ -2,7 +2,7 @@ wApp.routing = {
   query: (params) ->
     if params
       result = {}
-      $.extend(result, wApp.routing.query(), params)
+      Zepto.extend(result, wApp.routing.query(), params)
       qs = []
       for k, v of result
         if result[k] != null && result[k] != ''
@@ -46,15 +46,15 @@ wApp.routing = {
     wApp.routing.route = riot.route.create()
     riot.route.base "#/"
     
-    $(window).on 'hashchange', ->
-      console.log 'troute', arguments
+    # Zepto(window).on 'hashchange', ->
+    #   console.log 'troute', arguments
 
     wApp.routing.route ->
-      console.log 'routing', arguments
+      # console.log 'routing', arguments
       old_parts = wApp.routing.parts()
       if document.location.href != old_parts['href']
         wApp.routing.parts_cache = null
-        console.log wApp.routing.parts()
+        # console.log wApp.routing.parts()
         wApp.bus.trigger 'routing:href', wApp.routing.parts()
 
         if old_parts['hash_path'] != wApp.routing.path()

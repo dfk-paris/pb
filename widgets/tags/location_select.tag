@@ -23,9 +23,9 @@
     self = this
 
     self.on 'mount', ->
-      $(self.root).find('select').val(opts.value)
+      Zepto(self.root).find('select').val(opts.value)
 
-      $.ajax(
+      Zepto.ajax(
         type: 'get'
         url: '/data/locations.json'
         success: (data) ->
@@ -36,6 +36,6 @@
     self.is_selected = (location) ->
       location.id == opts.value
 
-    self.value = -> $(self.root).find('select').val()
+    self.value = -> Zepto(self.root).find('select').val()
   </script>
 </pb-location-select>

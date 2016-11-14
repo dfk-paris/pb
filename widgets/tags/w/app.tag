@@ -15,9 +15,9 @@
     self = this
 
     self.on 'mount', ->
-      $(document).on 'click', 'img[src-large]', (event) ->
+      Zepto(document).on 'click', 'img[src-large]', (event) ->
         console.log event.target
-        url = $(event.target).attr('src-large')
+        url = Zepto(event.target).attr('src-large')
         wApp.bus.trigger 'modal', 'pb-image-viewer', url: url
       wApp.routing.setup()
     
@@ -34,7 +34,7 @@
           'pb-se-editor'
         else
           'pb-mes-table'
-      riot.mount $('.pb-content')[0], tag, opts
+      riot.mount Zepto('.pb-content')[0], tag, opts
       window.scrollTo(0, 0)
 
   </script>

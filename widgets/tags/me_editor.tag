@@ -83,7 +83,7 @@
 
     self.on 'mount', ->
       if self.id()
-        $.ajax(
+        Zepto.ajax(
           type: 'get'
           url: "/api/mes/#{self.id()}"
           success: (data) ->
@@ -94,8 +94,8 @@
 
     form_data = ->
       result = {}
-      for element in $(self.root).find("[name]")
-        e = $(element)
+      for element in Zepto(self.root).find("[name]")
+        e = Zepto(element)
         if e.attr('type') == 'checkbox'
           result[e.attr('name')] = e.prop('checked')
         else
@@ -108,7 +108,7 @@
       event.preventDefault()
 
       if self.id()
-        $.ajax(
+        Zepto.ajax(
           type: 'put'
           url: "/api/mes/#{self.item.id}"
           data: JSON.stringify(main_entry: form_data())
@@ -121,7 +121,7 @@
             self.update()
         )
       else
-        $.ajax(
+        Zepto.ajax(
           type: 'post'
           url: "/api/mes"
           data: JSON.stringify(main_entry: form_data())

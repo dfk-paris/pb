@@ -80,7 +80,7 @@
     self.on 'mount', -> fetch()
 
     fetch = ->
-      $.ajax(
+      Zepto.ajax(
         type: 'get'
         url: '/api/mes'
         data: {per_page: 'all'}

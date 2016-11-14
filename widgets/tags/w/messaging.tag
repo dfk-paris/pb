@@ -11,7 +11,7 @@
   <script type="text/coffee">
     self = this
 
-    $(document).on 'ajaxComplete', (event, request, options) ->
+    Zepto(document).on 'ajaxComplete', (event, request, options) ->
       try
         data = JSON.parse(request.response)
         if data.message

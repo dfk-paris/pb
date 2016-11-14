@@ -1,8 +1,8 @@
 Dropzone.autoDiscover = false
 
-api_url = $('script[pb-api-url]').attr('pb-api-url')
+api_url = Zepto('script[pb-api-url]').attr('pb-api-url')
 
-$.extend $.ajaxSettings, {
+Zepto.extend Zepto.ajaxSettings, {
   dataType: 'json'
   contentType: 'application/json'
   beforeSend: (xhr, settings) ->

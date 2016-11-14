@@ -240,12 +240,12 @@
       wApp.bus.on 'pb-load-data', -> self.load_data()
       self.load_data()
 
-      $("input[name='no_title']").on 'change', (event) ->
-        self.hide_title_field = $(event.target).prop('checked')
+      Zepto("input[name='no_title']").on 'change', (event) ->
+        self.hide_title_field = Zepto(event.target).prop('checked')
         self.update()
 
     self.load_data = ->
-      $.ajax(
+      Zepto.ajax(
         type: 'get'
         url: "/api/mes/#{self.main_entry_id()}"
         success: (data) ->
@@ -254,7 +254,7 @@
       )
 
       if self.opts.id
-        $.ajax(
+        Zepto.ajax(
           type: 'get'
           url: "/api/ses/#{self.opts.id}"
           success: (data) ->
@@ -264,7 +264,7 @@
             self.update()
         )
       else
-        $.ajax(
+        Zepto.ajax(
           type: 'get'
           url: "/api/mes/#{self.opts.main_entry_id}"
           success: (data) ->
@@ -276,13 +276,13 @@
     form_data = ->
       result = {
         main_entry_id: self.main_entry_id()
-        no_title: $("input[name=no_title]").prop('checked')
+        no_title: Zepto("input[name=no_title]").prop('checked')
       }
-      for element in $(self.root).find("input[name], textarea[name]")
-        e = $(element)
+      for element in Zepto(self.root).find("input[name], textarea[name]")
+        e = Zepto(element)
         result[e.attr('name')] = e.val()
-      for element in $(self.root).find("input[type=checkbox][name]")
-        e = $(element)
+      for element in Zepto(self.root).find("input[type=checkbox][name]")
+        e = Zepto(element)
         result[e.attr('name')] = e.prop('checked')
       result
 
@@ -295,7 +295,7 @@
       event.preventDefault()
 
       if self.id()
-        $.ajax(
+        Zepto.ajax(
           type: 'put'
           url: "/api/ses/#{self.id()}"
           data: JSON.stringify(sub_entry: form_data())
@@ -311,7 +311,7 @@
             self.update()
         )
       else
-        $.ajax(
+        Zepto.ajax(
           type: 'post'
           url: "/api/ses"
           data: JSON.stringify(sub_entry: form_data())
@@ -339,7 +339,7 @@
     self.remove_medium = (medium) ->
       (event) ->
         event.preventDefault()
-        $.ajax(
+        Zepto.ajax(
           type: 'delete'
           url: "/api/ses/#{medium.sub_entry_id}/media/#{medium.id}"
           success: ->

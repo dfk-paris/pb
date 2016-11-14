@@ -25,7 +25,7 @@
     self = this
 
     self.on 'mount', ->
-      self.dropzone = new Dropzone($(self.root).find('.dropzone')[0],
+      self.dropzone = new Dropzone(Zepto(self.root).find('.dropzone')[0],
         url: "/api/ses/#{self.opts.subEntryId}/media"
         method: 'post'
         paramName: 'medium[image]'
