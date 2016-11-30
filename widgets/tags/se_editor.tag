@@ -203,6 +203,8 @@
     self = this
     self.id = -> wApp.routing.query()['id']
     self.main_entry_id = -> wApp.routing.query()['main_entry_id']
+    self.errors = {}
+    self.item = {}
 
     self.on 'mount', ->
       wApp.bus.on 'pb-load-data', -> self.load_data()

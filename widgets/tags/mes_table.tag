@@ -198,7 +198,7 @@
     self = this
     self.showData = false
     self.showEmptyFields = false
-    window.t = self
+    self.data = {}
 
     self.on 'mount', -> self.fetch()
 

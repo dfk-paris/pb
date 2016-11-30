@@ -80,6 +80,8 @@
 
   <script type="text/coffee">
     self = this
+    self.item = {}
+    self.errors = {}
 
     self.on 'mount', ->
       if self.id()

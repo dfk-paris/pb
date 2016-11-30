@@ -43,6 +43,7 @@
     "onchange": "^2.5.0",
     "parallelshell": "^2.0.0",
     "riot": "^3.0.0",
+    "riot-route": "^3.0.1",
     "strftime": "^0.9.2",
     "uglifyjs": "^2.4.10",
     "zepto": "^1.0.1"
