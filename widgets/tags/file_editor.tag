@@ -31,17 +31,6 @@
     </div>
   </form>
 
-
-  <style type="text/scss">
-    pb-file-editor, [data-is=pb-file-editor] {
-      padding: 2rem;
-
-      form {
-        margin-bottom: 0px;
-      }
-    }
-  </style>
-
   <script type="text/coffee">
     self = this
 

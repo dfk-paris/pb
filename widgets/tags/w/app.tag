@@ -6,17 +6,14 @@
 
   <w-modal />
   <w-messaging />
-
-  <style type="text/scss">
-    @import "widgets/styles/vars.scss";
-  </style>
+  <w-styles />
 
   <script type="text/coffee">
     self = this
 
     self.on 'mount', ->
       Zepto(document).on 'click', 'img[src-large]', (event) ->
-        console.log event.target
+        # console.log event.target
         url = Zepto(event.target).attr('src-large')
         wApp.bus.trigger 'modal', 'pb-image-viewer', url: url
       wApp.routing.setup()

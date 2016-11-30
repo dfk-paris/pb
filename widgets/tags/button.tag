@@ -5,28 +5,6 @@
     {opts.label}
   </a>
 
-  <style type="text/scss">
-    @import "widgets/styles/vars.scss";
-
-    pb-button, [data-is=pb-button] {
-      font-size: 1rem;
-      padding-left: 0.5rem;
-
-      a {
-        color: white;
-        background-color: $color-secondary-1-0;
-        border-radius: 0.3rem;
-        padding: 0.5rem;
-        text-decoration: none;
-      }
-
-      a:hover {
-        color: white;
-        background-color: $color-secondary-1-1
-      }
-    }
-  </style>
-
   <script type="text/coffee">
     self = this
 

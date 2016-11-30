@@ -39,41 +39,6 @@
     <hr />
   </div>
 
-  <style type="text/scss">
-    pb-listing, [data-is=pb-listing] {
-      .pb-main-entry {
-        padding: 0.5rem;
-        margin-bottom: 1rem;
-        line-height: 1.1em;
-
-        .pb-sub-entry {
-          margin-bottom: 0.5rem;
-        }
-      }
-
-      .pb-media-grid {
-        .medium {
-          float: left;
-          width: 33%;
-          padding: 1rem;
-          text-align: center;
-
-          img {
-            width: 100%;
-          }
-
-          .caption {
-            margin-top: 0.5rem;
-          }
-        }
-      }
-
-      .text-value {
-        margin-top: 1rem;
-      }
-    }
-  </style>
-
   <script type="text/coffee">
     self = this
 

@@ -12,6 +12,7 @@ function all {
   vendor
   lib
   tags
+  css
   app
   html
 }
@@ -23,6 +24,7 @@ function watch {
     "widgets/build.sh watch_vendor" \
     "widgets/build.sh watch_lib" \
     "widgets/build.sh watch_tags" \
+    "widgets/build.sh watch_css" \
     "widgets/build.sh watch_app" \
     "widgets/build.sh watch_html"
 }
@@ -50,12 +52,18 @@ function lib {
 
 function tags {
   log "compiling tags"
-  node_modules/.bin/riot widgets/tags public/tags.js
+  node_modules/.bin/riot widgets/tags public/tags.js > /dev/null
 }
 
 function app {
   log "concatenating app"
-  uglifyjs public/vendor.js public/lib.js public/tags.js -o public/app.js
+  echo "riot.tag('w-styles', '', \"`cat public/app.css`\")" > /tmp/w-styles.js
+  uglifyjs public/vendor.js public/lib.js public/tags.js /tmp/w-styles.js -b -o public/app.js
+}
+
+function css {
+  log "compiling style sheets"
+  node-sass widgets/styles/vars.scss > public/app.css
 }
 
 function html {
@@ -79,7 +87,13 @@ function watch_tags {
 }
 
 function watch_app {
-  onchange public/vendor.js public/lib.js public/tags.js -- widgets/build.sh app
+  onchange \
+    public/vendor.js public/lib.js public/tags.js public/styles.css \
+    -- widgets/build.sh app
+}
+
+function watch_css {
+  onchange widgets/styles -- widgets/build.sh css
 }
 
 function watch_html {

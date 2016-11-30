@@ -4,23 +4,6 @@
     <div class="dz-message">hier klicken oder Bilder hineinziehen</div>
   </div>
 
-  <style type="text/scss">
-    pb-media-dropzone, [data-is=pb-media-dropzone] {
-      .dropzone {
-        .dz-preview {
-          .dz-details {
-            position: relative;
-            padding: 0px;
-            margin-top: 0.5rem;
-            text-align: center;
-            opacity: 100 !important;
-            max-width: 120px;
-          }
-        }
-      }
-    }
-  </style>
-
   <script type="text/coffee">
     self = this
 

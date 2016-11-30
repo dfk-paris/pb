@@ -199,38 +199,6 @@
 
   </form>
 
-  <style type="text/scss">
-    @import "widgets/styles/vars.scss";
-
-    pb-se-editor, [data-is=pb-se-editor] {
-      .pb-media-grid {
-        .pb-frame {
-          padding: 0.5rem;
-          border: 1px solid gray;
-          margin-bottom: 3rem;
-
-          img {
-            display: block;
-            width: 100%;
-          }
-
-          hr {
-            margin-top: 0.5rem;
-            margin-bottom: 0.5rem;
-          }
-
-          .buttons {
-            margin-top: 0.3rem;
-          }
-
-          &.publish {
-            background-color: $color-secondary-2-4;
-          }
-        }
-      }
-    }
-  </style>
-
   <script type="text/coffee">
     self = this
     self.id = -> wApp.routing.query()['id']

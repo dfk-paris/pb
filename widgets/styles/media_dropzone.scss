@@ -1,0 +1,14 @@
+pb-media-dropzone, [data-is=pb-media-dropzone] {
+  .dropzone {
+    .dz-preview {
+      .dz-details {
+        position: relative;
+        padding: 0px;
+        margin-top: 0.5rem;
+        text-align: center;
+        opacity: 100 !important;
+        max-width: 120px;
+      }
+    }
+  }
+}
