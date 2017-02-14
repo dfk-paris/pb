@@ -1,6 +1,6 @@
 <w-modal show={active}>
 
-  <div name="receiver" ref="receiver"></div>
+  <div class="receiver" ref="receiver"></div>
 
   <script type="text/coffee">
     tag = this
@@ -14,12 +14,12 @@
       tag.update()
 
     Zepto(document).on 'keydown', (event) ->
-      if event.key == 'Escape'
+      if tag.active && event.key == 'Escape'
         tag.trigger 'close'
 
     tag.on 'mount', ->
       Zepto(tag.root).on 'click', (event) ->
-        if event.target == tag.root
+        if tag.active && event.target == tag.root
           tag.trigger 'close'
 
     tag.on 'close', ->

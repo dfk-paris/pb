@@ -9,9 +9,9 @@
   <w-styles />
 
   <script type="text/coffee">
-    self = this
+    tag = this
 
-    self.on 'mount', ->
+    tag.on 'mount', ->
       Zepto(document).on 'click', 'img[src-large]', (event) ->
         # console.log event.target
         url = Zepto(event.target).attr('src-large')
@@ -20,7 +20,7 @@
     
     wApp.bus.on 'routing:path', (parts) ->
       opts = {}
-      tag = switch parts['hash_path']
+      tagName = switch parts['hash_path']
         when '/mes/form'
           opts['id'] = parts['hash_query'].id
           opts.bla = "asdf"
@@ -31,7 +31,7 @@
           'pb-se-editor'
         else
           'pb-mes-table'
-      riot.mount Zepto('.pb-content')[0], tag, opts
+      riot.mount Zepto('.pb-content')[0], tagName, opts
       window.scrollTo(0, 0)
 
   </script>

@@ -22,7 +22,6 @@
 
     self.on 'mount', -> self.messages = []
     wApp.bus.on 'message', (type, message) -> 
-      # console.log 'messaging', type, message
       self.messages.push {
         type: type,
         content: message

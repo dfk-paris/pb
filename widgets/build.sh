@@ -63,7 +63,7 @@ function app {
 
 function css {
   log "compiling style sheets"
-  node-sass widgets/styles/vars.scss > public/app.css
+  node-sass widgets/app.scss > public/app.css
 }
 
 function html {
@@ -97,7 +97,9 @@ function watch_css {
 }
 
 function watch_html {
-  onchange public/app.js public/vendor.* widgets/*.html.ejs -- widgets/build.sh html
+  onchange \
+    public/app.js public/vendor.* widgets/*.html.ejs \
+    -- widgets/build.sh html
 }
 
 function log {

@@ -1,6 +1,9 @@
-@import 'palette';
-@import 'w/messaging';
-@import 'w/modal';
+@import 'styles/palette';
+
+@import 'styles/w/app';
+@import 'styles/w/messaging';
+@import 'styles/w/modal';
+@import 'styles/w/bar_chart';
 
 $blue: #1eaedb;
 $gray: #e1e1e1;
@@ -8,14 +11,14 @@ $yellow: #dbaa1e;
 $pink: #db1e4f;
 $highlight: #f4f4f4;
 
-@import 'badge_list';
-@import 'button';
-@import 'file_editor';
-@import 'image_viewer';
-@import 'listing';
-@import 'media_dropzone';
-@import 'mes_table';
-@import 'se_editor';
+@import 'styles/badge_list';
+@import 'styles/button';
+@import 'styles/file_editor';
+@import 'styles/image_viewer';
+@import 'styles/listing';
+@import 'styles/media_dropzone';
+@import 'styles/mes_table';
+@import 'styles/se_editor';
 
 body {
   padding-bottom: 10rem;
