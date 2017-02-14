@@ -12,12 +12,5 @@ var spec = {
     if (!opts) {opts = {}}
     var result = riot.mount('target', tagName, opts)[0];
     return result;
-  },
-  addStyles: function() {
-    var element = Zepto('<div data-is="w-styles">');
-    Zepto('body').prepend(element);
-    riot.mount('w-styles');
   }
 }
-
-before(spec.addStyles)

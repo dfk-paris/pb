@@ -13,11 +13,17 @@
       type="text/css"
       href="<%= stylesheet_path('vendor.css') %>"
     />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="<%= stylesheet_path('app.css') %>"
+    />
   </head>
   <body>
     <pb-listing></pb-listing>
 
-    <script type="text/javascript" src="<%= script_path('app.js') %>"></script>
+    <script type="text/javascript" src="<%= script_path('app-noboot.js') %>"></script>
     <script type="text/javascript">
       riot.mount('pb-listing')
     </script>

@@ -271,7 +271,7 @@
           data: JSON.stringify(sub_entry: form_data())
           success: (data) ->
             if self.where == 'back'
-              riot.route '/mes'
+              route '/mes'
             else
               self.item = data.sub_entry
               self.update()
@@ -287,9 +287,9 @@
           data: JSON.stringify(sub_entry: form_data())
           success: (data) ->
             if self.where == 'back'
-              riot.route '/mes'
+              route '/mes'
             else
-              riot.route "/ses/form?main_entry_id=#{self.main_entry_id()}&id=#{data.sub_entry.id}"
+              route "/ses/form?main_entry_id=#{self.main_entry_id()}&id=#{data.sub_entry.id}"
               self.item = data.sub_entry
               self.update()
           error: (request) ->

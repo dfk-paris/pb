@@ -57,8 +57,8 @@ function tags {
 
 function app {
   log "concatenating app"
-  echo "riot.tag('w-styles', '', \"`cat public/app.css`\")" > /tmp/w-styles.js
-  uglifyjs public/vendor.js public/lib.js public/tags.js /tmp/w-styles.js -b -o public/app.js
+  uglifyjs public/vendor.js public/lib.js public/tags.js -b -o public/app-noboot.js
+  uglifyjs public/app-noboot.js widgets/boot.js -b -o public/app.js
 }
 
 function css {

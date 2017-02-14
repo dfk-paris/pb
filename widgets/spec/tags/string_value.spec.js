@@ -7,16 +7,16 @@ describe("pb-string-value", function() {
 
   it('should render a value with unit', function() {
     tag = spec.mount('pb-string-value', {label: 'length', value: '12', unit: 'cm'});
-    expect($(tag.root).text().trim()).to.equal('length: 12 cm');
+    expect($(tag.root).text().trim()).toEqual('length: 12 cm');
   });
 
   it('should render a value without unit', function() {
     tag = spec.mount('pb-string-value', {label: 'length', value: '13'});
-    expect($(tag.root).text().trim()).to.equal('length: 13');
+    expect($(tag.root).text().trim()).toEqual('length: 13');
   });
 
   it('should not render an empty value', function() {
     tag = spec.mount('pb-string-value', {label: 'length'});
-    expect($('context').text().trim()).to.equal('');
+    expect($('context').text().trim()).toEqual('');
   });
 });

@@ -1,7 +1,7 @@
 <pb-me-editor>
 
   <h1 show={item.title}>Haupt-Eintrag '{item.title}' bearbeiten</h1>
-  <h1 show={!item}>Haupt-Eintrag erstellen</h1>
+  <h1 show={!item.id}>Haupt-Eintrag erstellen</h1>
 
   <hr />
 
@@ -115,7 +115,7 @@
           url: "/api/mes/#{self.item.id}"
           data: JSON.stringify(main_entry: form_data())
           success: (data) ->
-            riot.route 'mes'
+            route 'mes'
           error: (request) ->
             data = JSON.parse(request.response)
             self.errors = data.errors
@@ -128,7 +128,7 @@
           url: "/api/mes"
           data: JSON.stringify(main_entry: form_data())
           success: (data) ->
-            riot.route 'mes', undefined, true
+            route 'mes', undefined, true
           error: (request) ->
             data = JSON.parse(request.response)
             self.errors = data.errors
