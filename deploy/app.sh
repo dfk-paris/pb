@@ -12,6 +12,8 @@ function deploy {
   upload public/vendor.css $CURRENT_PATH/public/vendor.css
   upload public/vendor.js $CURRENT_PATH/public/vendor.js
   upload public/app.js $CURRENT_PATH/public/app.js
+  upload public/app-noboot.js $CURRENT_PATH/public/app-noboot.js
+  upload public/app.css $CURRENT_PATH/public/app.css
   upload public/fonts/ $CURRENT_PATH/public/fonts/
   upload public/index.html $CURRENT_PATH/public/index.html
   upload public/listing.html $CURRENT_PATH/public/listing.html
