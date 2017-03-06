@@ -7,7 +7,7 @@
       name={opts.name}
       class="u-full-width"
       placeholder={opts.placeholder || opts.label}
-      value={value_from_parent()}
+      riot-value={value_from_parent()}
       checked={checked()}
     />
   </label>
@@ -24,7 +24,7 @@
       else
         Zepto(self.root).find('input').val()
     self.value_from_parent = ->
-      if self.opts.type == 'checkbox' then 1 else self.opts.value
+      if self.opts.type == 'checkbox' then 1 else self.opts.riotValue
     self.checked = ->
       # console.log self.opts
       self.opts.type == 'checkbox' && self.opts.value

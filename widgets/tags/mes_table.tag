@@ -15,13 +15,13 @@
       <div class="one-third column">
         <pb-input
           placeholder="Objektbezeichnung"
-          name="title"
+          ref="title"
           value={params('title')}
         />
       </div>
       <div class="one-third column">
         <pb-location-select
-          name="location"
+          ref="location"
           value={params('location')}
           prompt={true}
         />
@@ -29,7 +29,7 @@
       <div class="one-third column">
         <pb-autocomplete
           placeholder="Personen"
-          name="creator"
+          ref="creator"
           value={params('creator')}
         />
       </div>
@@ -39,7 +39,7 @@
       <div class="one-third column">
         <pb-input
           placeholder="Inventar"
-          name="inventory"
+          ref="inventory"
           value={params('inventory')}
         />
       </div>
@@ -52,7 +52,7 @@
       <div class="one-third column">
         <pb-input
           label="Daten anzeigen"
-          name="show_data"
+          ref="show_data"
           type="checkbox"
           onchange={toggleDataVisibility}
         />
@@ -60,7 +60,7 @@
       <div class="one-third column">
         <pb-input
           label="leere Felder anzeigen"
-          name="show_empty_fields"
+          ref="show_empty_fields"
           type="checkbox"
           onchange={toggleEmptyFieldVisibility}
         />
@@ -158,8 +158,8 @@
             <div class="media u-pull-left" show={se.media.length > 0}>
               <img
                 each={medium in se.media}
-                src={medium.urls.thumb}
-                src-large={medium.urls.big}
+                src={imageUrl(medium.urls.thumb)}
+                src-large={imageUrl(medium.urls.big)}
               />
             </div>
             <strong>{se.sequence} {se.title}</strong>
@@ -217,10 +217,10 @@
       event.preventDefault()
       wApp.routing.query(
         page: 1
-        title: self.tags.title.value()
-        location: self.tags.location.value()
-        creator: self.tags.creator.value()
-        inventory: self.tags.inventory.value()
+        title: self.refs.title.value()
+        location: self.refs.location.value()
+        creator: self.refs.creator.value()
+        inventory: self.refs.inventory.value()
       )
 
     self.fetch = ->
@@ -269,6 +269,9 @@
     self.toggleEmptyFieldVisibility = (event) ->
       self.showEmptyFields = Zepto(event.target).prop('checked')
       self.update()
+
+    self.imageUrl = (url) ->
+      if wApp.utils.isDevelopment() then '/dummy.jpg' else url
 
 
   </script>

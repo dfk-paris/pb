@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161013143240) do
+ActiveRecord::Schema.define(version: 20170306155019) do
 
   create_table "main_entries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "title"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20161013143240) do
     t.text     "description",         limit: 65535
     t.text     "appreciation",        limit: 65535
     t.boolean  "publish",                           default: true
+    t.index ["title", "location"], name: "searchy", using: :btree
   end
 
   create_table "media", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -63,6 +64,7 @@ ActiveRecord::Schema.define(version: 20161013143240) do
     t.text     "framing",            limit: 65535
     t.text     "restaurations",      limit: 65535
     t.boolean  "no_title"
+    t.index ["main_entry_id", "title", "location", "creator"], name: "searchy", using: :btree
     t.index ["main_entry_id"], name: "index_sub_entries_on_main_entry_id", using: :btree
   end
 

@@ -23,4 +23,5 @@ wApp.utils = {
       parseInt(value)
     else
       value
+  isDevelopment: -> !!window.location.href.match(/localhost:3000/)
 }

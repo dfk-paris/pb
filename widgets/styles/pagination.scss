@@ -1,0 +1,13 @@
+pb-pagination, [data-is=pb-pagination] {
+  form {
+    display: inline-block;
+    margin-bottom: 0px;
+  }
+
+  input[type=text] {
+    display: inline;
+    width: 60px;
+    height: 25px;
+    text-align: right
+  }
+}

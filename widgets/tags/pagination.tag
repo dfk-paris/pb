@@ -9,7 +9,13 @@
       show={!is_first()}
       onclick={page_down}
     ><i class="fa fa-angle-left"></i></a>
-    {opts.page}/{total_pages()}
+    <form submit={jump}>
+      <pb-input
+        ref="jump"
+        value={opts.page}
+      />
+    </form>
+    / {total_pages()}
     <a
       show={!is_last()}
       onclick={page_up}
@@ -37,8 +43,13 @@
         wApp.routing.query page: new_page
 
     tag.total_pages = ->
-      # console.log tag.opts.total, tag.opts.per_page
       Math.ceil(tag.opts.total / tag.opts.per_page)
+
+    tag.jump = (event) ->
+      event.preventDefault()
+      newPage = parseInt(tag.refs.jump.value())
+      tag.page_to(newPage)
+
   </script>
 
 </pb-pagination>

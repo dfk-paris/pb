@@ -80,6 +80,15 @@ the listing
 
     <pb-listing></pb-listing>
 
+## Attributions
+
+The following resources have been integrated in accordance with their respective
+original licensing
+
+* https://commons.wikimedia.org/wiki/File:H%C3%B4tel_de_Beauharnais.jpg is the
+  basis for the favicon and serves as a general dummy during development. No
+  modifications were made except resizing.
+
 ## TODO:
 
 * link to DFK instance and website
