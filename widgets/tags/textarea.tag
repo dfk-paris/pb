@@ -6,7 +6,7 @@
       name={opts.name}
       placeholder={opts.label}
       class="u-full-width"
-      value={opts.value}
+      value={opts.riotValue}
     ></textarea>
   </label>
 

@@ -4,15 +4,16 @@
     label={opts.label}
     name={opts.name}
     placeholder={opts.placeholder || opts.label}
-    value={opts.value}
+    value={opts.riotValue}
+    ref="input"
   />
 
   <script type="text/coffee">
-    self = this
+    tag = this
 
-    self.on 'mount', ->
-      self.ac = new autoComplete(
-        selector: Zepto(self.root).find('input')[0]
+    tag.on 'mount', ->
+      tag.ac = new autoComplete(
+        selector: Zepto(tag.root).find('input')[0]
         minChars: 2
         source: (term, suggest) ->
           Zepto.ajax(
@@ -28,6 +29,6 @@
           )
       )
 
-    self.value = -> self.tags['pb-input'].value()
+    tag.value = -> tag.refs.value()
   </script>
 </pb-autocomplete>
