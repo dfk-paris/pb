@@ -26,7 +26,7 @@
 
       <div class="pb-media-grid" if={se.media.length > 0} >
         <div class="medium" each={medium in se.media} if={medium.publish}>
-          <img src="{apiUrl()}{medium.urls.normal}">
+          <pb-image-viewer url="{apiUrl()}{medium.urls.normal}" />
           <div class="caption">
             {parent.se.sequence}{medium.caption ? ': ' : ''}
             <em>{medium.caption}</em>

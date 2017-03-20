@@ -23,7 +23,7 @@
     self = this
 
     self.on 'mount', ->
-      Zepto(self.root).find('select').val(opts.value)
+      Zepto(self.root).find('select').val(opts.riotValue)
 
       Zepto.ajax(
         type: 'get'
@@ -34,7 +34,7 @@
       )
 
     self.is_selected = (location) ->
-      location.id == opts.value
+      location.id == opts.riotValue
 
     self.value = -> Zepto(self.root).find('select').val()
   </script>

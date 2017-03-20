@@ -1,8 +1,8 @@
-<pb-text-value if={opts.value}>
+<pb-text-value if={opts.riotValue}>
 
   <div class="text-value">
     <em>{opts.label}</em>
-    <p>{opts.value}</p>
+    <p>{opts.riotValue}</p>
   </div>
 
 </pb-text-value>
