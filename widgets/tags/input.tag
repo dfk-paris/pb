@@ -27,7 +27,7 @@
       if self.opts.type == 'checkbox' then 1 else self.opts.riotValue
     self.checked = ->
       # console.log self.opts
-      self.opts.type == 'checkbox' && self.opts.value
+      self.opts.type == 'checkbox' && self.opts.riotValue
   </script>
 
 </pb-input>

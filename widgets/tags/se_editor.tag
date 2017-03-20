@@ -1,11 +1,11 @@
 <pb-se-editor>
 
-  <h1 show={item.title}>Unterobjekt '{item.title}' bearbeiten</h1>
-  <h1 show={!item.id}>Unterobjekt hinzufügen</h1>
+  <h1 if={item} show={item.title}>Unterobjekt '{item.title}' bearbeiten</h1>
+  <h1 if={item} show={!item.id}>Unterobjekt hinzufügen</h1>
 
   <hr />
 
-  <form onsubmit={submit}>
+  <form onsubmit={submit} if={item && main_entry}>
 
     <div class="row">
       <div class="six columns">
@@ -28,6 +28,8 @@
           <strong>Haupteintrag:</strong><br/ >
           <em>{main_entry.title} ({main_entry.sequence})</em>
           <pb-input
+            ref="noTitle"
+            onchange={noTitleHandler}
             type="checkbox"
             label="Werte aus Haupteintrag übernehmen"
             name="no_title"
@@ -168,7 +170,7 @@
     >
       <div class="three columns" each={medium in row}>
         <div class="pb-frame {'publish': medium.publish}">
-          <img src={medium.urls.normal} />
+          <pb-image-viewer url={medium.urls.normal} />
           <small show={medium.caption}>{medium.caption}</small>
           <hr show={medium.caption} />
           <div class="u-text-right buttons">
@@ -200,85 +202,91 @@
   </form>
 
   <script type="text/coffee">
-    self = this
-    self.id = -> wApp.routing.query()['id']
-    self.main_entry_id = -> wApp.routing.query()['main_entry_id']
-    self.errors = {}
-    self.item = {}
+    tag = this
+    tag.id = -> wApp.routing.query()['id']
+    tag.main_entry_id = -> wApp.routing.query()['main_entry_id']
+    # tag.main_entry = {}
+    tag.errors = {}
+    # tag.item = {}
+    window.t = tag
 
-    self.on 'mount', ->
-      wApp.bus.on 'pb-load-data', -> self.load_data()
-      self.load_data()
+    tag.on 'mount', ->
+      wApp.bus.on 'pb-load-data', -> tag.load_data()
+      tag.load_data()
 
-      Zepto("input[name='no_title']").on 'change', (event) ->
-        self.hide_title_field = Zepto(event.target).prop('checked')
-        self.update()
+    tag.noTitleHandler = (event) ->
+      tag.hide_title_field = tag.refs.noTitle.value()
+      tag.update()
 
-    self.load_data = ->
+    tag.load_data = ->
       Zepto.ajax(
         type: 'get'
-        url: "/api/mes/#{self.main_entry_id()}"
+        url: "/api/mes/#{tag.main_entry_id()}"
         success: (data) ->
-          self.main_entry = data
-          self.update()
+          tag.main_entry = data
+          tag.update()
       )
 
-      if self.opts.id
+      if tag.opts.id
         Zepto.ajax(
           type: 'get'
-          url: "/api/ses/#{self.opts.id}"
+          url: "/api/ses/#{tag.opts.id}"
           success: (data) ->
             # console.log data
-            self.item = data
-            self.hide_title_field = data.no_title
-            self.update()
+            tag.item = data
+            tag.hide_title_field = data.no_title
+            tag.update()
         )
       else
         Zepto.ajax(
           type: 'get'
-          url: "/api/mes/#{self.opts.main_entry_id}"
+          url: "/api/mes/#{tag.opts.main_entry_id}"
           success: (data) ->
             # console.log data
-            self.item = {main_entry: data}
-            self.update()
+            tag.item = {
+              inventory_ids: []
+              media: []
+              main_entry: data
+            }
+            tag.update()
         )
 
     form_data = ->
       result = {
-        main_entry_id: self.main_entry_id()
-        no_title: Zepto("input[name=no_title]").prop('checked')
+        main_entry_id: tag.main_entry_id()
+        no_title: tag.refs.noTitle.value()
       }
-      for element in Zepto(self.root).find("input[name], textarea[name]")
+      for element in Zepto(tag.root).find("input[name], textarea[name]")
         e = Zepto(element)
         result[e.attr('name')] = e.val()
-      for element in Zepto(self.root).find("input[type=checkbox][name]")
+      for element in Zepto(tag.root).find("input[type=checkbox][name]")
         e = Zepto(element)
         result[e.attr('name')] = e.prop('checked')
       result
 
-    self.pre_submit = (where) ->
+    tag.pre_submit = (where) ->
       (event) ->
-        self.where = where
+        tag.where = where
         true
 
-    self.submit = (event) ->
+    tag.submit = (event) ->
       event.preventDefault()
 
-      if self.id()
+      if tag.id()
         Zepto.ajax(
           type: 'put'
-          url: "/api/ses/#{self.id()}"
+          url: "/api/ses/#{tag.id()}"
           data: JSON.stringify(sub_entry: form_data())
           success: (data) ->
-            if self.where == 'back'
+            if tag.where == 'back'
               route '/mes'
             else
-              self.item = data.sub_entry
-              self.update()
+              tag.item = data.sub_entry
+              tag.update()
           error: (request) ->
-            self.errors = data.errors
+            tag.errors = data.errors
           complete: ->
-            self.update()
+            tag.update()
         )
       else
         Zepto.ajax(
@@ -286,27 +294,27 @@
           url: "/api/ses"
           data: JSON.stringify(sub_entry: form_data())
           success: (data) ->
-            if self.where == 'back'
+            if tag.where == 'back'
               route '/mes'
             else
-              route "/ses/form?main_entry_id=#{self.main_entry_id()}&id=#{data.sub_entry.id}"
-              self.item = data.sub_entry
-              self.update()
+              route "/ses/form?main_entry_id=#{tag.main_entry_id()}&id=#{data.sub_entry.id}"
+              tag.item = data.sub_entry
+              tag.update()
           error: (request) ->
             data = JSON.parse(request.response)
-            self.errors = data.errors
+            tag.errors = data.errors
           complete: ->
-            self.update()
+            tag.update()
         )
 
-    self.edit_medium =(medium) ->
+    tag.edit_medium =(medium) ->
       (event) ->
         wApp.bus.trigger 'modal', 'pb-file-editor', {
-          'subEntryId': self.opts.id
+          'subEntryId': tag.opts.id
           'item': medium
         }
 
-    self.remove_medium = (medium) ->
+    tag.remove_medium = (medium) ->
       (event) ->
         event.preventDefault()
         Zepto.ajax(
