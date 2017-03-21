@@ -200,7 +200,12 @@
     tag.showEmptyFields = false
     tag.data = {}
 
-    tag.on 'mount', -> tag.fetch()
+    tag.on 'mount', ->
+      wApp.bus.on 'routing:query', tag.fetch
+      tag.fetch()
+
+    tag.on 'unmount', ->
+      wApp.bus.off 'routing:query', tag.fetch
 
     tag.params = (key = undefined) ->
       result = {
@@ -232,9 +237,6 @@
           tag.data = data
           tag.update()
       )
-
-    wApp.bus.on 'routing:query', ->
-      tag.fetch()
 
     tag.remove_main_entry = (me) ->
       (event) ->
