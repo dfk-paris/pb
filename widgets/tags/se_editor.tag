@@ -205,10 +205,9 @@
     tag = this
     tag.id = -> wApp.routing.query()['id']
     tag.main_entry_id = -> wApp.routing.query()['main_entry_id']
-    # tag.main_entry = {}
     tag.errors = {}
+    # tag.main_entry = {}
     # tag.item = {}
-    window.t = tag
 
     tag.on 'mount', ->
       wApp.bus.on 'pb-load-data', -> tag.load_data()
@@ -309,6 +308,7 @@
 
     tag.edit_medium =(medium) ->
       (event) ->
+        event.preventDefault()
         wApp.bus.trigger 'modal', 'pb-file-editor', {
           'subEntryId': tag.opts.id
           'item': medium

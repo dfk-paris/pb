@@ -2,7 +2,7 @@
 
   <h3>Zusatzinformationen bearbeiten</h3>
 
-  <form onsubmit={submit} onreset={reset}>
+  <form onsubmit={submit} onreset={reset} if={opts.item}>
     <div class="row">
       <div class="twelve columns">
         <pb-textarea
@@ -32,40 +32,41 @@
   </form>
 
   <script type="text/coffee">
-    self = this
+    tag = this
+    tag.errors = {}
 
     form_data = ->
       result = {}
-      for element in Zepto(self.root).find("[name]")
+      for element in Zepto(tag.root).find("[name]")
         e = Zepto(element)
         result[e.attr('name')] = e.val()
-      for element in Zepto(self.root).find("input[type=checkbox][name]")
+      for element in Zepto(tag.root).find("input[type=checkbox][name]")
         e = Zepto(element)
         result[e.attr('name')] = e.prop('checked')
       result
 
-    self.submit = (event) ->
+    tag.submit = (event) ->
       event.preventDefault()
 
       Zepto.ajax(
         type: 'put'
-        url: "/api/ses/#{self.opts.subEntryId}/media/#{self.opts.item.id}"
+        url: "/api/ses/#{tag.opts.subEntryId}/media/#{tag.opts.item.id}"
         data: JSON.stringify(medium: form_data())
         success: (data) ->
           # console.log data
-          self.errors = undefined
-          self.opts.modal.trigger 'close'
+          tag.errors = {}
+          tag.update()
+          tag.reset()
           wApp.bus.trigger 'pb-load-data'
         error: (request) ->
           data = JSON.parse(request.response)
           # console.log data
-          self.errors = data.errors
-        complete: ->
-          self.update()
+          tag.errors = data.errors
+          tag.update()
       )
 
-    self.reset = (event) ->
-      self.opts.modal.trigger 'close'
+    tag.reset = (event) ->
+      tag.opts.modal.trigger 'close'
 
   </script>
 

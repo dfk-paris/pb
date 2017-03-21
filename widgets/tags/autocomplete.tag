@@ -29,6 +29,6 @@
           )
       )
 
-    tag.value = -> tag.refs.value()
+    tag.value = -> tag.refs.input.value()
   </script>
 </pb-autocomplete>

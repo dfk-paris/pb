@@ -11,7 +11,7 @@ json.inventory_ids sub_entry.inventory_ids.map{|t| t.name}
 
 media = (
   local_assigns[:only_published] ? sub_entry.media.published : sub_entry.media
-).partition{|e| e.publish}.flatten
+).order('publish DESC, id ASC')
 
 json.media media do |medium|
   json.partial! 'media/item', medium: medium

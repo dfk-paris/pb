@@ -195,14 +195,14 @@
   </ul>
 
   <script type="text/coffee">
-    self = this
-    self.showData = false
-    self.showEmptyFields = false
-    self.data = {}
+    tag = this
+    tag.showData = false
+    tag.showEmptyFields = false
+    tag.data = {}
 
-    self.on 'mount', -> self.fetch()
+    tag.on 'mount', -> tag.fetch()
 
-    self.params = (key = undefined) ->
+    tag.params = (key = undefined) ->
       result = {
         page: (wApp.routing.query() || {})['page'] || 1
         title: wApp.routing.query()['title']
@@ -213,30 +213,30 @@
       }
       if key then result[key] else result
 
-    self.search = (event) -> 
+    tag.search = (event) -> 
       event.preventDefault()
       wApp.routing.query(
         page: 1
-        title: self.refs.title.value()
-        location: self.refs.location.value()
-        creator: self.refs.creator.value()
-        inventory: self.refs.inventory.value()
+        title: tag.refs.title.value()
+        location: tag.refs.location.value()
+        creator: tag.refs.creator.value()
+        inventory: tag.refs.inventory.value()
       )
 
-    self.fetch = ->
+    tag.fetch = ->
       Zepto.ajax(
         type: 'get'
         url: '/api/mes'
-        data: self.params()
+        data: tag.params()
         success: (data) ->
-          self.data = data
-          self.update()
+          tag.data = data
+          tag.update()
       )
 
     wApp.bus.on 'routing:query', ->
-      self.fetch()
+      tag.fetch()
 
-    self.remove_main_entry = (me) ->
+    tag.remove_main_entry = (me) ->
       (event) ->
         event.preventDefault()
         if confirm("Sicher?")
@@ -244,10 +244,10 @@
             type: 'delete'
             url: "/api/mes/#{me.id}"
             success: (data) ->
-              self.fetch()
+              tag.fetch()
           )
 
-    self.remove_sub_entry = (se) ->
+    tag.remove_sub_entry = (se) ->
       (event) ->
         event.preventDefault()
         if confirm("Sicher?")
@@ -255,22 +255,22 @@
             type: 'delete'
             url: "/api/ses/#{se.id}"
             success: (data) ->
-              self.fetch()
+              tag.fetch()
           )
 
-    self.new_me = (event) ->
+    tag.new_me = (event) ->
       event.preventDefault()
       riot.route 'mes/form'
 
-    self.toggleDataVisibility = (event) ->
-      self.showData = Zepto(event.target).prop('checked')
-      self.update()
+    tag.toggleDataVisibility = (event) ->
+      tag.showData = Zepto(event.target).prop('checked')
+      tag.update()
 
-    self.toggleEmptyFieldVisibility = (event) ->
-      self.showEmptyFields = Zepto(event.target).prop('checked')
-      self.update()
+    tag.toggleEmptyFieldVisibility = (event) ->
+      tag.showEmptyFields = Zepto(event.target).prop('checked')
+      tag.update()
 
-    self.imageUrl = (url) ->
+    tag.imageUrl = (url) ->
       if wApp.utils.isDevelopment() then '/dummy.jpg' else url
 
 
