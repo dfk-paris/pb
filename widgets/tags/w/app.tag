@@ -12,11 +12,14 @@
     tag = this
 
     tag.on 'mount', ->
-      Zepto(document).on 'click', 'img[src-large]', (event) ->
-        # console.log event.target
-        url = Zepto(event.target).attr('src-large')
-        wApp.bus.trigger 'modal', 'pb-image-viewer', url: url
-      wApp.routing.setup()
+      Zepto(document).on 'click', 'img[src-large]', enlargeImage
+
+    tag.on 'unmount', ->
+      Zepto(document).off 'click', 'img[src-large]', enlargeImage
+
+    enlargeImage = (event) ->
+      url = Zepto(event.target).attr('src-large')
+      wApp.bus.trigger 'modal', 'pb-image-viewer', url: url
     
     wApp.bus.on 'routing:path', (parts) ->
       opts = {}

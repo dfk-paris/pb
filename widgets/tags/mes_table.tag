@@ -71,8 +71,8 @@
   <pb-pagination
     total={data.total}
     page={params('page')}
-    per_page={10}
-    onchange={page_to}
+    per-page={10}
+    page-to={pageTo}
   />
 
   <ul class="u-full-width">
@@ -274,6 +274,9 @@
 
     tag.imageUrl = (url) ->
       if wApp.utils.isDevelopment() then '/dummy.jpg' else url
+
+    tag.pageTo = (newPage) ->
+      wApp.routing.query page: newPage
 
 
   </script>

@@ -1,6 +1,13 @@
 <pb-listing>
 
   <virtual if={data}>
+
+    <pb-pagination
+      total={data.total}
+      per-page={data.per_page}
+      page={data.page}
+    />
+
     <div each={me in data.items} class="pb-main-entry">
       <em>Nr. {me.sequence}</em>
       <div><strong>{me.title}</strong></div>
@@ -42,24 +49,32 @@
   </virtual>
 
   <script type="text/coffee">
-    self = this
+    tag = this
 
-    self.on 'mount', -> fetch()
+    tag.on 'mount', ->
+      wApp.bus.on 'routing:query', fetch
+
+    tag.on 'unmount', ->
+      wApp.bus.off 'routing:query', fetch
 
     fetch = ->
+      console.log 'fetch'
       Zepto.ajax(
         type: 'get'
         url: '/api/mes'
-        data: {per_page: 'all'}
+        data: {
+          per_page: 10
+          page: wApp.routing.query()['page'] || 1
+        }
         success: (data) ->
-          self.data = data
-          self.update()
+          tag.data = data
+          tag.update()
       )
 
-    self.creator_city_date = (se) ->
+    tag.creator_city_date = (se) ->
       [se.creator, se.location, se.date].filter((e) -> !!e).join(', ')
 
-    self.dimensions = (se) ->
+    tag.dimensions = (se) ->
       fields = [
         se.height_with_socket, se.width_with_socket, se.depth_with_socket
         se.height, se.width, se.depth
@@ -67,7 +82,7 @@
       fields = fields.filter (e) -> !!e
       fields.join(', ')
 
-    self.apiUrl = -> wAppApiUrl
+    tag.apiUrl = -> wAppApiUrl
 
   </script>
 

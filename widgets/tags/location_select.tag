@@ -7,7 +7,7 @@
       class="u-full-width"
     >
       <option value="0" if={opts.prompt}>.. bitte auswählen</option>
-      <optgroup each={group in data} label={group.name}>
+      <optgroup each={group in locations()} label={group.name}>
         <option
           each={location in group.rooms}
           value={location.id}
@@ -20,22 +20,17 @@
   </label>
 
   <script type="text/coffee">
-    self = this
+    tag = this
+    window.t = tag
 
-    self.on 'mount', ->
-      Zepto(self.root).find('select').val(opts.riotValue)
+    tag.on 'mount', ->
+      Zepto(tag.root).find('select').val(opts.riotValue)
 
-      Zepto.ajax(
-        type: 'get'
-        url: '/api/locations'
-        success: (data) ->
-          self.data = data
-          self.update()
-      )
+    tag.locations = -> wApp.data.locationList
 
-    self.is_selected = (location) ->
+    tag.is_selected = (location) ->
       location.id == opts.riotValue
 
-    self.value = -> Zepto(self.root).find('select').val()
+    tag.value = -> Zepto(tag.root).find('select').val()
   </script>
 </pb-location-select>

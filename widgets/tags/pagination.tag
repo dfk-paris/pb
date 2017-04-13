@@ -30,20 +30,30 @@
     tag = this
 
     tag.current_page = -> parseInt(wApp.routing.query()['page'] || 1)
-    tag.page_to_first = -> tag.page_to(1)
-    tag.page_down = -> tag.page_to(tag.current_page() - 1)
-    tag.page_up = -> tag.page_to(tag.current_page() + 1)
-    tag.page_to_last = -> tag.page_to(tag.total_pages())
-
+    tag.page_to_first = (event) ->
+      event.preventDefault()
+      tag.page_to(1)
+    tag.page_down = (event) ->
+      event.preventDefault()
+      tag.page_to(tag.current_page() - 1)
+    tag.page_up = (event) ->
+      event.preventDefault()
+      tag.page_to(tag.current_page() + 1)
+    tag.page_to_last = (event) -> 
+      event.preventDefault()
+      tag.page_to(tag.total_pages())
     tag.is_first = -> tag.current_page() == 1
     tag.is_last = -> tag.current_page() == tag.total_pages()
 
-    tag.page_to = (new_page) ->
-      if new_page != tag.current_page() && new_page >= 1 && new_page <= tag.total_pages()
-        wApp.routing.query page: new_page
+    tag.page_to = (newPage) ->
+      if opts.pageTo
+        opts.pageTo(newPage)
+      else
+        if newPage != tag.current_page() && newPage >= 1 && newPage <= tag.total_pages()
+          wApp.routing.query page: newPage
 
     tag.total_pages = ->
-      Math.ceil(tag.opts.total / tag.opts.per_page)
+      Math.ceil(tag.opts.total / tag.opts.perPage)
 
     tag.jump = (event) ->
       event.preventDefault()

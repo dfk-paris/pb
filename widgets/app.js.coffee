@@ -12,4 +12,18 @@ Zepto.extend Zepto.ajaxSettings, {
 window.wApp = {
   bus: riot.observable()
   data: {}
+  setup: (tags = '*') ->
+    Zepto.ajax(
+      type: 'get'
+      url: "/api/locations"
+      success: (data) ->
+        wApp.data.locationList = data
+        wApp.data.locations = {}
+        for group in data
+          for room in group.rooms
+            wApp.data.locations[room.id] = room.name
+
+        riot.mount(tags)
+        wApp.routing.setup()
+    )
 }

@@ -7,7 +7,9 @@ wApp.routing = {
       for k, v of result
         if result[k] != null && result[k] != ''
           qs.push "#{k}=#{v}"
-      route "#{wApp.routing.path()}?#{qs.join '&'}"
+
+      base = wApp.routing.path() || ''
+      route "#{base}?#{qs.join '&'}"
     else
       wApp.routing.parts()['hash_query'] || {}
   path: (new_path) ->
@@ -48,16 +50,24 @@ wApp.routing = {
     
     wApp.routing.route ->
       # console.log 'routing', arguments
-      old_parts = wApp.routing.parts()
-      if document.location.href != old_parts['href']
-        wApp.routing.parts_cache = null
-        # console.log wApp.routing.parts()
+
+      oldParts = wApp.routing.parts_cache || {}
+      wApp.routing.parts_cache = null
+
+      if wApp.routing.parts()['href'] != oldParts['href']
+        # console.log 'routing','href changed'
         wApp.bus.trigger 'routing:href', wApp.routing.parts()
 
-        if old_parts['hash_path'] != wApp.routing.path()
+        if oldParts['hash_path'] != wApp.routing.path()
+          # console.log 'routing','path changed'
           wApp.bus.trigger 'routing:path', wApp.routing.parts()
-        else
+        
+        if oldParts['hash'] != wApp.routing.parts()['hash']
+          # console.log 'routing','query changed'
           wApp.bus.trigger 'routing:query', wApp.routing.parts()
+
     route.start(true)
+    wApp.routing.parts() # warm cache
     wApp.bus.trigger 'routing:path', wApp.routing.parts()
+    wApp.bus.trigger 'routing:query', wApp.routing.parts()
 }
