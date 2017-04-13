@@ -1,4 +1,6 @@
 pb-pagination, [data-is=pb-pagination] {
+  display: block;
+
   form {
     display: inline-block;
     margin-bottom: 0px;
@@ -8,6 +10,7 @@ pb-pagination, [data-is=pb-pagination] {
     display: inline;
     width: 60px;
     height: 25px;
-    text-align: right
+    text-align: right;
+    margin-bottom: 0rem;
   }
 }

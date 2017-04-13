@@ -34,7 +34,14 @@
           'pb-se-editor'
         else
           'pb-mes-table'
-      riot.mount Zepto('.pb-content')[0], tagName, opts
+
+      mountPage(tagName, opts)
+
+    mountPage = (tagName, opts) ->
+      if tag.mountedTag
+        tag.mountedTag.unmount(true)
+        
+      tag.mountedTag = riot.mount(Zepto('.pb-content')[0], tagName, opts)[0]
       window.scrollTo(0, 0)
 
   </script>

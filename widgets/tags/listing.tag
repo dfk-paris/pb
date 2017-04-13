@@ -11,38 +11,71 @@
     <div each={me in data.items} class="pb-main-entry">
       <em>Nr. {me.sequence}</em>
       <div><strong>{me.title}</strong></div>
-      <pb-location id={me.location} />
 
-      <pb-text-value label="Herkunft" value={me.provenience} />
-      <pb-text-value label="Historische Nachweise" value={me.historical_evidence} />
-      <pb-text-value label="Literatur" value={me.literature} />
-      <pb-text-value label="Beschreibung" value={me.description} />
-      <pb-text-value label="Würdigung" value={me.appreciation} />
-
-      <div each={se in me.sub_entries} class="pb-sub-entry">
-        <em>Nr. {se.sequence}</em>
-        <div><strong>{se.title}</strong></div>
-        <span>{creator_city_date(se)}</span>
-
-        <pb-string-value label="Inv-Nr." value={se.inventory_ids.join('; ')} />
-        <pb-string-value label="Markierungen" value={se.markings} />
-        <pb-string-value label="Material" value={se.material} />
-        <pb-text-value label="Maße" value={dimensions(se)} />
-        <pb-string-value label="Gewicht" value={se.weight} />
-        <pb-string-value label="Durchmesser" value={se.diameter} />
-        <pb-text-value label="Restaurierungen" value={se.restaurations} />
-
-        <div class="pb-media-grid" if={se.media.length > 0} >
-          <div class="medium" each={medium in se.media} if={medium.publish}>
-            <pb-image-viewer url="{apiUrl()}{medium.urls.normal}" />
-            <div class="caption">
-              {parent.se.sequence}{medium.caption ? ': ' : ''}
-              <em>{medium.caption}</em>
-            </div>
-          </div>
-          <div class="pb-clearfix"></div>
+      <virtual if={me.sub_entries.length == 1}>
+        <em>{me.sub_entries[0].creator}</em>
+        <div>{city_date(me.sub_entries[0])}</div>
+        <pb-text-value label="Bezeichnet" value={me.sub_entries[0].markings} />
+        <div class="text-value" if={dimensions(me.sub_entries[0])}>
+          <p>
+            {me.sub_entries[0].material}<br />
+            {dimensions(me.sub_entries[0])}
+          </p>
         </div>
-      </div>
+        <pb-text-value
+          label="Restaurierungen"
+          value={me.sub_entries[0].restaurations}
+        />
+        <div class="text-value">
+          <em>Standort</em>
+          <p><pb-location id="{me.location}" /></p>
+        </div>
+        <pb-text-value
+          label="Historische Nachweise"
+          value={me.historical_evidence}
+        />
+        <pb-string-value
+          label="Inv-Nr."
+          value={me.sub_entries[0].inventory_ids.join('; ')}
+        />
+        <pb-text-value label="Literatur" value={me.literature} />
+        <pb-text-value label="Herkunft" value={me.provenience} />
+        <pb-text-value label="Beschreibung" value={me.description} />
+        <pb-text-value label="Würdigung" value={me.appreciation} />
+      </virtual>
+
+      <virtual if={me.sub_entries.length > 1}>
+        <div each={se in me.sub_entries} class="pb-sub-entry">
+          <hr width="50%" />
+
+          <em>Nr. {se.sequence}</em>
+          <div><strong>{se.title}</strong></div>
+          <em>{se.creator}</em>
+          <div>{city_date(se)}</div>
+          <pb-text-value label="Bezeichnet" value={se.markings} />
+            <div class="text-value" if={dimensions(me.sub_entries[0])}>
+            <p>
+              {me.sub_entries[0].material}<br />
+              {dimensions(me.sub_entries[0])}
+            </p>
+          </div>
+        </div>
+
+        <hr width="50%" />
+
+        <div class="text-value">
+          <em>Standort</em>
+          <p><pb-location id="{me.location}" /></p>
+        </div>
+        <pb-text-value
+          label="Historische Nachweise"
+          value={me.historical_evidence}
+        />
+        <pb-text-value label="Literatur" value={me.literature} />
+        <pb-text-value label="Herkunft" value={me.provenience} />
+        <pb-text-value label="Beschreibung" value={me.description} />
+        <pb-text-value label="Würdigung" value={me.appreciation} />
+      </virtual>
 
       <hr />
     </div>
@@ -71,8 +104,8 @@
           tag.update()
       )
 
-    tag.creator_city_date = (se) ->
-      [se.creator, se.location, se.date].filter((e) -> !!e).join(', ')
+    tag.city_date = (se) ->
+      [se.location, se.dating].filter((e) -> !!e).join(', ')
 
     tag.dimensions = (se) ->
       fields = [

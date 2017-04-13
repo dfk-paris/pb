@@ -202,7 +202,6 @@
 
     tag.on 'mount', ->
       wApp.bus.on 'routing:query', tag.fetch
-      tag.fetch()
 
     tag.on 'unmount', ->
       wApp.bus.off 'routing:query', tag.fetch

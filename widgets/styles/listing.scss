@@ -1,4 +1,6 @@
 pb-listing, [data-is=pb-listing] {
+  display: inline-block;
+
   .pb-main-entry {
     padding: 0.5rem;
     margin-bottom: 1rem;
@@ -28,5 +30,21 @@ pb-listing, [data-is=pb-listing] {
 
   .text-value {
     margin-top: 1rem;
+  }
+
+  p {
+    margin-bottom: 1.5rem;
+  }
+}
+
+pb-text-value, [data-is=pb-text-value] {
+  display: block;
+}
+
+pb-string-value, [data-is=pb-string-value] {
+  display: block;
+
+  .string-value {
+    margin-bottom: 1.5rem;
   }
 }
