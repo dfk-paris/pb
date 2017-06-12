@@ -2,7 +2,7 @@
 
   <virtual if={data}>
 
-    <pb-search-form handler={searchHandler} />
+    <pb-search-form />
 
     <pb-pagination
       total={data.total}
@@ -92,18 +92,20 @@
     tag.on 'unmount', ->
       wApp.bus.off 'routing:query', fetch
 
-    tag.searchHandler = (data) -> fetch(data)
-
     fetch = (data = {}) ->
-      Zepto.extend(data,
+      params = {
         per_page: 10
         page: wApp.routing.query()['page'] || 1
-      )
+        title: wApp.routing.query()['title']
+        location: wApp.routing.query()['location']
+        creator: wApp.routing.query()['creator']
+        inventory: wApp.routing.query()['inventory']
+      }
 
       Zepto.ajax(
         type: 'get'
         url: '/api/mes'
-        data: data
+        data: params
         success: (data) ->
           tag.data = data
           tag.update()

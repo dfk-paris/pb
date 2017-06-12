@@ -52,7 +52,7 @@
         creator: tag.refs.creator.value()
         inventory: tag.refs.inventory.value()
       }
-      h(data) if h = tag.opts.handler
+      wApp.routing.query(data)
 
     tag.params = (key = undefined) ->
       result = {
