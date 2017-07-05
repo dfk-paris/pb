@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20170705081159) do
 
-  create_table "main_entries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "main_entries", force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
     t.string   "title"
     t.integer  "location"
     t.string   "sequence"
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20170705081159) do
     t.index ["sub_entry_id"], name: "index_media_on_sub_entry_id", using: :btree
   end
 
-  create_table "sub_entries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "sub_entries", force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
     t.integer  "main_entry_id"
     t.string   "title"
     t.string   "sequence"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20170705081159) do
     t.text     "framing",            limit: 65535
     t.text     "restaurations",      limit: 65535
     t.boolean  "no_title"
-    t.index ["main_entry_id", "title", "location", "creator"], name: "searchy", using: :btree
+    t.index ["main_entry_id", "title", "location", "creator"], name: "searchy", length: {"main_entry_id"=>nil, "title"=>100, "location"=>50, "creator"=>50}, using: :btree
     t.index ["main_entry_id"], name: "index_sub_entries_on_main_entry_id", using: :btree
     t.index ["title", "description", "markings", "restaurations"], name: "se_terms", type: :fulltext
   end
