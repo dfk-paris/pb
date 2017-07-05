@@ -1,0 +1,26 @@
+@mixin cera($s: 18px, $lh: 24px) {
+  font-family: cera-pro, Helvetica, Arial, sans-serif;
+  font-size: $s;
+  line-height: $lh;
+}
+
+@mixin lyon($s: 18, $lh: 24) {
+  font-family: lyon, Georgia, "Times New Roman", Times, serif;
+  font-size: $s;
+  line-height: $lh;
+}
+
+@mixin or-select {
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAyMi41IDMwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxkZWZzPgogICAgPHN0eWxlPi5jbHMtMXtmaWxsOiNmZmY7fS5jbHMtMntmaWxsOiM0NDQ7fTwvc3R5bGU+CiAgPC9kZWZzPgogIDx0aXRsZT5hcnJvd3M8L3RpdGxlPgogIDxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgdHJhbnNmb3JtPSJtYXRyaXgoNS4zMjAzIDAgMCAzLjUxMTkgLTEuNjI4NiAtNi4wNDU5KSIgcG9pbnRzPSIxLjQxIDUuMzMgMy41NCA1LjMzIDIuNDggNi44MiIgc3R5bGU9ImZpbGw6Izk0OTQ5NyIvPgogIDxwYXRoIGQ9Im0wLjI0NTQ3IDB2MzB6IiBzdHlsZT0iZmlsbC1ydWxlOmV2ZW5vZGQ7ZmlsbDojNDQ0O3N0cm9rZS13aWR0aDouNDkwNzc7c3Ryb2tlOiM5NDk0OTciLz4KPC9zdmc+Cg==) no-repeat 100% 50%;
+  -moz-appearance: none; 
+  -webkit-appearance: none; 
+  appearance: none;
+  border: 1px solid gray;
+  border-radius: 0px;
+  @include cera(16px, 16px);
+  box-sizing: content-box;
+  width: 160px;
+  height: 18px;
+  margin: 0px;
+  padding: 6px;
+}

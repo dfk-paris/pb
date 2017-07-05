@@ -4,7 +4,7 @@ pb-listing, [data-is=pb-listing] {
   .pb-main-entry {
     padding: 0.5rem;
     margin-bottom: 1rem;
-    line-height: 1.1em;
+    @include lyon(18px, 24px);
 
     .pb-sub-entry {
       margin-bottom: 0.5rem;
