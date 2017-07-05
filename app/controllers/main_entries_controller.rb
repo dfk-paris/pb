@@ -6,6 +6,7 @@ class MainEntriesController < ApplicationController
     @main_entries = MainEntry.
       with_order.
       include_unpublished(params[:unpublished]).
+      by_terms(params[:terms]).
       by_title(params[:title]).
       by_location(params[:location]).
       by_creator(params[:creator]).

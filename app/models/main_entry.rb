@@ -55,6 +55,23 @@ class MainEntry < ApplicationRecord
     mega_join.where('LOWER(tags.name) LIKE :name', name: "%#{inventory.downcase}%")
   }
 
+  scope :by_terms, lambda {|terms|
+    return all if terms.blank?
+    mega_join.where("
+      (
+        MATCH(
+          main_entries.title, main_entries.provenience,
+          main_entries.historical_evidence, main_entries.literature,
+          main_entries.description, main_entries.appreciation
+        )
+        AGAINST (:terms IN BOOLEAN MODE)
+      ) OR (
+        MATCH(ses.title, ses.description, ses.markings, ses.restaurations)
+        AGAINST (:terms IN BOOLEAN MODE)
+      )
+    ", terms: terms)
+  }
+
   scope :include_unpublished, lambda { |value|
     value.present? ? all : where(publish: true)
   }
