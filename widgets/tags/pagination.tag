@@ -1,6 +1,11 @@
 <pb-pagination>
 
+  <div class="w-float-left">
+    {opts.total} Resultate
+  </div>
+
   <div class="u-text-right" show={total_pages() > 1}>
+    Seite
     <a
       show={!is_first()}
       onclick={page_to_first}
@@ -25,6 +30,8 @@
       onclick={page_to_last}
     ><i class="fa fa-angle-double-right"></i></a>
   </div>
+
+  <div class="w-clearfix"></div>
 
   <script type="text/coffee">
     tag = this

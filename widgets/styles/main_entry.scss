@@ -1,0 +1,16 @@
+pb-main-entry, [data-is=pb-main-entry] {
+  background-color: white;
+  padding: 30px;
+
+  padding: 3rem;
+  margin-bottom: 1rem;
+  @include lyon(18px, 24px);
+
+  .pb-sub-entry {
+    margin-bottom: 0.5rem;
+  }
+
+  pb-text-value, [data-is=pb-text-value] {
+    text-align: justify;
+  }
+}

@@ -21,11 +21,19 @@
     />
   </head>
   <body>
-    <pb-listing></pb-listing>
+    <pb-search-results></pb-search-results>
+
+    <div class="pb-hide-on-results">
+      Some text
+    </div>
+
+    <pb-search-form></pb-search-form>
+
+    <w-modal></w-modal>
 
     <script type="text/javascript" src="<%= script_path('app-noboot.js') %>"></script>
     <script type="text/javascript">
-      wApp.setup('pb-listing')
+      wApp.setup()
     </script>
   </body>
 </html>
