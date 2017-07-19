@@ -20,27 +20,3 @@ w-modal, [data-is=w-modal] {
     // max-width: 100%;
   }
 }
-
-@media print {
-  w-modal, [data-is=w-modal] {
-    background-color: white;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin: 0;
-    padding: 15px;
-    font-size: 14px;
-    line-height: 18px;
-
-    .receiver {
-      box-shadow: none;
-      width: 100%;
-      height: 100%;
-      max-height: 100%;
-      margin: 0;
-      border: none;
-    }
-  }
-}
