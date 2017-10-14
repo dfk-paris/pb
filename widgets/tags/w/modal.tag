@@ -29,6 +29,7 @@
     launch = (tagName, opts = {}) ->
       # console.log 'modal', tagName, opts
       opts.modal = tagName
+      opts.close = close
       tag.mountedTag = riot.mount(tag.refs.receiver, tagName, opts)[0]
       tag.active = true
       tag.update()

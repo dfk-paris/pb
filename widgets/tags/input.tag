@@ -9,6 +9,7 @@
       placeholder={opts.placeholder || opts.label}
       riot-value={value_from_parent()}
       checked={checked()}
+      autofocus={opts.autofocus}
     />
   </label>
   <ul class="pb-errors">

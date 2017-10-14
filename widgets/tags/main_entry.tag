@@ -1,5 +1,13 @@
 <pb-main-entry>
 
+  <div class="w-text-right">
+    <button onclick={newSearch}>neue Suche</button>
+    <button onclick={print}>drucken</button>
+    <button onclick={close}>schließen</button>
+  </div>
+
+  <hr />
+
   <em>Nr. {opts.me.sequence}</em>
   <div><strong>{opts.me.title}</strong></div>
 
@@ -81,6 +89,19 @@
       ]
       fields = fields.filter (e) -> !!e
       fields.join(', ')
+
+    tag.newSearch = (event) ->
+      tag.close()
+      for form in Zepto('pb-search-form form')
+        form.reset()
+      wApp.routing.path('/')
+
+    tag.print = (event) ->
+
+
+    tag.close = (event) ->
+      c() if c = tag.opts.close
+
 
   </script>
 

@@ -93,7 +93,7 @@ function watch_app {
 }
 
 function watch_css {
-  onchange widgets/styles -- widgets/build.sh css
+  onchange widgets/styles widgets/app.scss -- widgets/build.sh css
 }
 
 function watch_html {

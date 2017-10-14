@@ -63,6 +63,16 @@ input[type=submit], input[type=reset], .button {
   }
 }
 
+input[type=reset] {
+  background-color: initial;
+  color: black;
+
+  &:hover {
+    background-color: #dedede;
+    color: black;
+  }
+}
+
 fieldset {
   margin: 0px;
   margin-bottom: 1.5rem;

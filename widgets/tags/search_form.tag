@@ -5,9 +5,8 @@
       placeholder="Volltextsuche"
       ref="terms"
       value={params('terms')}
+      autofocus={true}
     />
-
-    <hr />
 
     <pb-input
       placeholder="Objektbezeichnung"
@@ -28,18 +27,15 @@
       value={params('creator')}
     />
 
-    <hr />
-
     <pb-input
       placeholder="Inventar"
       ref="inventory"
       value={params('inventory')}
     />
 
-    <hr />
-
     <div class="u-text-right">
-      <input type="submit" class="button" value="Suchen" />
+      <input type="reset" value="Neue Suche" />
+      <input type="submit" value="Suchen" />
     </div>
   </form>
 
