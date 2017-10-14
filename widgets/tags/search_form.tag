@@ -1,6 +1,6 @@
 <pb-search-form>
 
-  <form onsubmit={search}>
+  <form onsubmit={search} onreset={reset}>
     <pb-input
       placeholder="Volltextsuche"
       ref="terms"
@@ -43,7 +43,7 @@
     tag = this
 
     tag.search = (event) ->
-      event.preventDefault()
+      event.preventDefault() if event
       data = {
         page: 1
         title: tag.refs.title.value()
@@ -53,6 +53,10 @@
         inventory: tag.refs.inventory.value()
       }
       wApp.routing.query(data)
+
+    tag.reset = (event) ->
+      Zepto(tag.root).find('input').val('')
+      wApp.routing.path('/')
 
     tag.params = (key = undefined) ->
       result = {
