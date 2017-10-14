@@ -1,6 +1,6 @@
 class SubEntriesController < ApplicationController
 
-  skip_before_action :auth, only: [:index, :show]
+  skip_before_action :auth, only: [:index, :show, :autocomplete]
 
   def index
     @sub_entries = SubEntry.includes(:main_entry, :inventory_ids).all
@@ -42,9 +42,10 @@ class SubEntriesController < ApplicationController
   end
 
   def autocomplete
+    column = params[:column].gsub(/[^a-z_]/, '')
     @strings = SubEntry.
       select(params[:column]).
-      where("#{params[:column]} LIKE ?", "%#{params[:term]}%").
+      where("#{column} LIKE ?", "%#{params[:term]}%").
       distinct.
       limit(10)
 
