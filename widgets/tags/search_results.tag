@@ -30,7 +30,7 @@
 
     tag.on 'updated', ->
       elements = Zepto('.pb-hide-on-results')
-      if tag.data && tag.data.total > 0
+      if tag.data
         elements.animate({opacity: 0}, {
           complete: -> elements.hide()  
         })
