@@ -55,7 +55,7 @@
       wApp.routing.query(data)
 
     tag.reset = (event) ->
-      Zepto(tag.root).find('input').val('')
+      Zepto(tag.root).find('input[type=text]').val('')
       wApp.routing.path('/')
 
     tag.params = (key = undefined) ->
