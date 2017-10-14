@@ -1,7 +1,6 @@
 <pb-search-results>
 
-  <virtual if={data && data.total > 0}>
-
+  <virtual if={data}>
     <pb-pagination
       total={data.total}
       per-page={data.per_page}

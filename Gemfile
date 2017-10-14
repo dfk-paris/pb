@@ -14,9 +14,10 @@ gem 'acts-as-taggable-on', git: 'https://github.com/mbleigh/acts-as-taggable-on.
 gem 'rack-cors'
 
 group :development, :test do
-  gem 'byebug', platform: :mri
+  # gem 'byebug', platform: :mri
   gem 'spreadsheet'
   gem 'faker'
+  gem 'pry'
 end
 
 group :development do
