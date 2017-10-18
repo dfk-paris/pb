@@ -1,12 +1,12 @@
 <pb-main-entry>
 
-  <div class="w-text-right">
+  <div class="w-text-right no-print">
     <button onclick={newSearch}>neue Suche</button>
     <button onclick={print}>drucken</button>
     <button onclick={close}>schließen</button>
   </div>
 
-  <hr />
+  <hr class="no-print" />
 
   <em>Nr. {opts.me.sequence}</em>
   <div><strong>{opts.me.title}</strong></div>
@@ -97,7 +97,7 @@
       wApp.routing.path('/')
 
     tag.print = (event) ->
-
+      wApp.utils.printElement(tag.root);
 
     tag.close = (event) ->
       c() if c = tag.opts.close

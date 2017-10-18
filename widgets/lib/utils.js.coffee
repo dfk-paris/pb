@@ -25,11 +25,12 @@ wApp.utils = {
       value
   isDevelopment: -> !!window.location.href.match(/localhost:3000/)
   printElement: (e) ->
-    mywindow = window.open('', 'PRINT', 'height=400,width=600')
+    mywindow = window.open('', 'PRINT', 'height=800,width=1024')
 
     mywindow.document.write('<html><head><title>' + document.title  + '</title>')
-    mywindow.document.write('</head><body >')
-    mywindow.document.write('<h1>' + document.title  + '</h1>')
+    # mywindow.document.write('<link rel="stylesheet" type="text/css" href="print.css" />')
+    mywindow.document.write('<style type="text/css">@media print {.no-print {display: none}}</style>')
+    mywindow.document.write('</head><body>')
     mywindow.document.write(e.innerHTML)
     mywindow.document.write('</body></html>')
 
