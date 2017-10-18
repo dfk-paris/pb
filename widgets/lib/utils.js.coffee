@@ -28,8 +28,7 @@ wApp.utils = {
     mywindow = window.open('', 'PRINT', 'height=800,width=1024')
 
     mywindow.document.write('<html><head><title>' + document.title  + '</title>')
-    # mywindow.document.write('<link rel="stylesheet" type="text/css" href="print.css" />')
-    mywindow.document.write('<style type="text/css">@media print {.no-print {display: none}}</style>')
+    mywindow.document.write('<style type="text/css">.no-print {display: none}</style>')
     mywindow.document.write('</head><body>')
     mywindow.document.write(e.innerHTML)
     mywindow.document.write('</body></html>')
