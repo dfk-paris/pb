@@ -8,14 +8,22 @@
     />
 
     <div each={me in data.items} class="pb-list-entry" onclick={openEntry}>
-      <em>Nr. {me.sequence}</em>
-      <div><strong>{me.title}</strong></div>
+      <div class="pb-frame">
+        <pb-icon which="right" />
 
-      <virtual if={me.sub_entries.length == 1}>
-        <em>{me.sub_entries[0].creator}</em>
-      </virtual>
+        <div class="pb-item">
+          <em>Nr. {me.sequence}</em>
+          <div><strong>{me.title}</strong></div>
 
-      <pb-text-value value={me.description} />
+          <virtual if={me.sub_entries.length == 1}>
+            <em>{me.sub_entries[0].creator}</em>
+          </virtual>
+
+          <pb-text-value value={me.description} />
+        </div>
+
+        <div class="pb-clearfix"></div>
+      </div>
     </div>
   </virtual>
 

@@ -133,3 +133,27 @@ li {
 .pb-clearfix {
   clear: both;
 }
+
+.pb-list-entry {
+  border-top: 1px solid gray;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+
+  .pb-frame {
+    padding: 2rem;
+  }
+
+  .pb-frame:hover {
+    cursor: pointer;
+    background-color: #D9E6D9;
+  }
+
+  pb-icon {
+    display: block;
+    float: right;
+  }
+
+  .pb-item {
+    margin-right: 10rem;
+  }
+}
