@@ -156,4 +156,24 @@ li {
   .pb-item {
     margin-right: 10rem;
   }
+
+  .pb-id {
+    @include lyon(18px, 24px);
+    margin-bottom: 1em;
+  }
+
+  .pb-title {
+    @include cera(18px, 24px);
+    font-weight: bold;
+  }
+
+  .pb-creator {
+    @include lyon(17px, 25px);
+    font-style: italic;
+    margin-bottom: 1em;
+  }
+
+  pb-text-value {
+    @include lyon(18px, 24px);
+  }
 }

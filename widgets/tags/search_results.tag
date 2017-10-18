@@ -12,11 +12,11 @@
         <pb-icon which="right" />
 
         <div class="pb-item">
-          <em>Nr. {me.sequence}</em>
-          <div><strong>{me.title}</strong></div>
+          <div class="pb-id">Nr. {me.sequence}</div>
+          <div class="pb-title">{me.title}</div>
 
           <virtual if={me.sub_entries.length == 1}>
-            <em>{me.sub_entries[0].creator}</em>
+            <div class="pb-creator">{me.sub_entries[0].creator}</div>
           </virtual>
 
           <pb-text-value value={me.description} />
