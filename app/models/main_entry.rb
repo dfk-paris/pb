@@ -69,7 +69,7 @@ class MainEntry < ApplicationRecord
         MATCH(ses.title, ses.description, ses.markings, ses.restaurations)
         AGAINST (:terms IN BOOLEAN MODE)
       )
-    ", terms: terms)
+    ", terms: terms.split(/\s+/).map{|t| "+#{t}*"}.join(' '))
   }
 
   scope :include_unpublished, lambda { |value|

@@ -1,7 +1,7 @@
 <pb-pagination>
 
   <div class="w-float-left">
-    {opts.total} Resultate
+    {opts.total} {opts.total == 1 ? 'Resultat' : 'Resultate'}
   </div>
 
   <div class="u-text-right" show={total_pages() > 1}>

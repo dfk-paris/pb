@@ -18,10 +18,11 @@
       ref="location"
       value={params('location')}
       prompt={true}
+      only-in-use={true}
     />
 
     <pb-autocomplete
-      placeholder="Personen"
+      placeholder="Künstler"
       name="creator"
       ref="creator"
       value={params('creator')}
@@ -56,6 +57,7 @@
 
     tag.reset = (event) ->
       Zepto(tag.root).find('input[type=text]').val('')
+      Zepto(tag.root).find('select').val('')
       wApp.routing.path('/')
 
     tag.params = (key = undefined) ->
