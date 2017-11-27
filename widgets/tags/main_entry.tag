@@ -51,6 +51,10 @@
       <div><strong>{se.title}</strong></div>
       <em>{se.creator}</em>
       <div>{city_date(se)}</div>
+      <pb-string-value
+        label="Inv-Nr."
+        value={se.inventory_ids.join('; ')}
+      />
       <pb-text-value label="Bezeichnet" value={se.markings} />
         <div class="text-value" if={dimensions(opts.me.sub_entries[0])}>
         <p>
