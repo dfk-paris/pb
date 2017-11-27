@@ -12,7 +12,7 @@
         <pb-icon which="right" />
 
         <div class="pb-item">
-          <div class="pb-id">Nr. {me.sequence}</div>
+          <div class="pb-id" no-skype={me.sequence}></div>
           <div class="pb-title">{me.title}</div>
 
           <virtual if={me.sub_entries.length == 1}>
@@ -47,8 +47,16 @@
         elements.show()
         elements.animate({opacity: 1})
 
+      noSkype()
+
     tag.openEntry = (event) ->
       wApp.bus.trigger 'modal', 'pb-main-entry', {me: event.item.me}
+
+    noSkype = ->
+      tpl = '<span style="display:none;">_</span>-'
+      for e in Zepto(tag.root).find('[no-skype]')
+        e = Zepto(e)
+        e.html('Nr. ' + e.attr('no-skype').replace('-', tpl))
 
     fetch = (data = {}) ->
       params = {
