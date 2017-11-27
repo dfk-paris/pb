@@ -35,13 +35,14 @@
     />
 
     <div class="u-text-right">
-      <input type="reset" value="Neue Suche" />
+      <input type="reset" value="Neue Suche" onclick={reset} />
       <input type="submit" value="Suchen" />
     </div>
   </form>
 
   <script type="text/coffee">
     tag = this
+    window.t = tag
 
     tag.search = (event) ->
       event.preventDefault() if event
@@ -56,9 +57,11 @@
       wApp.routing.query(data)
 
     tag.reset = (event) ->
+      event.preventDefault()
+      wApp.routing.path('/')
       Zepto(tag.root).find('input[type=text]').val('')
       Zepto(tag.root).find('select').val('')
-      wApp.routing.path('/')
+
 
     tag.params = (key = undefined) ->
       result = {
