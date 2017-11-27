@@ -2,7 +2,7 @@
 
   <div if={!opts.expand} class="pb-grid">
     <div class="pb-cell" each={medium in opts.se.media}>
-      <img src={medium.urls.thumb} />
+      <img src={wAppApiUrl + medium.urls.thumb} />
     </div>
 
     <div class="w-clearfix"></div>
@@ -10,7 +10,7 @@
 
   <div if={opts.expand} class="pb-list">
     <div class="pb-item" each={medium in opts.se.media}>
-      <img src={medium.urls.normal} />
+      <img src={wAppApiUrl + medium.urls.normal} />
     </div>
   </div>
 
