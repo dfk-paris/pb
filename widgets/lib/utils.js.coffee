@@ -27,8 +27,25 @@ wApp.utils = {
   printElement: (e) ->
     mywindow = window.open('', 'PRINT', 'height=800,width=1024')
 
+    style = "
+      .no-print {display: none}
+      .w-clearfix {clear: both}
+      
+      pb-media-grid .pb-cell {
+        box-sizing: border-box;
+        float: left;
+        height: 80px;
+        width: 80px;
+        margin-right: 20px;
+        margin-bottom: 20px;
+      }
+
+      .pb-list {text-align: center}
+      .pb-item {margin-top: 2em}
+    "
+
     mywindow.document.write('<html><head><title>' + document.title  + '</title>')
-    mywindow.document.write('<style type="text/css">.no-print {display: none}</style>')
+    mywindow.document.write('<style type="text/css">' + style + '</style>')
     mywindow.document.write('</head><body>')
     mywindow.document.write(e.innerHTML)
     mywindow.document.write('</body></html>')

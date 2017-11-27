@@ -4,6 +4,7 @@
     <button onclick={newSearch}>neue Suche</button>
     <button onclick={print}>drucken</button>
     <button onclick={close}>schließen</button>
+    <button onclick={toggleExpand}>Abbildungen vergrößern/verkleinern</button>
   </div>
 
   <hr class="no-print" />
@@ -41,6 +42,8 @@
     <pb-text-value label="Herkunft" value={opts.me.provenience} />
     <pb-text-value label="Beschreibung" value={opts.me.description} />
     <pb-text-value label="Würdigung" value={opts.me.appreciation} />
+
+    <pb-media-grid se={opts.me.sub_entries[0]} expand={expand} />
   </virtual>
 
   <virtual if={opts.me.sub_entries.length > 1}>
@@ -62,6 +65,8 @@
           {dimensions(opts.me.sub_entries[0])}
         </p>
       </div>
+
+      <pb-media-grid se={se} expand={expand} />
     </div>
 
     <hr width="50%" />
@@ -106,6 +111,9 @@
     tag.close = (event) ->
       c() if c = tag.opts.close
 
+    tag.toggleExpand = (event) ->
+      tag.expand = !tag.expand
+      tag.update()
 
   </script>
 

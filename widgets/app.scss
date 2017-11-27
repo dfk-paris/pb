@@ -177,3 +177,28 @@ li {
     @include lyon(18px, 24px);
   }
 }
+
+pb-media-grid {
+  display: block;
+
+  .pb-grid {
+    .pb-cell {
+      box-sizing: border-box;
+      background-color: #1e1e1e;
+      padding: 10px;
+      float: left;
+      height: 100px;
+      width: 100px;
+      margin-right: 20px;
+      margin-bottom: 20px;
+    }
+  }
+
+  .pb-list {
+    text-align: center;
+
+    .pb-item {
+      margin-top: 2em;
+    }
+  }
+}
