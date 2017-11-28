@@ -87,6 +87,7 @@
 
   <script type="text/coffee">
     tag = this
+    tag.expand = true
 
     tag.city_date = (se) ->
       [se.location, se.dating].filter((e) -> !!e).join(', ')

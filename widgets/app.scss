@@ -199,6 +199,10 @@ pb-media-grid {
 
     .pb-item {
       margin-top: 2em;
+
+      img {
+        max-width: 500px;
+      }
     }
   }
 }
