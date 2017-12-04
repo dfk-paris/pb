@@ -48,6 +48,7 @@
         elements.animate({opacity: 1})
 
       noSkype()
+      highlighting()
 
     tag.openEntry = (event) ->
       wApp.bus.trigger 'modal', 'pb-main-entry', {me: event.item.me}
@@ -57,6 +58,21 @@
       for e in Zepto(tag.root).find('[no-skype]')
         e = Zepto(e)
         e.html('Nr. ' + e.attr('no-skype').replace('-', tpl))
+
+    hl = (match) ->
+      "<mark>#{match}</mark>"
+
+    highlighting = ->
+      elements = Zepto(tag.root).find('.pb-title, .pb-creator, pb-text-value p')
+      terms = []
+      for n in ['terms', 'title', 'location', 'creator', 'inventory']
+        if paramValue = wApp.routing.query()[n]
+          terms = terms.concat(paramValue.split(/\s+/))
+      for e in elements
+        for t in terms
+          e = Zepto(e)
+          e.html e.html().replace(new RegExp(t, 'gi'), hl)
+
 
     fetch = (data = {}) ->
       params = {
