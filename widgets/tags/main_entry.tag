@@ -35,8 +35,8 @@
       value={opts.me.historical_evidence}
     />
     <pb-string-value
-      label="Inv-Nr."
-      value={opts.me.sub_entries[0].inventory_ids.join('; ')}
+      label="Inv-Nr. (historische Inv-Nr.)"
+      value={humanIds(opts.me.sub_entries[0].inventory_ids)}
     />
     <pb-text-value label="Literatur" value={opts.me.literature} />
     <pb-text-value label="Herkunft" value={opts.me.provenience} />
@@ -55,8 +55,8 @@
       <em>{se.creator}</em>
       <div>{city_date(se)}</div>
       <pb-string-value
-        label="Inv-Nr."
-        value={se.inventory_ids.join('; ')}
+        label="Inv-Nr. (historische Inv-Nr.)"
+        value={humanIds(se.inventory_ids)}
       />
       <pb-text-value label="Bezeichnet" value={se.markings} />
         <div class="text-value" if={dimensions(opts.me.sub_entries[0])}>
@@ -115,6 +115,15 @@
     tag.toggleExpand = (event) ->
       tag.expand = !tag.expand
       tag.update()
+
+    tag.humanIds = (ids) ->
+      strs = for id in ids
+        parts = id.split('|')
+        if parts[1]
+          "#{parts[0]} (#{parts[1]})"
+        else
+          parts[0]
+      strs.join('; ')
 
   </script>
 
