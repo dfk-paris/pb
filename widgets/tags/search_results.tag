@@ -20,6 +20,8 @@
           </virtual>
 
           <pb-text-value value={me.description} />
+
+          Letzte Änderung vom <w-timestamp value={me.updated_at} format="%d.%m.%Y" />
         </div>
 
         <div class="pb-clearfix"></div>

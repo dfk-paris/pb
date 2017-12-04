@@ -5,9 +5,11 @@
     tag = this
 
     tag.formatted = ->
+      format = tag.opts.format || '%B %d, %Y %H:%M:%S'
+
       if tag.opts.riotValue
         ts = new Date(tag.opts.riotValue)
-        strftime '%B %d, %Y %H:%M:%S', ts
+        strftime format, ts
       else
         null
   </script>
