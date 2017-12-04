@@ -30,6 +30,17 @@ wApp.utils = {
     style = "
       .no-print {display: none}
       .w-clearfix {clear: both}
+
+      hr {
+        margin-top: 3rem;
+        margin-bottom: 3.5rem;
+        border-width: 0;
+        border-top: 1px solid #e1e1e1;
+      }
+
+      p {
+        margin-top: 0px;
+      }
       
       pb-media-grid .pb-cell {
         box-sizing: border-box;

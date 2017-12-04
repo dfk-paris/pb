@@ -18,7 +18,7 @@
     tag = this
 
     tag.media = ->
-      console.log tag.opts.se.media
+      # console.log tag.opts.se.media
       tag.mediaCache ||= (m for m in tag.opts.se.media when m.publish)
   </script>
 
