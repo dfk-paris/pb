@@ -52,7 +52,7 @@ class MainEntry < ApplicationRecord
 
   scope :by_inventory, lambda {|inventory|
     return all if inventory.blank?
-    mega_join.where('LOWER(tags.name) LIKE :name', name: "%#{inventory.downcase}%")
+    mega_join.where('LOWER(tags.name) LIKE :name', name: inventory.downcase)
   }
 
   scope :by_terms, lambda {|terms|

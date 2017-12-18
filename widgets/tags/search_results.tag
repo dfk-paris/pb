@@ -12,7 +12,11 @@
         <pb-icon which="right" />
 
         <div class="pb-item">
-          <div class="pb-id" no-skype={me.sequence}></div>
+          <div
+            class="pb-id"
+            no-skype={me.sequence}
+            x-ms-format-detection="none"
+          ></div>
           <div class="pb-title">{me.title}</div>
 
           <virtual if={me.sub_entries.length == 1}>

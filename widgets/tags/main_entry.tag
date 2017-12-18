@@ -35,7 +35,7 @@
       value={opts.me.historical_evidence}
     />
     <pb-string-value
-      label="Inv-Nr. (historische Inv-Nr.)"
+      label="Inv. Nr. (Inv. Nr. AA)"
       value={humanIds(opts.me.sub_entries[0].inventory_ids)}
     />
     <pb-text-value label="Literatur" value={opts.me.literature} />
@@ -55,7 +55,7 @@
       <em>{se.creator}</em>
       <div>{city_date(se)}</div>
       <pb-string-value
-        label="Inv-Nr. (historische Inv-Nr.)"
+        label="Inv. Nr. (Inv. Nr. AA)"
         value={humanIds(se.inventory_ids)}
       />
       <pb-text-value label="Bezeichnet" value={se.markings} />
