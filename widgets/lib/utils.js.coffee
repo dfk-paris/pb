@@ -53,6 +53,11 @@ wApp.utils = {
 
       .pb-list {text-align: center}
       .pb-item {margin-top: 2em}
+
+      pb-string-value.block-style {
+        display: block;
+        margin-bottom: 1em;
+      }
     "
 
     mywindow.document.write('<html><head><title>' + document.title  + '</title>')
@@ -65,5 +70,5 @@ wApp.utils = {
     mywindow.focus() # necessary for IE >= 10*/
 
     mywindow.print()
-    mywindow.close()
+    # mywindow.close()
 }

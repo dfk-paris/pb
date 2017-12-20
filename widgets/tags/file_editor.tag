@@ -66,7 +66,7 @@
       )
 
     tag.reset = (event) ->
-      tag.opts.modal.trigger 'close'
+      tag.opts.close()
 
   </script>
 

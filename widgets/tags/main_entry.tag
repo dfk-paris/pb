@@ -37,6 +37,7 @@
     <pb-string-value
       label="Inv. Nr. (Inv. Nr. AA)"
       value={humanIds(opts.me.sub_entries[0].inventory_ids)}
+      class="block-style"
     />
     <pb-text-value label="Literatur" value={opts.me.literature} />
     <pb-text-value label="Herkunft" value={opts.me.provenience} />
@@ -57,6 +58,7 @@
       <pb-string-value
         label="Inv. Nr. (Inv. Nr. AA)"
         value={humanIds(se.inventory_ids)}
+        class="block-style"
       />
       <pb-text-value label="Bezeichnet" value={se.markings} />
         <div class="text-value" if={dimensions(opts.me.sub_entries[0])}>

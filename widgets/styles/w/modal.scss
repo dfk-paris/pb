@@ -18,5 +18,9 @@ w-modal, [data-is=w-modal] {
     overflow-y: auto;
     max-height: 80%;
     // max-width: 100%;
+
+    &[data-is=pb-file-editor] {
+      background-color: white;
+    }
   }
 }

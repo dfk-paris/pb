@@ -24,5 +24,6 @@ public/*.html
 public/*.css
 public/*.js
 public/fonts
+public/media
 
 deploy/config.sh
