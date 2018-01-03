@@ -14,6 +14,10 @@ pb-main-entry, [data-is=pb-main-entry] {
   pb-text-value, [data-is=pb-text-value] {
     text-align: justify;
   }
+
+  hr {
+    margin: 0px auto;
+  }
 }
 
 pb-multi-main-entry, [data-is=pb-multi-main-entry] {
@@ -35,5 +39,9 @@ pb-multi-main-entry, [data-is=pb-multi-main-entry] {
     &:last-child {
       display: none;
     }
+  }
+
+  hr {
+    margin: 0px auto;
   }
 }
