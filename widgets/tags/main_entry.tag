@@ -15,6 +15,11 @@
   <virtual if={opts.me.sub_entries.length == 1}>
     <em>{opts.me.sub_entries[0].creator}</em>
     <div>{city_date(opts.me.sub_entries[0])}</div>
+    <pb-string-value
+      label="Inv. Nr. (Inv. Nr. AA)"
+      value={humanIds(opts.me.sub_entries[0].inventory_ids)}
+      class="block-style"
+    />
     <pb-text-value label="Bezeichnet" value={opts.me.sub_entries[0].markings} />
     <div class="text-value" if={dimensions(opts.me.sub_entries[0])}>
       <p>
@@ -34,11 +39,6 @@
       label="Historische Nachweise"
       value={opts.me.historical_evidence}
     />
-    <pb-string-value
-      label="Inv. Nr. (Inv. Nr. AA)"
-      value={humanIds(opts.me.sub_entries[0].inventory_ids)}
-      class="block-style"
-    />
     <pb-text-value label="Literatur" value={opts.me.literature} />
     <pb-text-value label="Herkunft" value={opts.me.provenience} />
     <pb-text-value label="Beschreibung" value={opts.me.description} />
@@ -48,13 +48,24 @@
   </virtual>
 
   <virtual if={opts.me.sub_entries.length > 1}>
+    <virtual if={singleCreator()}>
+      <div><em>{singleCreator()}</em></div>
+    </virtual>
+    <virtual if={singleCityDate()}>
+      <div><em>{singleCityDate()}</em></div>
+    </virtual>
+
     <div each={se in opts.me.sub_entries} class="pb-sub-entry">
       <hr width="50%" />
 
       <em>Nr. {se.sequence}</em>
       <div><strong>{se.title}</strong></div>
-      <em>{se.creator}</em>
-      <div>{city_date(se)}</div>
+      <virtual if={!singleCreator()}>
+        <div><em>{se.creator}</em></div>
+      </virtual>
+      <virtual if={!singleCityDate()}>
+        <div>{city_date(se)}</div>
+      </virtual>
       <pb-string-value
         label="Inv. Nr. (Inv. Nr. AA)"
         value={humanIds(se.inventory_ids)}
@@ -126,6 +137,20 @@
         else
           parts[0]
       strs.join('; ')
+
+    tag.singleCreator = ->
+      ses = tag.opts.me.sub_entries
+      previous = ses[0].creator
+      for se in ses[1..-1]
+        return false if previous != se.creator
+      previous
+
+    tag.singleCityDate = ->
+      ses = tag.opts.me.sub_entries
+      previous = tag.city_date(ses[0])
+      for se in ses[1..-1]
+        return false if previous != tag.city_date(se)
+      previous
 
   </script>
 
