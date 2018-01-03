@@ -58,6 +58,18 @@ wApp.utils = {
         display: block;
         margin-bottom: 1em;
       }
+
+      .me-separator hr:first-child {
+        margin-bottom: 10px;
+      }
+
+      .me-separator hr:last-child {
+        margin-top: 10px;
+      }
+
+      .me-separator:last-child {
+        display: none;
+      }
     "
 
     mywindow.document.write('<html><head><title>' + document.title  + '</title>')
@@ -70,5 +82,5 @@ wApp.utils = {
     mywindow.focus() # necessary for IE >= 10*/
 
     mywindow.print()
-    # mywindow.close()
+    mywindow.close()
 }

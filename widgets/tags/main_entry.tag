@@ -1,13 +1,13 @@
 <pb-main-entry>
 
-  <div class="w-text-right no-print">
+  <div class="w-text-right no-print" if={!opts.omitControls}>
     <button onclick={newSearch}>neue Suche</button>
     <button onclick={print}>drucken</button>
     <button onclick={close}>schließen</button>
     <button onclick={toggleExpand}>Abbildungen vergrößern/verkleinern</button>
   </div>
 
-  <hr class="no-print" />
+  <hr class="no-print" if={!opts.omitControls} />
 
   <em>Nr. {opts.me.sequence}</em>
   <div><strong>{opts.me.title}</strong></div>

@@ -5,13 +5,17 @@
       total={data.total}
       per-page={data.per_page}
       page={data.page}
+      any-selected={anySelected}
+      open-selection={openSelectedEntries}
     />
 
-    <div each={me in data.items} class="pb-list-entry" onclick={openEntry}>
+    <div each={me, i in data.items} class="pb-list-entry" onclick={openEntry}>
       <div class="pb-frame">
         <pb-icon which="right" />
 
         <div class="pb-item">
+          <input type="checkbox" onchange={toggleSelection} onclick={propStop} />
+
           <div
             class="pb-id"
             no-skype={me.sequence}
@@ -35,6 +39,7 @@
 
   <script type="text/coffee">
     tag = this
+    window.t = this
 
     tag.on 'mount', ->
       wApp.bus.on 'routing:query', fetch
@@ -56,8 +61,24 @@
       noSkype()
       highlighting()
 
+    tag.toggleSelection = (event) ->
+      selected = Zepto(event.target).prop('checked')
+      tag.selected[event.item.i] = selected
+      tag.update()
+
+    tag.anySelected = (event) ->
+      for e, i in tag.data.items
+        return true if tag.selected[i]
+      false
+
+    tag.propStop = (event) -> event.stopPropagation()
+
     tag.openEntry = (event) ->
       wApp.bus.trigger 'modal', 'pb-main-entry', {me: event.item.me}
+
+    tag.openSelectedEntries = ->
+      entries = (e for e, i in tag.data.items when tag.selected[i])
+      wApp.bus.trigger 'modal', 'pb-multi-main-entry', {mes: entries}
 
     noSkype = ->
       tpl = '<span style="display:none;">_</span>-'
@@ -105,6 +126,7 @@
           data: params
           success: (data) ->
             tag.data = data
+            tag.selected = []
             tag.update()
         )
       else

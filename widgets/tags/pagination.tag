@@ -2,6 +2,10 @@
 
   <div class="w-float-left">
     {opts.total} {opts.total == 1 ? 'Resultat' : 'Resultate'}
+    <a
+      if={opts.anySelected && opts.anySelected()}
+      onclick={openSelection}
+    >Auswahl öffnen</a>
   </div>
 
   <div class="u-text-right" show={total_pages() > 1}>
@@ -66,6 +70,10 @@
       event.preventDefault()
       newPage = parseInt(tag.refs.jump.value())
       tag.page_to(newPage)
+
+    tag.openSelection = (event) ->
+      event.preventDefault()
+      tag.opts.openSelection()
 
   </script>
 

@@ -1,4 +1,5 @@
 pb-main-entry, [data-is=pb-main-entry] {
+  display: block;
   background-color: white;
   padding: 30px;
 
@@ -12,5 +13,27 @@ pb-main-entry, [data-is=pb-main-entry] {
 
   pb-text-value, [data-is=pb-text-value] {
     text-align: justify;
+  }
+}
+
+pb-multi-main-entry, [data-is=pb-multi-main-entry] {
+  background-color: white;
+
+  .controls {
+    padding: 30px;
+  }
+
+  .me-separator {
+    hr:first-child {
+      margin-bottom: 5px;
+    }
+
+    hr:last-child {
+      margin-top: 5px;
+    }
+
+    &:last-child {
+      display: none;
+    }
   }
 }

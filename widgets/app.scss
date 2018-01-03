@@ -176,6 +176,14 @@ li {
   pb-text-value {
     @include lyon(18px, 24px);
   }
+
+  input[type=checkbox] {
+    position: relative;
+    top: 5px;
+    display: block;
+    float: left;
+    margin-right: 1em;
+  }
 }
 
 pb-media-grid {

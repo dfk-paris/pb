@@ -42,7 +42,6 @@
 
   <script type="text/coffee">
     tag = this
-    window.t = tag
 
     tag.search = (event) ->
       event.preventDefault() if event
