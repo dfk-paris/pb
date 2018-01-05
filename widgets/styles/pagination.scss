@@ -13,4 +13,21 @@ pb-pagination, [data-is=pb-pagination] {
     text-align: right;
     margin-bottom: 0rem;
   }
+
+  .pb-left {
+    float: left;
+    width: 30%;
+  }
+
+  .pb-right {
+    float: right;
+    text-align: right;
+  }
+
+  .pb-center {
+    display: block;
+    float: left;
+    text-align: center;
+    width: 30%;
+  }
 }

@@ -1,14 +1,16 @@
 <pb-pagination>
 
-  <div class="w-float-left">
+  <div class="pb-left">
     {opts.total} {opts.total == 1 ? 'Resultat' : 'Resultate'}
-    <a
-      if={opts.anySelected && opts.anySelected()}
-      onclick={openSelection}
-    >Auswahl öffnen</a>
   </div>
 
-  <div class="u-text-right" show={total_pages() > 1}>
+  <a
+    class="pb-center"
+    if={opts.anySelected && opts.anySelected()}
+    onclick={openSelection}
+  >Auswahl öffnen</a>
+
+  <div class="pb-right" show={total_pages() > 1}>
     Seite
     <a
       show={!is_first()}
