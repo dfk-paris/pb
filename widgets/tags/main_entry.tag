@@ -55,6 +55,19 @@
       <div><em>{singleCityDate()}</em></div>
     </virtual>
 
+    <div class="text-value">
+      <em>Standort</em>
+      <p><pb-location id="{opts.me.location}" /></p>
+    </div>
+    <pb-text-value
+      label="Historische Nachweise"
+      value={opts.me.historical_evidence}
+    />
+    <pb-text-value label="Literatur" value={opts.me.literature} />
+    <pb-text-value label="Herkunft" value={opts.me.provenience} />
+    <pb-text-value label="Beschreibung" value={opts.me.description} />
+    <pb-text-value label="Würdigung" value={opts.me.appreciation} />
+
     <div each={se in opts.me.sub_entries} class="pb-sub-entry">
       <hr width="50%" />
 
@@ -82,20 +95,6 @@
       <pb-media-grid se={se} expand={expand} />
     </div>
 
-    <hr width="50%" />
-
-    <div class="text-value">
-      <em>Standort</em>
-      <p><pb-location id="{opts.me.location}" /></p>
-    </div>
-    <pb-text-value
-      label="Historische Nachweise"
-      value={opts.me.historical_evidence}
-    />
-    <pb-text-value label="Literatur" value={opts.me.literature} />
-    <pb-text-value label="Herkunft" value={opts.me.provenience} />
-    <pb-text-value label="Beschreibung" value={opts.me.description} />
-    <pb-text-value label="Würdigung" value={opts.me.appreciation} />
   </virtual>
 
   <script type="text/coffee">

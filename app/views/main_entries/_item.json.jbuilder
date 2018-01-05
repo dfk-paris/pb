@@ -7,7 +7,7 @@ json.extract!(main_entry,
 
 if local_assigns[:include_sub_entries]
   json.sub_entries do
-    json.array! main_entry.sub_entries do |se|
+    json.array! main_entry.sub_entries.order(:sequence) do |se|
       json.partial! "sub_entries/item", sub_entry: se
     end
   end
