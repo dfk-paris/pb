@@ -31,6 +31,10 @@ wApp.utils = {
       .no-print {display: none}
       .w-clearfix {clear: both}
 
+      .location {
+        margin-top: 1em;
+      }
+
       hr {
         margin-top: 3rem;
         margin-bottom: 3.5rem;

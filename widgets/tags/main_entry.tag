@@ -55,7 +55,7 @@
       <div><em>{singleCityDate()}</em></div>
     </virtual>
 
-    <div class="text-value">
+    <div class="text-value location">
       <em>Standort</em>
       <p><pb-location id="{opts.me.location}" /></p>
     </div>
