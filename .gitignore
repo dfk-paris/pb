@@ -18,6 +18,7 @@
 
 # Custom ignores
 /data
+config/database.yml
 
 node_modules
 public/*.html
