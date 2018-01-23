@@ -5,8 +5,9 @@
     <select
       name={opts.name}
       class="u-full-width"
+      autocomplete="off"
     >
-      <option value="0" if={opts.prompt}>Raum bitte auswählen</option>
+      <option value="0" if={opts.prompt}>Standort</option>
       <optgroup each={group in locations()} label={group.name}>
         <option
           each={location in group.rooms}
@@ -23,7 +24,10 @@
     tag = this
 
     tag.on 'mount', ->
-      Zepto(tag.root).find('select').val(opts.riotValue)
+      if tag.opts.riotValue
+        Zepto(tag.root).find('select').val(tag.opts.riotValue)
+      else
+        Zepto(tag.root).find('select').val('0')
 
     tag.locations = ->
       if !tag.locs && wApp.data.locationList
@@ -36,7 +40,9 @@
       return tag.locs
 
     tag.is_selected = (location) ->
-      location.id == opts.riotValue
+      location.id == tag.opts.riotValue
+
+    tag.noValue = -> !tag.opts.riotValue
 
     tag.value = -> Zepto(tag.root).find('select').val()
   </script>
