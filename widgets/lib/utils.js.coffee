@@ -63,6 +63,11 @@ wApp.utils = {
         margin-bottom: 1em;
       }
 
+      pb-text-value, .text-value {
+        display: block;
+        margin-bottom: 1em;
+      }
+
       .me-separator hr:first-child {
         margin-bottom: 10px;
       }
@@ -73,6 +78,14 @@ wApp.utils = {
 
       .me-separator:last-child {
         display: none;
+      }
+
+      .u-text-right {
+        text-align: right;
+      }
+
+      .u-text-small {
+        font-size: 0.6em;
       }
     "
 

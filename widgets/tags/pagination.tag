@@ -8,7 +8,7 @@
     class="pb-center"
     if={opts.anySelected && opts.anySelected()}
     onclick={openSelection}
-  >Auswahl öffnen</a>
+  >Auswahl anzeigen</a>
 
   <div class="pb-right" show={total_pages() > 1}>
     Seite

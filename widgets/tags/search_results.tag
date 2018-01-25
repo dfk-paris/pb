@@ -29,7 +29,8 @@
 
           <pb-text-value value={me.description} />
 
-          Letzte Änderung vom <w-timestamp value={me.updated_at} format="%d.%m.%Y" />
+          Letzte Änderung vom <w-timestamp value={me.updated_at} format="%d.%m.%Y" />,
+          Autoren: Jörg Ebeling & Ulrich Leben
         </div>
 
         <div class="pb-clearfix"></div>

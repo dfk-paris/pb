@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 20170705081159) do
     t.boolean  "publish",                           default: true
     t.index ["title", "location"], name: "searchy", using: :btree
     t.index ["title", "provenience", "historical_evidence", "literature", "description", "appreciation"], name: "me_terms", type: :fulltext
-    t.index ["title", "provenience", "historical_evidence", "literature", "description", "appreciation"], name: "terms", type: :fulltext
   end
 
   create_table "media", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -66,7 +65,7 @@ ActiveRecord::Schema.define(version: 20170705081159) do
     t.text     "framing",            limit: 65535
     t.text     "restaurations",      limit: 65535
     t.boolean  "no_title"
-    t.index ["main_entry_id", "title", "location", "creator"], name: "searchy", length: {"main_entry_id"=>nil, "title"=>100, "location"=>50, "creator"=>50}, using: :btree
+    t.index ["main_entry_id", "title", "location", "creator"], name: "searchy", length: { title: 100, location: 50, creator: 50 }, using: :btree
     t.index ["main_entry_id"], name: "index_sub_entries_on_main_entry_id", using: :btree
     t.index ["title", "description", "markings", "restaurations"], name: "se_terms", type: :fulltext
   end
