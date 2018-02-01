@@ -93,7 +93,7 @@
     highlighting = ->
       elements = Zepto(tag.root).find('.pb-title, .pb-creator, pb-text-value p')
       terms = []
-      for n in ['terms', 'title', 'location', 'creator', 'inventory']
+      for n in ['terms', 'title', 'creator', 'inventory']
         if paramValue = wApp.routing.query()[n]
           terms = terms.concat(paramValue.split(/\s+/))
       for e in elements

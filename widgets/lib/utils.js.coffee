@@ -87,9 +87,14 @@ wApp.utils = {
       .u-text-small {
         font-size: 0.6em;
       }
+
+      .pb-timestamp {
+        margin-top: 2em;
+      }
     "
 
     mywindow.document.write('<html><head><title>' + document.title  + '</title>')
+    mywindow.document.write('<meta charset="utf-8" />')
     mywindow.document.write('<style type="text/css">' + style + '</style>')
     mywindow.document.write('</head><body>')
     mywindow.document.write(e.innerHTML)
