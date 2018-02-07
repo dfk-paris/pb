@@ -107,9 +107,6 @@
     tag = this
     tag.expand = true
 
-    tag.on 'mount', ->
-      updateAccessTime()
-
     tag.city_date = (se) ->
       [se.location, se.dating].filter((e) -> !!e).join(', ')
 
