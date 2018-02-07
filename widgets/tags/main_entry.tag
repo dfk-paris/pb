@@ -100,12 +100,15 @@
   <div class="u-text-right u-text-small pb-timestamp">
     Letzte Änderung vom
     <w-timestamp value={opts.me.updated_at} format="%d.%m.%Y" />,
-    Autoren: Jörg Ebeling & Ulrich Leben
+    Autoren: Jörg Ebeling, Ulrich Leben
   </div>
 
   <script type="text/coffee">
     tag = this
     tag.expand = true
+
+    tag.on 'mount', ->
+      updateAccessTime()
 
     tag.city_date = (se) ->
       [se.location, se.dating].filter((e) -> !!e).join(', ')
