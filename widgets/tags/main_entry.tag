@@ -111,11 +111,15 @@
       [se.location, se.dating].filter((e) -> !!e).join(', ')
 
     tag.dimensions = (se) ->
-      fields = [
-        se.height_with_socket, se.width_with_socket, se.depth_with_socket
-        se.height, se.width, se.depth
-      ]
-      fields = fields.filter (e) -> !!e
+      fields = []
+
+      fields.push('Höhe: ' + se.height_with_socket) if !!se.height_with_socket
+      fields.push('Breite: ' + se.width_with_socket) if !!se.width_with_socket
+      fields.push('Tiefe: ' + se.depth_with_socket) if !!se.depth_with_socket
+      fields.push('Höhe: ' + se.height) if !!se.height
+      fields.push('Breite: ' + se.width) if !!se.width
+      fields.push('Tiefe: ' + se.depth) if !!se.depth
+
       fields.join(', ')
 
     tag.newSearch = (event) ->
