@@ -85,10 +85,10 @@
         class="block-style"
       />
       <pb-text-value label="Bezeichnet" value={se.markings} />
-        <div class="text-value" if={dimensions(opts.me.sub_entries[0])}>
+        <div class="text-value" if={dimensions(se)}>
         <p>
-          {opts.me.sub_entries[0].material}<br />
-          {dimensions(opts.me.sub_entries[0])}
+          {se.material}<br />
+          {dimensions(se)}
         </p>
       </div>
 
