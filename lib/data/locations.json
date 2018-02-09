@@ -14,9 +14,9 @@
   },{
     "name": "02.00 Obergeschoss",
     "rooms": [
-      {"id": 9, "name": "02.01 VORZIMMER"},
-      {"id": 10, "name": "02.02 THRONSAAL"},
-      {"id": 11, "name": "02.03 BOTSCHAFTERBÜRO"},
+      {"id": 9, "name": "02.01 OBERES VESTIBÜL"},
+      {"id": 10, "name": "02.02 ANTI-SALON"},
+      {"id": 11, "name": "02.03 SPEISESAAL"},
       {"id": 12, "name": "02.04 SALON DER VIER JAHRESZEITEN"},
       {"id": 13, "name": "02.05 KLEINE GALERIE"},
       {"id": 14, "name": "02.06 MUSIKZIMMER"},
