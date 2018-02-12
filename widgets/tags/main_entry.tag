@@ -1,111 +1,118 @@
 <pb-main-entry>
 
-  <div class="w-text-right no-print" if={!opts.omitControls}>
-    <button onclick={newSearch}>neue Suche</button>
-    <button onclick={print}>drucken</button>
-    <button onclick={close}>schließen</button>
-    <button onclick={toggleExpand}>Abbildungen vergrößern/verkleinern</button>
-  </div>
+  <div if={opts.me}>
 
-  <hr class="no-print" if={!opts.omitControls} />
-
-  <em>Nr. {opts.me.sequence}</em>
-  <div><strong>{opts.me.title}</strong></div>
-
-  <virtual if={opts.me.sub_entries.length == 1}>
-    <em>{opts.me.sub_entries[0].creator}</em>
-    <div>{city_date(opts.me.sub_entries[0])}</div>
-    <pb-string-value
-      label="Inv. Nr. (Inv. Nr. AA)"
-      value={humanIds(opts.me.sub_entries[0].inventory_ids)}
-      class="block-style"
-    />
-    <pb-text-value label="Bezeichnet" value={opts.me.sub_entries[0].markings} />
-    <div class="text-value" if={dimensions(opts.me.sub_entries[0])}>
-      <p>
-        {opts.me.sub_entries[0].material}<br />
-        {dimensions(opts.me.sub_entries[0])}
-      </p>
+    <div class="w-text-right no-print" if={!opts.omitControls}>
+      <button onclick={newSearch}>neue Suche</button>
+      <button onclick={print}>drucken</button>
+      <button onclick={close}>schließen</button>
+      <button onclick={toggleExpand}>Abbildungen vergrößern/verkleinern</button>
     </div>
-    <pb-text-value
-      label="Restaurierungen"
-      value={opts.me.sub_entries[0].restaurations}
-    />
-    <div class="text-value">
-      <em>Standort</em>
-      <p><pb-location id="{opts.me.location}" /></p>
-    </div>
-    <pb-text-value
-      label="Historische Nachweise"
-      value={opts.me.historical_evidence}
-    />
-    <pb-text-value label="Literatur" value={opts.me.literature} />
-    <pb-text-value label="Herkunft" value={opts.me.provenience} />
-    <pb-text-value label="Beschreibung" value={opts.me.description} />
-    <pb-text-value label="Würdigung" value={opts.me.appreciation} />
 
-    <pb-media-grid se={opts.me.sub_entries[0]} expand={expand} />
-  </virtual>
+    <hr class="no-print" if={!opts.omitControls} />
 
-  <virtual if={opts.me.sub_entries.length > 1}>
-    <virtual if={singleCreator()}>
-      <div><em>{singleCreator()}</em></div>
-    </virtual>
-    <virtual if={singleCityDate()}>
-      <div><em>{singleCityDate()}</em></div>
-    </virtual>
+    <em>Nr. {opts.me.sequence}</em>
+    <div><strong>{opts.me.title}</strong></div>
 
-    <div class="text-value location">
-      <em>Standort</em>
-      <p><pb-location id="{opts.me.location}" /></p>
-    </div>
-    <pb-text-value
-      label="Historische Nachweise"
-      value={opts.me.historical_evidence}
-    />
-    <pb-text-value label="Literatur" value={opts.me.literature} />
-    <pb-text-value label="Herkunft" value={opts.me.provenience} />
-    <pb-text-value label="Beschreibung" value={opts.me.description} />
-    <pb-text-value label="Würdigung" value={opts.me.appreciation} />
-
-    <div each={se in opts.me.sub_entries} class="pb-sub-entry">
-      <hr width="50%" />
-
-      <em>Nr. {se.sequence}</em>
-      <div><strong>{se.title}</strong></div>
-      <virtual if={!singleCreator()}>
-        <div><em>{se.creator}</em></div>
-      </virtual>
-      <virtual if={!singleCityDate()}>
-        <div>{city_date(se)}</div>
-      </virtual>
+    <virtual if={opts.me.sub_entries.length == 1}>
+      <em>{opts.me.sub_entries[0].creator}</em>
+      <div>{city_date(opts.me.sub_entries[0])}</div>
       <pb-string-value
         label="Inv. Nr. (Inv. Nr. AA)"
-        value={humanIds(se.inventory_ids)}
+        value={humanIds(opts.me.sub_entries[0].inventory_ids)}
         class="block-style"
       />
-      <pb-text-value label="Bezeichnet" value={se.markings} />
-        <div class="text-value" if={dimensions(se)}>
+      <pb-text-value label="Bezeichnet" value={opts.me.sub_entries[0].markings} />
+      <div class="text-value" if={dimensions(opts.me.sub_entries[0])}>
         <p>
-          {se.material}<br />
-          {dimensions(se)}
+          {opts.me.sub_entries[0].material}<br />
+          {dimensions(opts.me.sub_entries[0])}
         </p>
       </div>
+      <pb-text-value
+        label="Restaurierungen"
+        value={opts.me.sub_entries[0].restaurations}
+      />
+      <div class="text-value">
+        <em>Standort</em>
+        <p><pb-location id="{opts.me.location}" /></p>
+      </div>
+      <pb-text-value
+        label="Historische Nachweise"
+        value={opts.me.historical_evidence}
+      />
+      <pb-text-value label="Literatur" value={opts.me.literature} />
+      <pb-text-value label="Herkunft" value={opts.me.provenience} />
+      <pb-text-value label="Beschreibung" value={opts.me.description} />
+      <pb-text-value label="Würdigung" value={opts.me.appreciation} />
 
-      <pb-media-grid se={se} expand={expand} />
+      <pb-media-grid se={opts.me.sub_entries[0]} expand={expand} />
+    </virtual>
+
+    <virtual if={opts.me.sub_entries.length > 1}>
+      <virtual if={singleCreator()}>
+        <div><em>{singleCreator()}</em></div>
+      </virtual>
+      <virtual if={singleCityDate()}>
+        <div><em>{singleCityDate()}</em></div>
+      </virtual>
+
+      <div class="text-value location">
+        <em>Standort</em>
+        <p><pb-location id="{opts.me.location}" /></p>
+      </div>
+      <pb-text-value
+        label="Historische Nachweise"
+        value={opts.me.historical_evidence}
+      />
+      <pb-text-value label="Literatur" value={opts.me.literature} />
+      <pb-text-value label="Herkunft" value={opts.me.provenience} />
+      <pb-text-value label="Beschreibung" value={opts.me.description} />
+      <pb-text-value label="Würdigung" value={opts.me.appreciation} />
+
+      <div each={se in opts.me.sub_entries} class="pb-sub-entry">
+        <hr width="50%" />
+
+        <em>Nr. {se.sequence}</em>
+        <div><strong>{se.title}</strong></div>
+        <virtual if={!singleCreator()}>
+          <div><em>{se.creator}</em></div>
+        </virtual>
+        <virtual if={!singleCityDate()}>
+          <div>{city_date(se)}</div>
+        </virtual>
+        <pb-string-value
+          label="Inv. Nr. (Inv. Nr. AA)"
+          value={humanIds(se.inventory_ids)}
+          class="block-style"
+        />
+        <pb-text-value label="Bezeichnet" value={se.markings} />
+          <div class="text-value" if={dimensions(se)}>
+          <p>
+            {se.material}<br />
+            {dimensions(se)}
+          </p>
+        </div>
+
+        <pb-media-grid se={se} expand={expand} />
+      </div>
+
+    </virtual>
+
+    <div class="u-text-right u-text-small pb-timestamp">
+      Letzte Änderung vom
+      <w-timestamp value={opts.me.updated_at} format="%d.%m.%Y" />,
+      Autoren: Jörg Ebeling, Ulrich Leben
     </div>
 
-  </virtual>
-
-  <div class="u-text-right u-text-small pb-timestamp">
-    Letzte Änderung vom
-    <w-timestamp value={opts.me.updated_at} format="%d.%m.%Y" />,
-    Autoren: Jörg Ebeling, Ulrich Leben
   </div>
 
   <script type="text/coffee">
     tag = this
     tag.expand = true
+
+    tag.on 'mount', ->
+      fetch() unless tag.opts.me
 
     tag.city_date = (se) ->
       [se.location, se.dating].filter((e) -> !!e).join(', ')
@@ -160,6 +167,15 @@
       for se in ses[1..-1]
         return false if previous != tag.city_date(se)
       previous
+
+    fetch = ->
+      $.ajax(
+        url: "/api/mes/#{tag.opts.id}.json"
+        accepts: 'application/json'
+        success: (data) ->
+          tag.opts.me = data
+          tag.update()
+      )
 
   </script>
 

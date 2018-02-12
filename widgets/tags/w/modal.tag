@@ -8,7 +8,7 @@
     tag.mountedTag = null
 
     tag.on 'mount', ->
-      # wApp.bus.on 'routing:query', fromUrl
+      wApp.bus.on 'routing:query', fromUrl
       Zepto(document).on 'keydown', closeOnEscape
       Zepto(tag.root).on 'click', closeOnBackClick
       # Zepto(window).on 'resize', fixHeight
@@ -24,10 +24,9 @@
       Zepto(tag.root).off 'click', closeOnBackClick
       wApp.bus.off 'routing:query', fromUrl
 
-    # tag.on 'close', ->
-
     launch = (tagName, opts = {}) ->
-      # console.log 'modal', tagName, opts
+      opts = Zepto.extend({}, opts)
+      console.log 'modal', tagName, opts
       opts.modal = tagName
       opts.close = close
       tag.mountedTag = riot.mount(tag.refs.receiver, tagName, opts)[0]
@@ -59,17 +58,18 @@
     #   new_height = Math.max($(window).height() - 100, 500)
     #   Zepto(tag.root).find('.receiver').css 'height', new_height
 
-    fromUrl = ->
-      data = wApp.routing.packed()
+    fromUrl = (parts) ->
+      data = parts['hash_query']
 
       if data.modal
+        console.log(data)
         tag.triggeredByUrl = true
         launch data.tag, data
       else
         unlaunch()
 
     removeFromUrl = ->
-      wApp.routing.packed modal: null, tag: null, id: null, src: null
+      wApp.routing.query modal: null, tag: null, id: null, src: null
 
   </script>
 

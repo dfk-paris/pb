@@ -74,7 +74,8 @@
     tag.propStop = (event) -> event.stopPropagation()
 
     tag.openEntry = (event) ->
-      wApp.bus.trigger 'modal', 'pb-main-entry', {me: event.item.me}
+      wApp.routing.query modal: true, tag: 'pb-main-entry', id: event.item.me.id
+      # wApp.bus.trigger 'modal', 'pb-main-entry', {me: event.item.me}
 
     tag.openSelectedEntries = ->
       entries = (e for e, i in tag.data.items when tag.selected[i])
