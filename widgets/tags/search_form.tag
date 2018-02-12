@@ -60,6 +60,7 @@
       wApp.routing.path('/')
       Zepto(tag.root).find('input[type=text]').val('')
       Zepto(tag.root).find('select').val('')
+      Lockr.set('selected-results')
 
 
     tag.params = (key = undefined) ->

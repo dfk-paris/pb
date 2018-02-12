@@ -7,6 +7,7 @@
       page={data.page}
       any-selected={anySelected}
       open-selection={openSelectedEntries}
+      clear-selection={clearSelection}
     />
 
     <div each={me, i in data.items} class="pb-list-entry" onclick={openEntry}>
@@ -14,7 +15,12 @@
         <pb-icon which="right" />
 
         <div class="pb-item">
-          <input type="checkbox" onchange={toggleSelection} onclick={propStop} />
+          <input
+            type="checkbox"
+            onchange={toggleSelection}
+            onclick={propStop}
+            checked={isSelected(me.id)}
+          />
 
           <div
             class="pb-id"
@@ -62,24 +68,38 @@
       highlighting()
 
     tag.toggleSelection = (event) ->
+      selection = Lockr.get('selected-results', [])
       selected = Zepto(event.target).prop('checked')
-      tag.selected[event.item.i] = selected
+      id = event.item.me.id
+
+      if selected
+        selection.push id
+      else
+        i = selection.indexOf(id)
+        selection.splice(i, 1)
+
+      Lockr.set('selected-results', selection)
       tag.update()
 
+    tag.clearSelection = (event) ->
+      Lockr.set('selected-results')
+      tag.update()
+
+    tag.isSelected = (id) ->
+      i = Lockr.get('selected-results', []).indexOf(id)
+      return i != -1
+
     tag.anySelected = (event) ->
-      for e, i in tag.data.items
-        return true if tag.selected[i]
-      false
+      return Lockr.get('selected-results', []).length > 0
 
     tag.propStop = (event) -> event.stopPropagation()
 
+    tag.openSelectedEntries = ->
+      selection = Lockr.get('selected-results', [])
+      wApp.bus.trigger 'modal', 'pb-multi-main-entry', {mes: selection}
+
     tag.openEntry = (event) ->
       wApp.routing.query modal: true, tag: 'pb-main-entry', id: event.item.me.id
-      # wApp.bus.trigger 'modal', 'pb-main-entry', {me: event.item.me}
-
-    tag.openSelectedEntries = ->
-      entries = (e for e, i in tag.data.items when tag.selected[i])
-      wApp.bus.trigger 'modal', 'pb-multi-main-entry', {mes: entries}
 
     noSkype = ->
       tpl = '<span style="display:none;">_</span>-'

@@ -10,8 +10,8 @@
   </div>
 
 
-  <virtual each={me in opts.mes}>
-    <pb-main-entry me={me} omit-controls={true} ref="entries" />
+  <virtual each={id in opts.mes}>
+    <pb-main-entry id={id} omit-controls={true} ref="entries" />
     <div class="me-separator">
       <hr width="75%" />
       <hr width="75%" />

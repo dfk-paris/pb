@@ -11,7 +11,8 @@ Zepto.extend Zepto.ajaxSettings, {
 
 Zepto(document).on 'contextmenu', 'img', (event) ->
   event.preventDefault()
-  # console.log event
+
+Lockr.prefix = 'pb'
 
 window.wApp = {
   bus: riot.observable()

@@ -4,11 +4,11 @@
     {opts.total} {opts.total == 1 ? 'Resultat' : 'Resultate'}
   </div>
 
-  <a
-    class="pb-center"
-    if={opts.anySelected && opts.anySelected()}
-    onclick={openSelection}
-  >Auswahl anzeigen</a>
+  <div class="pb-center" if={opts.anySelected && opts.anySelected()}>
+    <a onclick={openSelection}>Auswahl anzeigen</a>
+    |
+    <a onclick={clearSelection}>Auswahl aufheben</a>
+  </div>
 
   <div class="pb-right" show={total_pages() > 1}>
     Seite
@@ -76,6 +76,10 @@
     tag.openSelection = (event) ->
       event.preventDefault()
       tag.opts.openSelection()
+
+    tag.clearSelection = (event) ->#
+      event.preventDefault()
+      tag.opts.clearSelection()
 
   </script>
 

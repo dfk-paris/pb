@@ -47,5 +47,8 @@
     "strftime": "^0.10.0",
     "uglify-js": "^3.2.1",
     "zepto": "^1.0.1"
+  },
+  "dependencies": {
+    "lockr": "^0.8.4"
   }
 }
