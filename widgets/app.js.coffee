@@ -9,6 +9,10 @@ Zepto.extend Zepto.ajaxSettings, {
     settings.url = "#{wAppApiUrl}#{settings.url}"
 }
 
+Zepto(document).on 'contextmenu', 'img', (event) ->
+  event.preventDefault()
+  # console.log event
+
 window.wApp = {
   bus: riot.observable()
   data: {}
