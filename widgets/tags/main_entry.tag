@@ -123,11 +123,18 @@
       fields.push('Höhe: ' + se.height_with_socket) if !!se.height_with_socket
       fields.push('Breite: ' + se.width_with_socket) if !!se.width_with_socket
       fields.push('Tiefe: ' + se.depth_with_socket) if !!se.depth_with_socket
+      op = fields.join(', ')
+
+      fields = []
       fields.push('Höhe: ' + se.height) if !!se.height
       fields.push('Breite: ' + se.width) if !!se.width
       fields.push('Tiefe: ' + se.depth) if !!se.depth
+      mp = fields.join(', ')
 
-      fields.join(', ')
+      if op == '' || mp == ''
+        op + mp
+      else
+        op + '; ' + mp
 
     tag.newSearch = (event) ->
       tag.close()
