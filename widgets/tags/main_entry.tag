@@ -105,6 +105,11 @@
       Autoren: Jörg Ebeling, Ulrich Leben
     </div>
 
+    <div class="u-text-right u-text-small pb-timestamp">
+      <a href={currentUrl()}>{currentUrl()}</a>, letzter Zugriff am
+      {currentDate()}
+    </div>
+
   </div>
 
   <script type="text/coffee">
@@ -183,6 +188,13 @@
           tag.opts.me = data
           tag.update()
       )
+
+    tag.currentUrl = ->
+      base = document.location.href.split('#')[0]
+      "#{base}#/?modal=true&tag=pb-main-entry&id=#{tag.opts.id}"
+
+    tag.currentDate = ->
+      strftime("%-d.%-m.%Y", new Date())
 
   </script>
 
