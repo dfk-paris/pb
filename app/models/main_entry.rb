@@ -4,6 +4,15 @@ class MainEntry < ApplicationRecord
 
   validates :title, presence: true
 
+  before_validation do |me|
+    me.title_reverse = me.title.reverse
+    me.provenience_reverse = me.provenience.reverse
+    me.historical_evidence_reverse = me.historical_evidence.reverse
+    me.literature_reverse = me.literature.reverse
+    me.description_reverse = me.description.reverse
+    me.appreciation_reverse = me.appreciation.reverse
+  end
+
   after_save do |me|
     if me.title_changed? || me.sequence_changed?
       me.sub_entries.each do |se|
@@ -59,17 +68,31 @@ class MainEntry < ApplicationRecord
     return all if terms.blank?
     mega_join.where("
       (
-        MATCH(
-          main_entries.title, main_entries.provenience,
-          main_entries.historical_evidence, main_entries.literature,
-          main_entries.description, main_entries.appreciation
+        (
+          MATCH(
+            main_entries.title, main_entries.provenience,
+            main_entries.historical_evidence, main_entries.literature,
+            main_entries.description, main_entries.appreciation
+          )
+          AGAINST (:terms IN BOOLEAN MODE)
+        ) OR (
+          MATCH(
+            main_entries.title_reverse, main_entries.provenience_reverse,
+            main_entries.historical_evidence_reverse, main_entries.literature_reverse,
+            main_entries.description_reverse, main_entries.appreciation_reverse
+          )
+          AGAINST (:terms_reverse IN BOOLEAN MODE)
+        ) OR (
+          MATCH(ses.title, ses.description, ses.markings, ses.restaurations)
+          AGAINST (:terms IN BOOLEAN MODE)
+        ) OR (
+          MATCH(ses.title_reverse, ses.description_reverse, ses.markings_reverse, ses.restaurations_reverse)
+          AGAINST (:terms_reverse IN BOOLEAN MODE)
         )
-        AGAINST (:terms IN BOOLEAN MODE)
-      ) OR (
-        MATCH(ses.title, ses.description, ses.markings, ses.restaurations)
-        AGAINST (:terms IN BOOLEAN MODE)
-      )
-    ", terms: terms.split(/\s+/).map{|t| "+#{t}*"}.join(' '))
+      )",
+      terms: terms.split(/\s+/).map{|t| "#{t}*"}.join(' '),
+      terms_reverse: terms.split(/\s+/).map{|t| "+#{t.reverse}*"}.join(' ')
+    )
   }
 
   scope :include_unpublished, lambda { |value|

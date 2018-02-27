@@ -10,22 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170705081159) do
+ActiveRecord::Schema.define(version: 20180227045039) do
 
   create_table "main_entries", force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
     t.string   "title"
     t.integer  "location"
     t.string   "sequence"
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
-    t.text     "provenience",         limit: 65535
-    t.text     "historical_evidence", limit: 65535
-    t.text     "literature",          limit: 65535
-    t.text     "description",         limit: 65535
-    t.text     "appreciation",        limit: 65535
-    t.boolean  "publish",                           default: true
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
+    t.text     "provenience",                 limit: 65535
+    t.text     "historical_evidence",         limit: 65535
+    t.text     "literature",                  limit: 65535
+    t.text     "description",                 limit: 65535
+    t.text     "appreciation",                limit: 65535
+    t.boolean  "publish",                                   default: true
+    t.string   "title_reverse"
+    t.text     "provenience_reverse",         limit: 65535
+    t.text     "historical_evidence_reverse", limit: 65535
+    t.text     "literature_reverse",          limit: 65535
+    t.text     "description_reverse",         limit: 65535
+    t.text     "appreciation_reverse",        limit: 65535
     t.index ["title", "location"], name: "searchy", using: :btree
     t.index ["title", "provenience", "historical_evidence", "literature", "description", "appreciation"], name: "me_terms", type: :fulltext
+    t.index ["title_reverse", "provenience_reverse", "historical_evidence_reverse", "literature_reverse", "description_reverse", "appreciation_reverse"], name: "me_terms_reverse", type: :fulltext
   end
 
   create_table "media", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -46,14 +53,14 @@ ActiveRecord::Schema.define(version: 20170705081159) do
     t.integer  "main_entry_id"
     t.string   "title"
     t.string   "sequence"
-    t.text     "description",        limit: 65535
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.text     "description",           limit: 65535
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.string   "material"
     t.string   "creator"
     t.string   "location"
     t.string   "dating"
-    t.text     "markings",           limit: 65535
+    t.text     "markings",              limit: 65535
     t.string   "height"
     t.string   "width"
     t.string   "depth"
@@ -62,12 +69,17 @@ ActiveRecord::Schema.define(version: 20170705081159) do
     t.string   "height_with_socket"
     t.string   "width_with_socket"
     t.string   "depth_with_socket"
-    t.text     "framing",            limit: 65535
-    t.text     "restaurations",      limit: 65535
+    t.text     "framing",               limit: 65535
+    t.text     "restaurations",         limit: 65535
     t.boolean  "no_title"
+    t.string   "title_reverse"
+    t.text     "description_reverse",   limit: 65535
+    t.text     "markings_reverse",      limit: 65535
+    t.text     "restaurations_reverse", limit: 65535
     t.index ["main_entry_id", "title", "location", "creator"], name: "searchy", length: { title: 100, location: 50, creator: 50 }, using: :btree
     t.index ["main_entry_id"], name: "index_sub_entries_on_main_entry_id", using: :btree
     t.index ["title", "description", "markings", "restaurations"], name: "se_terms", type: :fulltext
+    t.index ["title_reverse", "description_reverse", "markings_reverse", "restaurations_reverse"], name: "se_terms_reverse", type: :fulltext
   end
 
   create_table "taggings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

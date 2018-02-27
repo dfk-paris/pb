@@ -109,7 +109,6 @@
       <a href={currentUrl()}>{currentUrl()}</a>, letzter Zugriff am
       {currentDate()}
     </div>
-
   </div>
 
   <script type="text/coffee">
