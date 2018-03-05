@@ -11,6 +11,7 @@
   <div if={opts.expand} class="pb-list">
     <div class="pb-item" each={medium in media()}>
       <img src={wAppApiUrl + medium.urls.normal} />
+      <div class="pb-caption">{medium.caption}</div>
     </div>
   </div>
 

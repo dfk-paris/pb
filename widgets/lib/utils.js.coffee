@@ -58,6 +58,8 @@ wApp.utils = {
       .pb-list {text-align: center}
       .pb-item {margin-top: 2em}
 
+      .pb-list .pb-caption {margin-top: 0.7em}
+
       pb-string-value.block-style {
         display: block;
         margin-bottom: 1em;
