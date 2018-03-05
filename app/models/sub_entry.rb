@@ -13,7 +13,7 @@ class SubEntry < ApplicationRecord
       se.sequence = se.main_entry.sequence
     end
 
-    [:title, :description, :markings, :restaurations].each do |f|
+    [:title, :description, :markings, :restaurations, :material].each do |f|
       if se[f].present?
         se["#{f}_reverse".to_sym] = se[f].reverse
       end

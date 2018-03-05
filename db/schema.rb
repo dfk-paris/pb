@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180227045039) do
+ActiveRecord::Schema.define(version: 20180305220008) do
 
   create_table "main_entries", force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
     t.string   "title"
@@ -76,9 +76,10 @@ ActiveRecord::Schema.define(version: 20180227045039) do
     t.text     "description_reverse",   limit: 65535
     t.text     "markings_reverse",      limit: 65535
     t.text     "restaurations_reverse", limit: 65535
+    t.string   "material_reverse"
     t.index ["main_entry_id", "title", "location", "creator"], name: "searchy", length: { title: 100, location: 50, creator: 50 }, using: :btree
     t.index ["main_entry_id"], name: "index_sub_entries_on_main_entry_id", using: :btree
-    t.index ["title", "description", "markings", "restaurations"], name: "se_terms", type: :fulltext
+    t.index ["title", "description", "markings", "restaurations", "material"], name: "se_terms", type: :fulltext
     t.index ["title_reverse", "description_reverse", "markings_reverse", "restaurations_reverse"], name: "se_terms_reverse", type: :fulltext
   end
 

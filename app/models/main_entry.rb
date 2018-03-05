@@ -83,10 +83,16 @@ class MainEntry < ApplicationRecord
           )
           AGAINST (:terms_reverse IN BOOLEAN MODE)
         ) OR (
-          MATCH(ses.title, ses.description, ses.markings, ses.restaurations)
+          MATCH(
+            ses.title, ses.description, ses.markings, ses.restaurations,
+            ses.material
+          )
           AGAINST (:terms IN BOOLEAN MODE)
         ) OR (
-          MATCH(ses.title_reverse, ses.description_reverse, ses.markings_reverse, ses.restaurations_reverse)
+          MATCH(
+            ses.title_reverse, ses.description_reverse, ses.markings_reverse,
+            ses.restaurations_reverse, ses.material_reverse
+          )
           AGAINST (:terms_reverse IN BOOLEAN MODE)
         )
       )",
