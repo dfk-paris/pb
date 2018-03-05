@@ -111,16 +111,26 @@
       "<mark>#{match}</mark>"
 
     highlighting = ->
-      elements = Zepto(tag.root).find('.pb-title, .pb-creator, pb-text-value p')
+      # full text
+      fields = ['terms', 'creator', 'inventory']
+      selector = '.pb-title, .pb-creator, pb-text-value p'
+      highlightFieldsInElements(fields, selector)
+
+      # title search
+      fields = ['title']
+      selector = '.pb-title'
+      highlightFieldsInElements(fields, selector)
+
+    highlightFieldsInElements = (fields, selector) ->
+      elements = Zepto(tag.root).find(selector)
       terms = []
-      for n in ['terms', 'title', 'creator', 'inventory']
+      for n in fields
         if paramValue = wApp.routing.query()[n]
           terms = terms.concat(paramValue.split(/\s+/))
       for e in elements
         for t in terms
           e = Zepto(e)
-          e.html e.html().replace(new RegExp(t, 'gi'), hl)
-
+          e.html e.html().replace(new RegExp("#{t}(?!</mark>)", 'gi'), hl)
 
     fetch = (data = {}) ->
       params = {
