@@ -7,7 +7,9 @@ function deploy {
   deploy_code
   cleanup
 
-  local "npm run build > /dev/null"
+  if which npm; then
+    local "npm run build > /dev/null"
+  fi
 
   upload public/vendor.css $CURRENT_PATH/public/vendor.css
   upload public/vendor.js $CURRENT_PATH/public/vendor.js
