@@ -278,7 +278,7 @@
           data: JSON.stringify(sub_entry: form_data())
           success: (data) ->
             if tag.where == 'back'
-              route '/mes'
+              window.history.back()
             else
               tag.item = data.sub_entry
               tag.update()
@@ -294,7 +294,7 @@
           data: JSON.stringify(sub_entry: form_data())
           success: (data) ->
             if tag.where == 'back'
-              route '/mes'
+              window.history.back()
             else
               route "/ses/form?main_entry_id=#{tag.main_entry_id()}&id=#{data.sub_entry.id}"
               tag.item = data.sub_entry

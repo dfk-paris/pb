@@ -115,7 +115,7 @@
           url: "/api/mes/#{self.item.id}"
           data: JSON.stringify(main_entry: form_data())
           success: (data) ->
-            route 'mes'
+            window.history.back()
           error: (request) ->
             data = JSON.parse(request.response)
             self.errors = data.errors
@@ -128,7 +128,7 @@
           url: "/api/mes"
           data: JSON.stringify(main_entry: form_data())
           success: (data) ->
-            route 'mes', undefined, true
+            window.history.back()
           error: (request) ->
             data = JSON.parse(request.response)
             self.errors = data.errors
