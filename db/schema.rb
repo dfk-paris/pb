@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180305220008) do
+ActiveRecord::Schema.define(version: 20180308000820) do
 
   create_table "main_entries", force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
     t.string   "title"
@@ -53,14 +53,14 @@ ActiveRecord::Schema.define(version: 20180305220008) do
     t.integer  "main_entry_id"
     t.string   "title"
     t.string   "sequence"
-    t.text     "description",           limit: 65535
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.text     "description",                limit: 65535
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.string   "material"
     t.string   "creator"
     t.string   "location"
     t.string   "dating"
-    t.text     "markings",              limit: 65535
+    t.text     "markings",                   limit: 65535
     t.string   "height"
     t.string   "width"
     t.string   "depth"
@@ -69,18 +69,29 @@ ActiveRecord::Schema.define(version: 20180305220008) do
     t.string   "height_with_socket"
     t.string   "width_with_socket"
     t.string   "depth_with_socket"
-    t.text     "framing",               limit: 65535
-    t.text     "restaurations",         limit: 65535
+    t.text     "framing",                    limit: 65535
+    t.text     "restaurations",              limit: 65535
     t.boolean  "no_title"
     t.string   "title_reverse"
-    t.text     "description_reverse",   limit: 65535
-    t.text     "markings_reverse",      limit: 65535
-    t.text     "restaurations_reverse", limit: 65535
+    t.text     "description_reverse",        limit: 65535
+    t.text     "markings_reverse",           limit: 65535
+    t.text     "restaurations_reverse",      limit: 65535
     t.string   "material_reverse"
+    t.string   "creator_reverse"
+    t.string   "dating_reverse"
+    t.string   "height_reverse"
+    t.string   "width_reverse"
+    t.string   "depth_reverse"
+    t.string   "diameter_reverse"
+    t.string   "weight_reverse"
+    t.string   "height_with_socket_reverse"
+    t.string   "width_with_socket_reverse"
+    t.string   "depth_with_socket_reverse"
+    t.text     "framing_reverse",            limit: 65535
     t.index ["main_entry_id", "title", "location", "creator"], name: "searchy", length: { title: 100, location: 50, creator: 50 }, using: :btree
     t.index ["main_entry_id"], name: "index_sub_entries_on_main_entry_id", using: :btree
-    t.index ["title", "description", "markings", "restaurations", "material"], name: "se_terms", type: :fulltext
-    t.index ["title_reverse", "description_reverse", "markings_reverse", "restaurations_reverse"], name: "se_terms_reverse", type: :fulltext
+    t.index ["title", "description", "markings", "restaurations", "material", "creator", "dating", "height", "width", "depth", "diameter", "weight", "height_with_socket", "width_with_socket", "depth_with_socket", "framing"], name: "se_terms", type: :fulltext
+    t.index ["title", "description", "markings", "restaurations", "material", "creator", "dating", "height", "width", "depth", "diameter", "weight", "height_with_socket", "width_with_socket", "depth_with_socket", "framing"], name: "se_terms_reverse", type: :fulltext
   end
 
   create_table "taggings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

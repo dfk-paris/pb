@@ -13,7 +13,12 @@ class SubEntry < ApplicationRecord
       se.sequence = se.main_entry.sequence
     end
 
-    [:title, :description, :markings, :restaurations, :material].each do |f|
+    fields = [
+      :title, :description, :markings, :restaurations, :material,
+      :creator, :dating, :height, :width, :depth, :diameter, :weight,
+      :height_with_socket, :width_with_socket, :depth_with_socket, :framing
+    ]
+    fields.each do |f|
       if se[f].present?
         se["#{f}_reverse".to_sym] = se[f].reverse
       end

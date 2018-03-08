@@ -85,13 +85,19 @@ class MainEntry < ApplicationRecord
         ) OR (
           MATCH(
             ses.title, ses.description, ses.markings, ses.restaurations,
-            ses.material
+            ses.material,
+            creator, dating, height, width, depth, diameter, weight,
+            height_with_socket, width_with_socket, depth_with_socket, framing
           )
           AGAINST (:terms IN BOOLEAN MODE)
         ) OR (
           MATCH(
             ses.title_reverse, ses.description_reverse, ses.markings_reverse,
-            ses.restaurations_reverse, ses.material_reverse
+            ses.restaurations_reverse, ses.material_reverse,
+            creator_reverse, dating_reverse, height_reverse, width_reverse,
+            depth_reverse, diameter_reverse, weight_reverse,
+            height_with_socket_reverse, width_with_socket_reverse,
+            depth_with_socket_reverse, framing_reverse
           )
           AGAINST (:terms_reverse IN BOOLEAN MODE)
         )
