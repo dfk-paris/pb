@@ -6,7 +6,7 @@ class ApplicationRecord < ActiveRecord::Base
       all
     else
       page = [(page || 1).to_i, 1].max - 1
-      per_page = 10
+      per_page = [(per_page || 10).to_i, 10].max
       limit(per_page).offset(per_page * page)
     end
   end

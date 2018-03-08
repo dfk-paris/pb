@@ -66,6 +66,7 @@
     tag.params = (key = undefined) ->
       result = {
         page: (wApp.routing.query() || {})['page'] || 1
+        per_page: (wApp.routing.query() || {})['per_page'] || 10
         title: wApp.routing.query()['title']
         terms: wApp.routing.query()['terms']
         location: wApp.utils.to_integer(wApp.routing.query()['location'])

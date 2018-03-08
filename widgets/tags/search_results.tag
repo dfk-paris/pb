@@ -85,6 +85,11 @@
       Lockr.set('selected-results')
       tag.update()
 
+    tag.selectAll = (event) ->
+      selection = (me.id for me in tag.data.items)
+      Lockr.set('selected-results', selection)
+      tag.update()
+
     tag.isSelected = (id) ->
       i = Lockr.get('selected-results', []).indexOf(id)
       return i != -1
@@ -134,7 +139,7 @@
 
     fetch = (data = {}) ->
       params = {
-        per_page: 10
+        per_page: wApp.routing.query()['per_page'] || 10
         page: wApp.routing.query()['page'] || 1
         terms: wApp.routing.query()['terms']
         title: wApp.routing.query()['title']
@@ -144,6 +149,7 @@
       }
 
       doFetch = (params['page'] != 1 && params['page'] != '1') ||
+                params['per_page'] ||
                 params['terms'] ||
                 params['title'] ||
                 params['location'] ||
