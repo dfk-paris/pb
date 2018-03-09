@@ -149,7 +149,7 @@
       }
 
       doFetch = (params['page'] != 1 && params['page'] != '1') ||
-                params['per_page'] ||
+                (params['per_page'] != 10 && params['page'] != '10') ||
                 params['terms'] ||
                 params['title'] ||
                 params['location'] ||
