@@ -93,6 +93,10 @@
             {dimensions(se)}
           </p>
         </div>
+        <pb-text-value
+          label="Restaurierungen"
+          value={se.restaurations}
+        />
 
         <pb-media-grid se={se} expand={expand} />
       </div>
