@@ -39,7 +39,7 @@
       </div>
       <div class="six columns">
         <pb-textarea
-          label="Inventarnummern"
+          label="Inv. Nr.|Anlage-Nr.|Equip.-Nr."
           name="inventory_id_list"
           value={item.inventory_ids.join(', ')}
           errors={errors.inventory_ids}

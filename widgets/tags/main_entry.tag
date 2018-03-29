@@ -18,7 +18,7 @@
       <em>{opts.me.sub_entries[0].creator}</em>
       <div>{city_date(opts.me.sub_entries[0])}</div>
       <pb-string-value
-        label="Inv. Nr. (Inv. Nr. AA)"
+        label="Inv. Nr. (Anlage-Nr./Equip.-Nr.)"
         value={humanIds(opts.me.sub_entries[0].inventory_ids)}
         class="block-style"
       />
@@ -82,7 +82,7 @@
           <div>{city_date(se)}</div>
         </virtual>
         <pb-string-value
-          label="Inv. Nr. (Inv. Nr. AA)"
+          label="Inv. Nr. (Anlage-Nr./Equip.-Nr.)"
           value={humanIds(se.inventory_ids)}
           class="block-style"
         />
@@ -164,7 +164,10 @@
       strs = for id in ids
         parts = id.split('|')
         if parts[1]
-          "#{parts[0]} (#{parts[1]})"
+          if parts[2]
+            "#{parts[0]} (#{parts[1]}/#{parts[2]})"
+          else
+            "#{parts[0]} (#{parts[1]})"
         else
           parts[0]
       strs.join('; ')
