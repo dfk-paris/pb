@@ -139,10 +139,13 @@
       fields.push('Tiefe: ' + se.depth) if !!se.depth
       mp = fields.join(', ')
 
-      if op == '' || mp == ''
-        op + mp
-      else
-        op + '; ' + mp
+      fields = []
+      fields.push('Gewicht: ' + se.weight) if !!se.weight
+      fields.push('Durchmesser: ' + se.diameter) if !!se.diameter
+      dia = fields.join('')
+
+      result = [op, mp, dia].filter (e) -> e != ''
+      result.join('; ')
 
     tag.newSearch = (event) ->
       tag.close()
