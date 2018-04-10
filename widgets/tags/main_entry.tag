@@ -166,13 +166,7 @@
     tag.humanIds = (ids) ->
       strs = for id in ids
         parts = id.split('|')
-        if parts[1]
-          if parts[2]
-            "#{parts[0]} (#{parts[1]}/#{parts[2]})"
-          else
-            "#{parts[0]} (#{parts[1]})"
-        else
-          parts[0]
+        "#{parts[0] || 'n.v.'} (#{parts[1] || 'n.v.'}/#{parts[2] || 'n.v.'})"
       strs.join('; ')
 
     tag.singleCreator = ->

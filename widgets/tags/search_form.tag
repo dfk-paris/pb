@@ -29,7 +29,7 @@
     />
 
     <pb-input
-      placeholder="Inventar"
+      placeholder="Inventarnummer"
       ref="inventory"
       value={params('inventory')}
     />
