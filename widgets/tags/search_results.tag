@@ -119,7 +119,7 @@
     tag.firstImageSrc = (me) ->
       for se in me.sub_entries
         for medium in se.media
-          return medium.urls.normal
+          return wAppApiUrl + medium.urls.normal
       null
 
     noSkype = ->
