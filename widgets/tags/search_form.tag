@@ -35,8 +35,8 @@
     />
 
     <div class="u-text-right pb-buttons">
-      <input type="reset" value="Neue Suche" onclick={reset} />
       <input type="submit" value="Suchen" />
+      <input type="reset" value="Neue Suche" onclick={reset} />
     </div>
   </form>
 
