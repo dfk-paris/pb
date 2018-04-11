@@ -165,7 +165,7 @@
 
     tag.humanIds = (ids) ->
       strs = for id in ids
-        parts = id.split('|')
+        parts = id.split(/[\|\!]/)
         "#{parts[0] || 'n.v.'} (#{parts[1] || 'n.v.'}/#{parts[2] || 'n.v.'})"
       strs.join('; ')
 
