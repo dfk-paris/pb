@@ -33,10 +33,20 @@
             <div class="pb-creator">{me.sub_entries[0].creator}</div>
           </virtual>
 
+          <img
+            if={firstImageSrc(me)}
+            class="pb-image-teaser"
+            riot-src={firstImageSrc(me)}
+          />
+
           <pb-text-value value={me.description} />
 
-          Letzte Änderung vom <w-timestamp value={me.updated_at} format="%d.%m.%Y" />,
-          Autoren: Jörg Ebeling, Ulrich Leben
+          <div class="pb-clearfix"></div>
+
+          <div class="pb-item-footer">
+            Letzte Änderung vom <w-timestamp value={me.updated_at} format="%d.%m.%Y" />,
+            Autoren: Jörg Ebeling, Ulrich Leben
+          </div>
         </div>
 
         <div class="pb-clearfix"></div>
@@ -105,6 +115,12 @@
 
     tag.openEntry = (event) ->
       wApp.routing.query modal: true, tag: 'pb-main-entry', id: event.item.me.id
+
+    tag.firstImageSrc = (me) ->
+      for se in me.sub_entries
+        for medium in se.media
+          return medium.urls.normal
+      null
 
     noSkype = ->
       tpl = '<span style="display:none;">_</span>-'

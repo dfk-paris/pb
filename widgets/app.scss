@@ -159,6 +159,23 @@ li {
 
   .pb-item {
     margin-right: 10rem;
+
+    .pb-image-teaser {
+      display: block;
+      float: left;
+      max-width: 120px;
+      max-height: 120px;
+      margin-right: 1em;
+      margin-top: 0.25em;
+    }
+
+    .pb-item-footer {
+      margin-top: 18px;
+    }
+
+    p {
+      margin-bottom: 0px;
+    }
   }
 
   .pb-id {
@@ -187,6 +204,10 @@ li {
     display: block;
     float: left;
     margin-right: 1em;
+  }
+
+  pb-text-value {
+    text-align: justify;
   }
 }
 
