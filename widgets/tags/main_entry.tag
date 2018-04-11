@@ -110,6 +110,7 @@
     </div>
 
     <div class="u-text-right u-text-small pb-timestamp">
+      Zitierlink: 
       <a href={currentUrl()}>{currentUrl()}</a>, letzter Zugriff am
       {currentDate()}
     </div>
