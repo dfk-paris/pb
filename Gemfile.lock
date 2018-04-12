@@ -163,6 +163,9 @@ GEM
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    roo (2.7.1)
+      nokogiri (~> 1)
+      rubyzip (~> 1.1, < 2.0.0)
     ruby-ole (1.2.12)
     rubyzip (1.2.1)
     selenium-webdriver (3.0.8)
@@ -211,6 +214,7 @@ DEPENDENCIES
   puma (~> 3.0)
   rack-cors
   rails (~> 5.0.0)
+  roo
   selenium-webdriver
   spreadsheet
   spring
@@ -218,4 +222,4 @@ DEPENDENCIES
   tzinfo-data
 
 BUNDLED WITH
-   1.15.4
+   1.16.1

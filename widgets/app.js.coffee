@@ -18,7 +18,7 @@ window.wApp = {
   bus: riot.observable()
   data: {}
   setup: (tags = '*') ->
-    Zepto.ajax(
+    locations = Zepto.ajax(
       type: 'get'
       url: "/api/locations"
       success: (data) ->
@@ -27,8 +27,16 @@ window.wApp = {
         for group in data
           for room in group.rooms
             wApp.data.locations[room.id] = room.name
-
-        riot.mount(tags)
-        wApp.routing.setup()
     )
+
+    people = Zepto.ajax(
+      type: 'get'
+      url: '/api/people'
+      success: (data) -> wApp.data.people = data
+    )
+
+    Zepto.when(locations, people).then ->
+      riot.mount(tags)
+      wApp.routing.setup()
+
 }

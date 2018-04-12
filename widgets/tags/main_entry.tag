@@ -15,7 +15,9 @@
     <div><strong>{opts.me.title}</strong></div>
 
     <virtual if={opts.me.sub_entries.length == 1}>
-      <em>{opts.me.sub_entries[0].creator}</em>
+      <em>
+        <pb-person name={opts.me.sub_entries[0].creator} />
+      </em>
       <div>{city_date(opts.me.sub_entries[0])}</div>
       <pb-string-value
         label="Inv. Nr. (Anlage-Nr./Equip.-Nr.)"
@@ -51,7 +53,9 @@
 
     <virtual if={opts.me.sub_entries.length > 1}>
       <virtual if={singleCreator()}>
-        <div><em>{singleCreator()}</em></div>
+        <div><em>
+          <pb-person name={singleCreator()} />
+        </em></div>
       </virtual>
       <virtual if={singleCityDate()}>
         <div><em>{singleCityDate()}</em></div>
@@ -76,7 +80,9 @@
         <em>Nr. {se.sequence}</em>
         <div><strong>{se.title}</strong></div>
         <virtual if={!singleCreator()}>
-          <div><em>{se.creator}</em></div>
+          <div><em>
+            <pb-person name={se.creator} />
+          </em></div>
         </virtual>
         <virtual if={!singleCityDate()}>
           <div>{city_date(se)}</div>

@@ -16,6 +16,7 @@ gem 'rack-cors'
 group :development, :test do
   # gem 'byebug', platform: :mri
   gem 'spreadsheet'
+  gem 'roo'
   gem 'faker'
   gem 'pry'
 end
