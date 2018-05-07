@@ -162,6 +162,7 @@
         title: wApp.routing.query()['title']
         location: wApp.routing.query()['location']
         creator: wApp.routing.query()['creator']
+        people: wApp.routing.query()['people']
         inventory: wApp.routing.query()['inventory']
       }
 

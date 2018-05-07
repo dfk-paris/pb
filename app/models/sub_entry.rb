@@ -23,10 +23,25 @@ class SubEntry < ApplicationRecord
         se["#{f}_reverse".to_sym] = se[f].reverse
       end
     end
+
+    se.wikidata_people(:markings) if se.markings_changed?
+    se.wikidata_people(:restaurations) if se.restaurations_changed?
+    se.wikidata_people(:framing) if se.framing_changed?
+  end
+
+  def self.all_people
+    select(:people).map{|v| v.people}.flatten
   end
 
   def title
     no_title ? main_entry.title : super
   end
 
+  def people
+    (self[:people] || '').split(/\s*;\s*/)
+  end
+
+  def people=(list)
+    self[:people] = list.join('; ')
+  end
 end

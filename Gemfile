@@ -12,6 +12,7 @@ gem 'acts-as-taggable-on', git: 'https://github.com/mbleigh/acts-as-taggable-on.
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'rack-cors'
+gem 'httpclient'
 
 group :development, :test do
   # gem 'byebug', platform: :mri

@@ -34,4 +34,8 @@ module Pb
       end
     end
   end
+
+  def self.http_client
+    @http_client ||= HTTPClient.new
+  end
 end

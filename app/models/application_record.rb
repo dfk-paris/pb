@@ -10,4 +10,30 @@ class ApplicationRecord < ActiveRecord::Base
       limit(per_page).offset(per_page * page)
     end
   end
+
+  def wikidata_people(field)
+    qids = (self[field] || '').scan(/[Qq][0-9]+/).flatten
+    qids.each do |qid|
+      data = fetch_wikidata(qid)
+      self.people = (self.people + [data['labels']['de']['value']]).sort.uniq
+    end
+  end
+
+  def fetch_wikidata(qid)
+    filename = Rails.root.join('data', 'wikidata', "#{qid}.json")
+    if File.exists?(filename)
+      Rails.logger.info "WikiData cache: #{qid}"
+      JSON.parse File.read(filename)
+    else
+      Rails.logger.info "WikiData fetch: #{qid}"
+      url = "http://www.wikidata.org/entity/#{qid}.json"
+      response = Pb.http_client.get_content(url)
+      data = JSON.parse(response)
+      item = data['entities'][qid]
+      File.open filename, 'w' do |f|
+        f.write JSON.dump(item)
+      end
+      item
+    end
+  end
 end

@@ -10,6 +10,7 @@ class MainEntriesController < ApplicationController
       by_title(params[:title]).
       by_location(params[:location]).
       by_creator(params[:creator]).
+      by_people(params[:people]).
       by_inventory(params[:inventory]).
       pageit(params[:page], params[:per_page]).
       all

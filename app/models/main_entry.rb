@@ -11,6 +11,12 @@ class MainEntry < ApplicationRecord
     me.literature_reverse = me.literature.reverse
     me.description_reverse = me.description.reverse
     me.appreciation_reverse = me.appreciation.reverse
+
+    me.wikidata_people(:provenience) if me.provenience_changed?
+    me.wikidata_people(:historical_evidence) if me.historical_evidence_changed?
+    me.wikidata_people(:literature) if me.literature_changed?
+    me.wikidata_people(:description) if me.description_changed?
+    me.wikidata_people(:appreciation) if me.appreciation_changed?
   end
 
   after_save do |me|
@@ -56,6 +62,14 @@ class MainEntry < ApplicationRecord
     mega_join.where(
       'ses.creator LIKE :creator',
       creator: "%#{creator}%"
+    )
+  }
+
+  scope :by_people, lambda {|term|
+    return all if term.blank?
+    mega_join.where(
+      'ses.creator LIKE :t OR main_entries.people LIKE :t OR ses.people LIKE :t',
+      t: "%#{term}%"
     )
   }
 
@@ -111,4 +125,15 @@ class MainEntry < ApplicationRecord
     value.present? ? all : where(publish: true)
   }
 
+  def self.all_people
+    select(:people).map{|v| v.people}.flatten
+  end
+
+  def people
+    (self[:people] || '').split(/\s*;\s*/)
+  end
+
+  def people=(list)
+    self[:people] = list.join('; ')
+  end
 end

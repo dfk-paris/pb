@@ -51,6 +51,7 @@
         terms: tag.refs.terms.value()
         location: tag.refs.location.value()
         creator: tag.refs.creator.value()
+        # people: tag.refs.people.value()
         inventory: tag.refs.inventory.value()
       }
       wApp.routing.query(data)
@@ -71,6 +72,7 @@
         terms: wApp.routing.query()['terms']
         location: wApp.utils.to_integer(wApp.routing.query()['location'])
         creator: wApp.routing.query()['creator']
+        people: wApp.routing.query()['people']
         inventory: wApp.routing.query()['inventory']
         unpublished: true
       }

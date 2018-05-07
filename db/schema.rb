@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180308000820) do
+ActiveRecord::Schema.define(version: 20180507003148) do
 
   create_table "main_entries", force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
     t.string   "title"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20180308000820) do
     t.text     "literature_reverse",          limit: 65535
     t.text     "description_reverse",         limit: 65535
     t.text     "appreciation_reverse",        limit: 65535
+    t.text     "people",                      limit: 65535
     t.index ["title", "location"], name: "searchy", using: :btree
     t.index ["title", "provenience", "historical_evidence", "literature", "description", "appreciation"], name: "me_terms", type: :fulltext
     t.index ["title_reverse", "provenience_reverse", "historical_evidence_reverse", "literature_reverse", "description_reverse", "appreciation_reverse"], name: "me_terms_reverse", type: :fulltext
@@ -88,6 +89,7 @@ ActiveRecord::Schema.define(version: 20180308000820) do
     t.string   "width_with_socket_reverse"
     t.string   "depth_with_socket_reverse"
     t.text     "framing_reverse",            limit: 65535
+    t.text     "people",                     limit: 65535
     t.index ["main_entry_id", "title", "location", "creator"], name: "searchy", length: { title: 100, location: 50, creator: 50 }, using: :btree
     t.index ["main_entry_id"], name: "index_sub_entries_on_main_entry_id", using: :btree
     t.index ["title", "description", "markings", "restaurations", "material", "creator", "dating", "height", "width", "depth", "diameter", "weight", "height_with_socket", "width_with_socket", "depth_with_socket", "framing"], name: "se_terms", type: :fulltext
