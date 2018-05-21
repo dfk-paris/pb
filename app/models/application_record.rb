@@ -14,9 +14,12 @@ class ApplicationRecord < ActiveRecord::Base
   def wikidata_people(field)
     qids = (self[field] || '').scan(/[Qq][0-9]+/).flatten
     qids.each do |qid|
-      data = fetch_wikidata(qid)
-      self.people = (self.people + [data['labels']['de']['value']]).sort.uniq
+      if data = fetch_wikidata(qid)
+        lang = data['labels']['de'] || data['labels']['fr']
+        self.people += [lang['value']]
+      end
     end
+    self.people.sort!.uniq!
   end
 
   def fetch_wikidata(qid)

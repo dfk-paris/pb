@@ -27,6 +27,7 @@ class SubEntry < ApplicationRecord
     se.wikidata_people(:markings) if se.markings_changed?
     se.wikidata_people(:restaurations) if se.restaurations_changed?
     se.wikidata_people(:framing) if se.framing_changed?
+    se.wikidata_people(:creator) if se.creator_changed?
   end
 
   def self.all_people

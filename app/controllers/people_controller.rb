@@ -7,22 +7,14 @@ class PeopleController < ApplicationController
 
   def autocomplete
     term = (params[:term] || '').gsub(/[^a-zA-Z0-9 \-]/, '')
-    @people = all.select{|v| v.match(/#{term}/i)}.first(10)
+    @people = tagged.select{|v| v.match(/#{term}/i)}.first(10)
     render json: @people
   end
 
   protected
 
-    def creators
-      SubEntry.distinct.pluck(:creator).sort
-    end
-
     def tagged
       dirty = (MainEntry.all_people + SubEntry.all_people)
       dirty.select{|v| v.present?}.sort.uniq
-    end
-
-    def all
-      (creators + tagged).sort.uniq
     end
 end

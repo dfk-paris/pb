@@ -49,6 +49,7 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     arel (7.1.4)
     builder (3.2.3)
+    byebug (10.0.2)
     capybara (2.12.0)
       addressable
       mime-types (>= 1.16)
@@ -202,6 +203,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on!
+  byebug
   capybara
   cucumber-rails
   database_cleaner

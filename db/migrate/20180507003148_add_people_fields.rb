@@ -18,6 +18,7 @@ class AddPeopleFields < ActiveRecord::Migration[5.0]
       se.wikidata_people(:markings)
       se.wikidata_people(:restaurations)
       se.wikidata_people(:framing)
+      se.wikidata_people(:creator)
       se.save
     end
 

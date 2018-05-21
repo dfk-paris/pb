@@ -18,7 +18,7 @@
         source: (term, suggest) ->
           Zepto.ajax(
             type: 'get'
-            url: "/api/ses/autocomplete"
+            url: tag.opts.url || "/api/ses/autocomplete"
             data: {
               column: opts.name
               term: term

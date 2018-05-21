@@ -27,10 +27,22 @@
             no-skype={me.sequence}
             x-ms-format-detection="none"
           ></div>
-          <div class="pb-title">{me.title}</div>
+          <div class="pb-title">
+            <pb-special-render
+              value={me.title}
+              highlight-fields={['title']}
+              tagged-text={true}
+            />
+          </div>
 
           <virtual if={me.sub_entries.length == 1}>
-            <div class="pb-creator">{me.sub_entries[0].creator}</div>
+            <div class="pb-creator">
+              <pb-special-render
+                value={me.sub_entries[0].creator}
+                highlight-fields={['terms', 'creator', 'inventory']}
+                tagged-text={true}
+              />
+            </div>
           </virtual>
 
           <img
@@ -39,7 +51,11 @@
             riot-src={firstImageSrc(me)}
           />
 
-          <pb-text-value value={me.description} />
+          <pb-text-value
+            value={me.description}
+            highlight-fields={['terms', 'creator', 'inventory']}
+            tagged-text={true}
+          />
 
           <div class="pb-clearfix"></div>
 
@@ -75,7 +91,6 @@
         elements.animate({opacity: 1})
 
       noSkype()
-      highlighting()
 
     tag.toggleSelection = (event) ->
       selection = Lockr.get('selected-results', [])
@@ -128,31 +143,6 @@
       for e in Zepto(tag.root).find('[no-skype]')
         e = Zepto(e)
         e.html('Nr. ' + e.attr('no-skype').replace('-', tpl))
-
-    hl = (match) ->
-      "<mark>#{match}</mark>"
-
-    highlighting = ->
-      # full text
-      fields = ['terms', 'creator', 'inventory']
-      selector = '.pb-title, .pb-creator, pb-text-value p'
-      highlightFieldsInElements(fields, selector)
-
-      # title search
-      fields = ['title']
-      selector = '.pb-title'
-      highlightFieldsInElements(fields, selector)
-
-    highlightFieldsInElements = (fields, selector) ->
-      elements = Zepto(tag.root).find(selector)
-      terms = []
-      for n in fields
-        if paramValue = wApp.routing.query()[n]
-          terms = terms.concat(paramValue.split(/\s+/))
-      for e in elements
-        for t in terms
-          e = Zepto(e)
-          e.html e.html().replace(new RegExp("#{t}(?!</mark>)", 'gi'), hl)
 
     fetch = (data = {}) ->
       params = {

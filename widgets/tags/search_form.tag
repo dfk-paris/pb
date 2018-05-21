@@ -22,10 +22,11 @@
     />
 
     <pb-autocomplete
-      placeholder="Künstler"
+      placeholder="Personen"
       name="creator"
       ref="creator"
       value={params('creator')}
+      url="/api/people/autocomplete"
     />
 
     <pb-input

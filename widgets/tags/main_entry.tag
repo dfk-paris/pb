@@ -24,7 +24,10 @@
         value={humanIds(opts.me.sub_entries[0].inventory_ids)}
         class="block-style"
       />
-      <pb-text-value label="Bezeichnet" value={opts.me.sub_entries[0].markings} />
+      <pb-text-value
+        label="Bezeichnet" value={opts.me.sub_entries[0].markings}
+        tagged-text={true}
+      />
       <div class="text-value" if={dimensions(opts.me.sub_entries[0])}>
         <p>
           {opts.me.sub_entries[0].material}<br />
@@ -34,6 +37,7 @@
       <pb-text-value
         label="Restaurierungen"
         value={opts.me.sub_entries[0].restaurations}
+        tagged-text={true}
       />
       <div class="text-value">
         <em>Standort</em>
@@ -42,11 +46,28 @@
       <pb-text-value
         label="Historische Nachweise"
         value={opts.me.historical_evidence}
+        tagged-text={true}
       />
-      <pb-text-value label="Literatur" value={opts.me.literature} />
-      <pb-text-value label="Herkunft" value={opts.me.provenience} />
-      <pb-text-value label="Beschreibung" value={opts.me.description} />
-      <pb-text-value label="Würdigung" value={opts.me.appreciation} />
+      <pb-text-value
+        label="Literatur"
+        value={opts.me.literature}
+        tagged-text={true}
+      />
+      <pb-text-value
+        label="Herkunft"
+        value={opts.me.provenience}
+        tagged-text={true}
+      />
+      <pb-text-value
+        label="Beschreibung"
+        value={opts.me.description}
+        tagged-text={true}
+      />
+      <pb-text-value
+        label="Würdigung"
+        value={opts.me.appreciation}
+        tagged-text={true}
+      />
 
       <pb-media-grid se={opts.me.sub_entries[0]} expand={expand} />
     </virtual>
@@ -68,11 +89,28 @@
       <pb-text-value
         label="Historische Nachweise"
         value={opts.me.historical_evidence}
+        tagged-text={true}
       />
-      <pb-text-value label="Literatur" value={opts.me.literature} />
-      <pb-text-value label="Herkunft" value={opts.me.provenience} />
-      <pb-text-value label="Beschreibung" value={opts.me.description} />
-      <pb-text-value label="Würdigung" value={opts.me.appreciation} />
+      <pb-text-value
+        label="Literatur"
+        value={opts.me.literature}
+        tagged-text={true}
+      />
+      <pb-text-value
+        label="Herkunft"
+        value={opts.me.provenience}
+        tagged-text={true}
+      />
+      <pb-text-value
+        label="Beschreibung"
+        value={opts.me.description}
+        tagged-text={true}
+      />
+      <pb-text-value
+        label="Würdigung"
+        value={opts.me.appreciation}
+        tagged-text={true}
+      />
 
       <div each={se in opts.me.sub_entries} class="pb-sub-entry">
         <hr width="50%" />
@@ -92,8 +130,12 @@
           value={humanIds(se.inventory_ids)}
           class="block-style"
         />
-        <pb-text-value label="Bezeichnet" value={se.markings} />
-          <div class="text-value" if={dimensions(se)}>
+        <pb-text-value
+          label="Bezeichnet"
+          value={se.markings}
+          tagged-text={true}
+        />
+        <div class="text-value" if={dimensions(se)}>
           <p>
             {se.material}<br />
             {dimensions(se)}
@@ -102,6 +144,7 @@
         <pb-text-value
           label="Restaurierungen"
           value={se.restaurations}
+          tagged-text={true}
         />
 
         <pb-media-grid se={se} expand={expand} />

@@ -20,6 +20,7 @@ group :development, :test do
   gem 'roo'
   gem 'faker'
   gem 'pry'
+  gem 'byebug'
 end
 
 group :development do
