@@ -68,7 +68,7 @@ class MainEntry < ApplicationRecord
   scope :by_people, lambda {|term|
     return all if term.blank?
     mega_join.where(
-      'ses.creator LIKE :t OR main_entries.people LIKE :t OR ses.people LIKE :t',
+      'main_entries.people LIKE :t OR ses.people LIKE :t',
       t: "%#{term}%"
     )
   }

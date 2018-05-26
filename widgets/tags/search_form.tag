@@ -23,9 +23,9 @@
 
     <pb-autocomplete
       placeholder="Personen"
-      name="creator"
-      ref="creator"
-      value={params('creator')}
+      name="people"
+      ref="people"
+      value={params('people')}
       url="/api/people/autocomplete"
     />
 
@@ -51,7 +51,7 @@
         title: tag.refs.title.value()
         terms: tag.refs.terms.value()
         location: tag.refs.location.value()
-        creator: tag.refs.creator.value()
+        people: tag.refs.people.value()
         # people: tag.refs.people.value()
         inventory: tag.refs.inventory.value()
       }
@@ -72,7 +72,6 @@
         title: wApp.routing.query()['title']
         terms: wApp.routing.query()['terms']
         location: wApp.utils.to_integer(wApp.routing.query()['location'])
-        creator: wApp.routing.query()['creator']
         people: wApp.routing.query()['people']
         inventory: wApp.routing.query()['inventory']
         unpublished: true

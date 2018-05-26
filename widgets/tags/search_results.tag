@@ -39,7 +39,7 @@
             <div class="pb-creator">
               <pb-special-render
                 value={me.sub_entries[0].creator}
-                highlight-fields={['terms', 'creator', 'inventory']}
+                highlight-fields={['terms', 'people', 'inventory']}
                 tagged-text={true}
               />
             </div>
@@ -53,7 +53,7 @@
 
           <pb-text-value
             value={me.description}
-            highlight-fields={['terms', 'creator', 'inventory']}
+            highlight-fields={['terms', 'people', 'inventory']}
             tagged-text={true}
           />
 
@@ -151,7 +151,6 @@
         terms: wApp.routing.query()['terms']
         title: wApp.routing.query()['title']
         location: wApp.routing.query()['location']
-        creator: wApp.routing.query()['creator']
         people: wApp.routing.query()['people']
         inventory: wApp.routing.query()['inventory']
       }
@@ -161,7 +160,7 @@
                 params['terms'] ||
                 params['title'] ||
                 params['location'] ||
-                params['creator'] ||
+                params['people'] ||
                 params['inventory']
 
       if !!doFetch
