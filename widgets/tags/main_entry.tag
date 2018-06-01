@@ -12,7 +12,12 @@
     <hr class="no-print" if={!opts.omitControls} />
 
     <em>Nr. {opts.me.sequence}</em>
-    <div><strong>{opts.me.title}</strong></div>
+    <div><strong>
+      <pb-special-render
+        value={opts.me.title}
+        tagged-text={true}
+      />
+    </strong></div>
 
     <virtual if={opts.me.sub_entries.length == 1}>
       <em>
@@ -116,7 +121,12 @@
         <hr width="50%" />
 
         <em>Nr. {se.sequence}</em>
-        <div><strong>{se.title}</strong></div>
+        <div><strong>
+          <pb-special-render
+            value={se.title}
+            tagged-text={true}
+          />
+        </strong></div>
         <virtual if={!singleCreator()}>
           <div><em>
             <pb-person name={se.creator} />

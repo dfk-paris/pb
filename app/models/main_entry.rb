@@ -12,6 +12,7 @@ class MainEntry < ApplicationRecord
     me.description_reverse = me.description.reverse
     me.appreciation_reverse = me.appreciation.reverse
 
+    me.wikidata_people(:title) if me.title_changed?
     me.wikidata_people(:provenience) if me.provenience_changed?
     me.wikidata_people(:historical_evidence) if me.historical_evidence_changed?
     me.wikidata_people(:literature) if me.literature_changed?

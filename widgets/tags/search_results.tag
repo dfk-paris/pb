@@ -27,6 +27,7 @@
             no-skype={me.sequence}
             x-ms-format-detection="none"
           ></div>
+          
           <div class="pb-title">
             <pb-special-render
               value={me.title}

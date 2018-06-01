@@ -24,6 +24,7 @@ class SubEntry < ApplicationRecord
       end
     end
 
+    se.wikidata_people(:title) if se.title_changed?
     se.wikidata_people(:markings) if se.markings_changed?
     se.wikidata_people(:restaurations) if se.restaurations_changed?
     se.wikidata_people(:framing) if se.framing_changed?
