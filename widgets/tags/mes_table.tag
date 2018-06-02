@@ -97,7 +97,11 @@
           />
         </div>
         <h4>
-          {me.sequence} {me.title || me.id}
+          {me.sequence}
+          <pb-special-render
+            value={me.title || me.id}
+            tagged-text={true}
+          />
           <i show={me.publish} class="fa fa-eye"></i>
           <i show={!me.publish} class="fa fa-eye-slash"></i>
         </h4>
@@ -162,7 +166,13 @@
                 src-large={imageUrl(medium.urls.big)}
               />
             </div>
-            <strong>{se.sequence} {se.title}</strong>
+            <strong>
+              {se.sequence}
+              <pb-special-render
+                value={se.title}
+                tagged-text={true}
+              />
+            </strong>
             <div class="pb-timestamp">
               <strong>Letztes Update:</strong>
               <w-timestamp value={se.updated_at} />
