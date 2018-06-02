@@ -2,7 +2,7 @@
 
 A simple database to store metadata on the interior equipment within the Palais
 Beauharnais in Paris, France. This repository contains the source code for the
-web application.
+web application. The application is currently available [here](https://dfk-paris.org/de/WissenschaftlicheBearbeitungdesPalaisBeauharnais/Datenbank.html).
 
 ## License
 
@@ -88,7 +88,3 @@ original licensing
 * https://commons.wikimedia.org/wiki/File:H%C3%B4tel_de_Beauharnais.jpg is the
   basis for the favicon and serves as a general dummy during development. No
   modifications were made except resizing.
-
-## TODO:
-
-* link to DFK instance and website
