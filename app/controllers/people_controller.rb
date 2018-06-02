@@ -6,7 +6,7 @@ class PeopleController < ApplicationController
   end
 
   def autocomplete
-    term = (params[:term] || '').gsub(/[^a-zA-Z0-9 \-]/, '')
+    term = Regexp.escape(params[:term])
     @people = tagged.select{|v| v.match(/#{term}/i)}.first(10)
     render json: @people
   end
