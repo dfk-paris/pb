@@ -26,19 +26,22 @@ namespace :pb do
 
   desc 'export vikus data csv'
   task vikus_data_csv: :environment do
-    puts 'id,year,keywords,_material,_description,_dating,_creator'
-    SubEntry.find_each do |se|
-      data = [
-        se.id,
-        se.dating.scan(/\d{4}/).first.to_i,
-        [se.location].join(','),
-        se.material,
-        se.description,
-        se.dating,
-        se.creator
-      ]
-      puts to_csv(data).join(',')
+    require 'csv'
+    out = CSV.generate do |csv|
+      csv << ['id' , 'year', 'keywords', '_material', '_description', '_dating', '_creator']
+      SubEntry.find_each do |se|
+        csv << [
+          se.id,
+          se.dating.scan(/\d{4}/).first.to_i,
+          [room_for(se)].join(','),
+          se.material,
+          se.description,
+          se.dating,
+          se.creator.gsub('"', "'")
+        ]
+      end
     end
+    puts out
   end
 
   desc 'export vikus image data'
@@ -50,6 +53,21 @@ namespace :pb do
         system "cp #{from} #{to}"
       end
     end
+  end
+
+  def room_for(se)
+    @rooms ||= JSON.parse(File.read 'lib/data/locations.json')
+
+    @rooms.each do |m|
+      etage = m['name']
+      m['rooms'].each do |r|
+        if r['id'] == se.main_entry.location
+          return r['name']
+        end
+      end
+    end
+
+    nil
   end
 
   def to_csv(data)
