@@ -1,29 +1,36 @@
 require 'test_helper'
 
 class SubEntriesControllerTest < ActionDispatch::IntegrationTest
-  test "should get index" do
-    get sub_entries_index_url
+  test "should GET index" do
+    se = FactoryGirl.create :sub_entry
+    get '/api/ses'
     assert_response :success
   end
 
-  test "should get show" do
-    get sub_entries_show_url
+  test "should GET show" do
+    se = FactoryGirl.create :sub_entry
+    get "/api/ses/#{se.id}"
     assert_response :success
   end
 
-  test "should get create" do
-    get sub_entries_create_url
+  test "should PATCH update" do
+    se = FactoryGirl.create :sub_entry
+    patch "/api/ses/#{se.id}", params: {sub_entry: {title: 'Königliche Sitzgruppe'}}
     assert_response :success
+    assert_equal 1, SubEntry.count
+    assert_equal 'Königliche Sitzgruppe', SubEntry.first.title
   end
 
-  test "should get update" do
-    get sub_entries_update_url
+  test "should POST create" do
+    post '/api/ses', params: {sub_entry: {title: 'Something', sequence: '001'}}
     assert_response :success
+    assert_equal 1, SubEntry.count
   end
 
-  test "should get destroy" do
-    get sub_entries_destroy_url
+  test "should DELETE destroy" do
+    se = FactoryGirl.create :sub_entry
+    delete "/api/ses/#{se.id}"
     assert_response :success
+    assert_equal 0, SubEntry.count
   end
-
 end

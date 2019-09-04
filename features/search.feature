@@ -1,7 +1,7 @@
 @javascript
 Feature: search
 
-  Scenario: update a sub entry
+  Scenario: by "Objektbezeichnung"
     Given a main entry
     Given another main entry
     When I go to "the main entries list" 

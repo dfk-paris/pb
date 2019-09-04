@@ -4,8 +4,11 @@ require 'rails/test_help'
 require 'capybara/rails'
 
 class ActiveSupport::TestCase
-  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
-  fixtures :all
+  DatabaseCleaner.strategy = :truncation
 
-  # Add more helper methods to be used by all tests here...
+  self.use_transactional_tests = false
+
+  def setup
+    DatabaseCleaner.clean
+  end
 end

@@ -58,9 +58,9 @@ Feature: data entry
     When I go to "the main entries list" 
     And I follow "bearbeiten" within sub entry "3 Spiegel"
     When I fill in the following values
-      | field             | value            |
-      | Objektbezeichnung | 3 kleine Spiegel |
-      | Inventarnummern   | ab 01 01         |
+      | field                            | value            |
+      | Objektbezeichnung                | 3 kleine Spiegel |
+      | Inv. Nr.\|Anlage-Nr.\|Equip.-Nr. | ab 01 01         |
     And I press "Speichern und zurück zur Liste"
     Then I should see "Unterobjekt wurde geändert"
     Then I should be on "the main entries list"

@@ -6,11 +6,11 @@ class MainEntry < ApplicationRecord
 
   before_validation do |me|
     me.title_reverse = me.title.reverse
-    me.provenience_reverse = me.provenience.reverse
-    me.historical_evidence_reverse = me.historical_evidence.reverse
-    me.literature_reverse = me.literature.reverse
-    me.description_reverse = me.description.reverse
-    me.appreciation_reverse = me.appreciation.reverse
+    me.provenience_reverse = me.provenience.reverse if me.provenience.present?
+    me.historical_evidence_reverse = me.historical_evidence.reverse if me.historical_evidence.present?
+    me.literature_reverse = me.literature.reverse if me.literature.present?
+    me.description_reverse = me.description.reverse if me.description.present?
+    me.appreciation_reverse = me.appreciation.reverse if me.appreciation.present?
 
     me.wikidata_people(:title) if me.title_changed?
     me.wikidata_people(:provenience) if me.provenience_changed?
@@ -76,7 +76,11 @@ class MainEntry < ApplicationRecord
 
   scope :by_inventory, lambda {|inventory|
     return all if inventory.blank?
-    mega_join.where('LOWER(tags.name) LIKE :name', name: inventory.downcase)
+
+    # inventory.gsub! '|', '[[.vertical-line.]]'
+    mega_join.where(
+      "LOWER(tags.name) REGEXP :t", t: "(\\||^)#{inventory.downcase}(\\||$)"
+    )
   }
 
   scope :by_terms, lambda {|terms|

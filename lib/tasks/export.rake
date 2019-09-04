@@ -15,9 +15,9 @@ namespace :pb do
     puts 'year,titel,text,extra'
     datings = {}
     SubEntry.find_each do |se|
-      datings[se.dating.scan(/\d{4}/).first.to_i] ||= se.dating
+      datings[dating_for(se.dating.scan(/\d{4}/).first.to_i)] ||= se.dating
     end
-    data = datings.keys.sort.map do |d|
+    data = datings.keys.map do |d|
       to_csv([d,datings[d],'','']).join(',')
     end
 
@@ -28,16 +28,17 @@ namespace :pb do
   task vikus_data_csv: :environment do
     require 'csv'
     out = CSV.generate do |csv|
-      csv << ['id' , 'year', 'keywords', '_material', '_description', '_dating', '_creator']
+      csv << ['id' , 'year', 'keywords', '_material', '_description', '_dating', '_creator', '_main_entry_id']
       SubEntry.find_each do |se|
         csv << [
           se.id,
-          se.dating.scan(/\d{4}/).first.to_i,
+          dating_for(se.dating.scan(/\d{4}/).first.to_i),
           [room_for(se)].join(','),
           se.material,
           se.description,
           se.dating,
-          se.creator.gsub('"', "'")
+          se.creator.gsub('"', "'"),
+          se.main_entry_id
         ]
       end
     end
@@ -51,6 +52,9 @@ namespace :pb do
         from = medium.image.path(:normal)
         to = "../cache/vikus-viewer-script/images/#{se.id}.jpg"
         system "cp #{from} #{to}"
+      else
+        # binding.pry
+        # puts se.sequence
       end
     end
   end
@@ -62,12 +66,16 @@ namespace :pb do
       etage = m['name']
       m['rooms'].each do |r|
         if r['id'] == se.main_entry.location
-          return r['name']
+          return r['name'].gsub(/^(\d\d\.\d\d) (.*)$/, '\2 (\1)')
         end
       end
     end
 
     nil
+  end
+
+  def dating_for(x)
+    x == 0 ? '-> 20. Jahrhundert' : x
   end
 
   def to_csv(data)

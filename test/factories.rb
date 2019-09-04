@@ -1,5 +1,4 @@
 FactoryGirl.define do
-
   factory :main_entry do
     title "Kaiserliche Sitzgruppe"
     add_attribute :sequence, "001"
@@ -14,5 +13,4 @@ FactoryGirl.define do
     title "3 Spiegel"
     main_entry {MainEntry.first}
   end
-
 end
