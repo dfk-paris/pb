@@ -85,6 +85,14 @@ class MainEntry < ApplicationRecord
 
   scope :by_terms, lambda {|terms|
     return all if terms.blank?
+
+    locations = JSON.parse(File.read("#{Rails.root}/lib/data/locations.json"))
+    rooms = locations.map{|l| l['rooms']}.flatten
+    matching_room_ids = rooms.select do |r|
+      t = Regexp.quote(terms.downcase)
+      r['name'].downcase.match(/#{t}/)
+    end.map{|r| r['id']}
+
     mega_join.where("
       (
         (
@@ -127,12 +135,15 @@ class MainEntry < ApplicationRecord
           ses.sequence LIKE :simple
         ) OR (
           ses.location LIKE :simple
+        ) OR (
+          main_entries.location IN (:location_ids)
         )
       )",
       terms: terms.split(/\s+/).map{|t| "#{t}*"}.join(' '),
       terms_reverse: terms.split(/\s+/).map{|t| "+#{t.reverse}*"}.join(' '),
       t: "(\\||^)#{terms.downcase}(\\||$)",
-      simple: "%#{terms}%"
+      simple: "%#{terms}%",
+      location_ids: matching_room_ids
     )
   }
 
