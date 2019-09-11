@@ -25,10 +25,14 @@ class MainEntryTest < ActiveSupport::TestCase
       historical_evidence: v
     }
     se = FactoryGirl.create :sub_entry, {
+      sequence: '008',
+      location: 'Kopenhagen',
       inventory_id_list: '88|12345|7000144993, 79|12345|7000144994'
     }
 
     assert_equal 1, MainEntry.by_terms('69').count
     assert_equal 1, MainEntry.by_terms('79').count
+    assert_equal 1, MainEntry.by_terms('Kopenhagen').count
+    assert_equal 1, MainEntry.by_terms('008').count
   end
 end

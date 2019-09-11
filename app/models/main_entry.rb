@@ -121,11 +121,18 @@ class MainEntry < ApplicationRecord
           AGAINST (:terms_reverse IN BOOLEAN MODE)
         ) OR (
           LOWER(tags.name) REGEXP :t
+        ) OR (
+          main_entries.sequence LIKE :simple
+        ) OR (
+          ses.sequence LIKE :simple
+        ) OR (
+          ses.location LIKE :simple
         )
       )",
       terms: terms.split(/\s+/).map{|t| "#{t}*"}.join(' '),
       terms_reverse: terms.split(/\s+/).map{|t| "+#{t.reverse}*"}.join(' '),
-      t: "(\\||^)#{terms.downcase}(\\||$)"
+      t: "(\\||^)#{terms.downcase}(\\||$)",
+      simple: "%#{terms}%"
     )
   }
 
