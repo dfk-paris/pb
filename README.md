@@ -15,8 +15,14 @@ well, please contact the
 
 To build and deploy the application nodejs and npm are required on a
 workstation. On the server, an environment to run [rack](http://rack.github.io/)
-applications is required. We will assume that both is already set up. Make sure
-the `bundler` gem is installed on the server as well.
+applications is required as well as MySQL. We will assume that all three are
+already set up. Make sure the `bundler` gem is installed on the server as well.
+
+For MySQL, make sure that `ft_min_word_len` (`[mysqld] section`) is set to `2`
+instead of the default of `4`. This sets the minimum word length that can be
+found with the full text search. This value has to be set correctly BEFORE the
+database is created, or `REPAIR TABLE main_entries QUICK` has to be run
+afterwards.
 
 Clone this repository, then change into its directory. Run the following to
 install dependencies via npm

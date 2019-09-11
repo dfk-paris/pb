@@ -119,10 +119,13 @@ class MainEntry < ApplicationRecord
             depth_with_socket_reverse, framing_reverse
           )
           AGAINST (:terms_reverse IN BOOLEAN MODE)
+        ) OR (
+          LOWER(tags.name) REGEXP :t
         )
       )",
       terms: terms.split(/\s+/).map{|t| "#{t}*"}.join(' '),
-      terms_reverse: terms.split(/\s+/).map{|t| "+#{t.reverse}*"}.join(' ')
+      terms_reverse: terms.split(/\s+/).map{|t| "+#{t.reverse}*"}.join(' '),
+      t: "(\\||^)#{terms.downcase}(\\||$)"
     )
   }
 
