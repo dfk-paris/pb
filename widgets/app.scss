@@ -24,7 +24,7 @@ $highlight: #f4f4f4;
 @import 'styles/pagination';
 @import 'styles/main_entry';
 
-body {
+body.no-drupal {
   padding-top: 5rem;
   padding-bottom: 10rem;
 }
